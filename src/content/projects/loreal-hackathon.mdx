@@ -1,0 +1,76 @@
+---
+title: "L'Oréal Skin Condition Classification"
+slug: "loreal-hackathon"
+summary: "Knowledge distillation and Green AI optimization for skin condition classification."
+tags: ["Deep Learning", "Green AI", "Hackathon"]
+tools: ["Python", "PyTorch", "TensorFlow"]
+github: "https://github.com/ShubhamShirsekar/L-Oreal-Hackathon"
+date: "2026-01"
+featured: true
+---
+
+## Overview
+
+Developed a sustainable AI solution for L'Oréal's skin condition classification challenge, focusing on model compression and Green AI principles to reduce computational footprint while maintaining accuracy.
+
+---
+
+## Problem Statement
+
+L'Oréal hosted a Skin condition classification hackathon to build a model that:
+- Accurately identifies multiple skin conditions from textual descriptions of their products
+- Minimizes carbon footprint (Green AI principles)
+- Maintains enterprise-grade accuracy
+
+---
+
+## Data
+
+- **Source**: L'Oréal proprietary dataset
+- **Size**: 6,420 product descriptions
+- **Classes**: 33 skin conditions
+
+---
+
+## Approach
+
+### Knowledge Distillation Pipeline
+
+1. **Teacher Model**
+   - RoBERTa-large model
+   - Fine-tuned to 78.17% validation accuracy
+   - Served as knowledge source
+
+2. **Student Model**
+   - DistilRoBERTa architecture
+   - 76.9% fewer parameters than teacher
+   - Trained using soft labels + hard labels
+
+3. **Optimization**
+   - Quantization-aware training
+   - Pruning of redundant connections
+
+---
+
+## Results & Impact
+
+| Metric | Teacher | Student | Reduction |
+|--------|---------|---------|-----------|
+| Accuracy | 78.17% | 76.26% | -2.4% |
+| Model Size | 1360.4MB | 190.2MB | 86% |
+| CO₂ per 1K inferences | 31.781g | 1.097g | 96.5% |
+
+---
+
+## Key Learnings
+
+- Knowledge distillation effectively transfers complex patterns
+- Temperature parameter crucial for soft label quality
+- Green AI metrics should be standard in ML reporting
+- Edge deployment constraints drive creative optimization
+
+---
+
+## Links
+
+- [GitHub Repository](https://github.com/ShubhamShirsekar/L-Oreal-Hackathon)

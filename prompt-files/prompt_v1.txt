@@ -1,0 +1,68 @@
+role_definition,
+  title,Senior Frontend Engineer and Product Designer
+  specialization,Production-ready personal portfolio for a Data Analyst
+  adherence_level,Strict adherence to provided documentation as single source of truth
+project_context,
+  tech_stack,
+    framework,Next.js (App Router)
+    language,TypeScript
+    styling,Tailwind CSS
+    content_management,MDX for project case studies
+    animation,Framer Motion (subtle animations only)
+    deployment,Vercel
+  input_files[9],content-inventory.md,projects/_template.mdx,components.md,design-guidelines.md,seo.md,types.ts,ux-flow.md,roadmap.md,analytics.md
+design_system,
+  theme,Space / Cosmic (Dark Mode)
+  visual_direction,
+    background,Dark (near-black,deep navy,or space gray)
+    texture,Subtle starfield / grain / noise
+    accents[3],electric blue,violet,cyan
+    ui_style,Glassmorphism (low opacity,blurred background)
+    borders,Soft glowing borders on hover
+    restrictions[2],No flashy neon,No gradients overload
+  typography,
+    primary_font,Inter
+    styles[2],Large hero headline with strong letter spacing,Clear hierarchy (H1 → H3 → body)
+  motion,
+    transitions,Slow fade-in on sections
+    effects[2],Slight parallax on hero,Card hover,lift + glow
+    restrictions,No distracting animations
+site_architecture,
+  pages[8],/ (Home),/about,/experience,/projects,/projects/[slug] (MDX-driven),/skills,/education,/contact
+feature_requirements,
+  home_page,
+    hero,
+      headline_source,content-inventory.md
+      intro,Short intro (1–2 lines)
+      ctas[2],Primary,View Projects,Secondary,Download Resume
+    sections[4],3 value proposition cards,Impact metrics section (numeric,bold),Featured projects grid (max 3),Subtle space-themed background visuals
+  projects,
+    rendering,MDX
+    card_elements[4],Title,One-line description,Tags,CTA,Case Study
+    detail_page,Must follow projects/_template.mdx
+    links[2],GitHub,Live Demo (if available)
+  components,
+    source,components.md
+    rules[3],Reusable and composable,Typed via types.ts,No inline hardcoded content
+  ux_navigation,
+    navbar,
+      type,Sticky
+      links[4],Home,Projects,About,Contact (CTA)
+    footer[3],Email,GitHub,LinkedIn
+    flow,Follow ux-flow.md (Recruiter flow)
+  seo,
+    implementation,Next.js metadata API
+    source,seo.md
+    requirements[3],Open Graph image placeholders,Sitemap,robots.txt
+  analytics,
+    type,Instrumentation only (No Dashboard)
+    events[4],Project views,CTA clicks,Resume download,Contact form submit
+engineering_standards,
+  quality_bar[6],Clean folder structure,No prop drilling,Mobile-first responsive,Lighthouse score > 90,Dark mode by default,No unused components
+negative_constraints[5],Do NOT add blogs,Do NOT add backend APIs,Do NOT over-engineer,Do NOT ignore provided content files,Do NOT use light theme
+deliverables[7],Full Next.js project structure,Tailwind config with dark space theme,MDX setup,Core pages implemented,Reusable component system,Placeholder content wired from inventory,Ready-to-deploy Vercel setup
+final_goal,
+  vibe,Intelligent,calm,analytical depth
+  target_audience,Recruiters (impress in <60 seconds)
+  scalability,Scales cleanly as projects are added
+execution_order,Scaffold project structure -> Tailwind dark theme setup -> Implement Home page

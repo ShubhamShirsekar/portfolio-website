@@ -1,0 +1,11 @@
+/
+/about
+/experience
+/projects
+/projects/loreal-hackathon
+/projects/spotify/reconstruction
+/projects/spotify/recommendation
+/projects/btc-dca-vs-dip
+/projects/iea-analysis
+/projects/eventsphere
+/contact

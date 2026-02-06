@@ -1,0 +1,73 @@
+---
+title: "Spotify Playlist Reconstruction"
+slug: "spotify-reconstruction"
+summary: "Reconstructing deleted Spotify playlists using machine learning classification."
+tags: ["Machine Learning", "Classification"]
+tools: ["Python", "Pandas", "Scikit-learn"]
+github: "https://github.com/ShubhamShirsekar/Data_Analytics/tree/main/MLI_Spotify_Project_Task1"
+date: "2024-12"
+featured: true
+---
+
+## Overview
+
+This model was built as a part of my Machine Learning I course at KEDGE Business School. After accidentally losing playlist data from a shared family Spotify account, I developed a two-stage machine learning classification system to reconstruct the original playlists by predicting which user each song belonged to and what year it was added.
+
+---
+
+## Problem Statement
+
+A mixed family Spotify account had playlists from multiple users merged together. The challenge was to:
+- Identify which songs belonged to which family member
+- Predict the approximate year each song was added
+- Reconstruct the original personalized playlists
+
+---
+
+## Data
+
+- **Source**: Spotify API (audio features, track metadata)
+- **Size**: 3,500 labelled 100 unlabelled songs with 22 audio features each
+- **Features**: Danceability, energy, valence, tempo, acousticness, etc.
+- **Labels**: User (4 family members), Year added (2018-2024)
+
+---
+
+## Approach
+
+### Two-Stage Classification
+1. **Stage 1 - User Prediction**
+   - Feature engineering from audio attributes
+   - Tested multiple classifiers (Random Forest, XGBoost, SVM)
+   - Best model: Random Forest with 97.28% accuracy
+
+2. **Stage 2 - Year Prediction**
+   - Time-based features combined with audio features
+   - Gradient Boosting chosen for year prediction
+   - Achieved 87.14% accuracy
+
+### Validation Strategy
+- Stratified 5-fold cross-validation
+- Classification report
+
+---
+
+## Results & Impact
+
+- **User Classification**: 97% accuracy
+- **Year Prediction**: 87% accuracy
+- Successfully reconstructed 4 personalized playlists
+
+---
+
+## Key Learnings
+
+- Audio features alone carry significant user preference signals
+- Feature importance analysis revealed danceability and valence as top predictors
+- Pipeline architecture enables easy extension to new users
+
+---
+
+## Links
+
+- [GitHub Repository](https://github.com/ShubhamShirsekar/Data_Analytics/tree/main/MLI_Spotify_Project_Task1)

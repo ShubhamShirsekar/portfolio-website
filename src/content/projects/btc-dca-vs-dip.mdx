@@ -1,0 +1,75 @@
+---
+title: "BTC DCA vs Buy the Dip"
+slug: "btc-dca-vs-dip"
+summary: "A quantitative comparison of Dollar Cost Averaging vs Buy-the-Dip Bitcoin investment strategies."
+tags: ["Finance", "Quantitative Analysis"]
+tools: ["Python", "Pandas", "NumPy", "Matplotlib"]
+github: "https://github.com/ShubhamShirsekar/Data_Analytics/tree/main/BTC_DCA_vs_Dip"
+date: "2025-01"
+featured: true
+---
+
+## Overview
+
+This project analyzes the performance of two popular Bitcoin investment strategies: Dollar Cost Averaging (DCA) and Buy-the-Dip. The goal was to determine which approach yields better risk-adjusted returns over various market cycles.
+
+---
+
+## Problem Statement
+
+Retail investors often debate between:
+- **DCA**: Investing a fixed amount at regular intervals regardless of price
+- **Buy-the-Dip**: Waiting for price drops before investing
+
+This analysis provides data-driven insights to inform investment decisions.
+
+---
+
+## Data
+
+- **Source**: Historical Bitcoin price data (2012–2025)
+- **Size**: Daily closing prices spanning 13+ years
+- **Analysis Windows**: 3,950 rolling 3-year periods
+
+---
+
+## Approach
+
+### Methodology
+1. Collected daily Bitcoin price data
+2. Implemented both investment strategies programmatically
+3. Calculated returns across 3,950 rolling 3-year windows
+4. Computed risk-adjusted metrics (Sharpe ratio, Win rate)
+5. Statistical comparison of strategy performance
+
+### Key Metrics
+- Total return
+- Volatility
+- Sharpe ratio
+- Win rate
+
+---
+
+## Results & Impact
+
+| Metric | DCA | Buy-the-Dip |
+|--------|-----|-------------|
+| Avg Return | 312.46% | 268.57% |
+| Sharpe Ratio | 0.541 | 0.467 |
+| Win Rate | 63.02% | 36.98% |
+
+**Key Finding**: DCA is more consistent (wins 63.0% of the time), with better risk-adjusted returns.
+
+---
+
+## Key Learnings
+
+- Market timing is difficult; consistent investing often wins
+- Rolling window analysis provides robust conclusions across market cycles
+- Visualizing thousands of scenarios helps communicate complex findings
+
+---
+
+## Links
+
+- [GitHub Repository](https://github.com/ShubhamShirsekar/Data_Analytics/tree/main/BTC_DCA_vs_Dip)
