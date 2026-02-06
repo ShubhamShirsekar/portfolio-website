@@ -251,7 +251,7 @@ Make outreach effortless.
 #### Sections
 - Internship availability notice (May 2026)
 - Contact form
-- Email shubhamshirsekar20@outlook.com
+- Email shubhamshirsekar7@gmail.com
 - LinkedIn[https://www.linkedin.com/in/shubhamshirsekar21/]
 - GitHub[https://github.com/ShubhamShirsekar]
 - Kaggle[https://www.kaggle.com/shubhamshirsekar]

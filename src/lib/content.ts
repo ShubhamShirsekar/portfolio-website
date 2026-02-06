@@ -17,7 +17,7 @@ export const siteConfig = {
   name: 'Shubham Shirsekar',
   role: 'Data Analyst | Business Analyst',
   availability: 'End-of-studies internship – May 2026',
-  email: 'shubhamshirsekar20@outlook.com',
+  email: 'shubhamshirsekar7@gmail.com',
   linkedin: 'https://www.linkedin.com/in/shubhamshirsekar21/',
   github: 'https://github.com/ShubhamShirsekar',
   kaggle: 'https://www.kaggle.com/shubhamshirsekar',

@@ -124,6 +124,6 @@ MIT License - Feel free to use this as a template for your own portfolio.
 
 ## 👤 Contact
 
-- **Email**: shubhamshirsekar20@outlook.com
+- **Email**: shubhamshirsekar7@gmail.com
 - **LinkedIn**: [/in/shubhamshirsekar21](https://linkedin.com/in/shubhamshirsekar21)
 - **GitHub**: [@ShubhamShirsekar](https://github.com/ShubhamShirsekar)
