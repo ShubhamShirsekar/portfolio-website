@@ -131,9 +131,9 @@ export default function AboutPage() {
               <h3 className="text-xl font-semibold text-white mb-4">Languages</h3>
               <div className="glass-card p-6 space-y-4">
                 {languages.map((lang, i) => (
-                  <div key={i} className="flex items-center justify-between">
-                    <span className="text-gray-300">{lang.name.split(' — ')[0]}</span>
-                    <span className="text-accent-cyan text-sm">{lang.name.split(' — ')[1]}</span>
+                  <div key={i} className="grid grid-cols-2 items-center gap-4">
+                    <span className="text-gray-300 text-left truncate">{lang.name.split(' — ')[0]}</span>
+                    <span className="text-accent-cyan text-sm text-right truncate">{lang.name.split(' — ')[1]}</span>
                   </div>
                 ))}
               </div>
