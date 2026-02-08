@@ -129,17 +129,17 @@ export default function ContactPage() {
                       href={social.url}
                       target={social.icon !== 'mail' ? '_blank' : undefined}
                       rel={social.icon !== 'mail' ? 'noopener noreferrer' : undefined}
-                      className="flex items-center gap-4 p-4 glass-card hover:border-accent-blue/30 transition-colors"
+                      className="flex items-center gap-4 p-4 glass-card hover:border-accent-blue/30 transition-colors w-full"
                     >
                       <span className="text-accent-blue">
                         <SocialIcon icon={social.icon} />
                       </span>
-                      <div>
-                        <p className="text-white font-medium">{social.name}</p>
-                        <p className="text-gray-400 text-sm">
-                          {social.icon === 'mail' ? siteConfig.email : social.url.replace('https://', '')}
-                        </p>
-                      </div>
+                        <div className="min-w-0">
+                          <p className="text-white font-medium">{social.name}</p>
+                          <p className="text-gray-400 text-sm w-full truncate">
+                            {social.icon === 'mail' ? siteConfig.email : social.url.replace('https://', '')}
+                          </p>
+                        </div>
                     </a>
                   ))}
                 </div>
