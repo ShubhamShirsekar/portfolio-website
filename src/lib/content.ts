@@ -151,6 +151,17 @@ export const experiences: Experience[] = [
 
 export const projects: Project[] = [
   {
+    title: 'Synthpanel Chatbot',
+    slug: 'synthpanel',
+    summary: 'An interactive AI chatbot application built with Streamlit, providing users with a seamless and real-time interface to interact with language models.',
+    tags: ['AI', 'Web Development'],
+    tools: ['Python', 'Streamlit'],
+    github: 'https://github.com/ShubhamShirsekar/Synthpanel',
+    demo: 'https://synthpanel-chatbot.streamlit.app/',
+    featured: true,
+    date: '2026-03',
+  },
+  {
     title: 'BTC DCA vs Buy the Dip',
     slug: 'btc-dca-vs-dip',
     summary: 'A quantitative comparison of Dollar Cost Averaging vs Buy-the-Dip Bitcoin investment strategies. Analyzed Bitcoin price data from 2012–2025 using 3,950 rolling 3-year windows to compare risk-adjusted returns between passive and tactical investment strategies.',
