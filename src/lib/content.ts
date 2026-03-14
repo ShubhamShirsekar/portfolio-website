@@ -168,7 +168,7 @@ export const projects: Project[] = [
     tags: ['Finance', 'Quantitative Analysis'],
     tools: ['Python', 'Pandas', 'NumPy', 'Matplotlib'],
     github: 'https://github.com/ShubhamShirsekar/btc-dca-vs-dip',
-    featured: true,
+    featured: false,
     date: '2025-01',
   },
   {
