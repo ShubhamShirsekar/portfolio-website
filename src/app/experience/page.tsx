@@ -46,7 +46,7 @@ export default function ExperiencePage() {
               Download my resume for a complete overview of my experience and qualifications.
             </p>
             <a
-              href="https://docs.google.com/document/d/e/2PACX-1vQtXJ-L_m1r5bCkXVxPItlecZuvtSHlJ_1fJjFMGtFIzYV38y1blGfAFXDx0dMQLguJd--tfPmLGj11/pub"
+              href="https://docs.google.com/document/d/1r3z8sXlJRHt1B86RPlUoF4MgoPvi3dQjNbgRnHlYeFg/edit?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-accent-blue text-white font-medium hover:bg-accent-blue/90 transition-colors"
