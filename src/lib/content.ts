@@ -50,7 +50,7 @@ export const heroContent = {
   subheadline: 'Data analyst blending technical depth with real-world business impact',
   intro: 'Transforming data into decisions through analytics and automation',
   primaryCTA: { label: 'View Projects', href: '/projects' },
-  secondaryCTA: { label: 'Download Resume', href: 'https://drive.google.com/file/d/1PplsPHKQ9axNxrZb-mEikH38UY8PrpOe/view?usp=sharing' },
+  secondaryCTA: { label: 'Download Resume', href: 'https://docs.google.com/document/d/e/2PACX-1vQtXJ-L_m1r5bCkXVxPItlecZuvtSHlJ_1fJjFMGtFIzYV38y1blGfAFXDx0dMQLguJd--tfPmLGj11/pub' },
 };
 
 export const valuePropositions: ValueProposition[] = [
