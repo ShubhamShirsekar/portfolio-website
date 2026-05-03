@@ -13,7 +13,7 @@ export default function ProjectsPage() {
       {/* GIF Background - Full Page */}
       <div className="fixed inset-0 z-0">
         <img
-          src="/projects-bg.gif"
+          src="/projects-bg.webp"
           alt=""
           className="w-full h-full object-cover opacity-30"
         />

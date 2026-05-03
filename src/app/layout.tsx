@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter, Silkscreen } from 'next/font/google';
 import { Navbar, Footer } from '@/components/layout';
-import { Starfield } from '@/components/effects';
 import './globals.css';
 
 const inter = Inter({ 
@@ -16,12 +15,12 @@ const silkscreen = Silkscreen({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://shubhamshirsekar.com'),
+  metadataBase: new URL('https://shubham-shirsekar.vercel.app'),
   title: {
-    default: 'Shubham Shirsekar | Data Analyst & Business Analytics',
+    default: 'Shubham Shirsekar | MSc Data Analytics',
     template: '%s | Shubham Shirsekar',
   },
-  description: 'Data analyst specializing in analytics, automation, and business-driven insights. Seeking end-of-studies internship starting May 2026.',
+  description: 'Started my career building systems that power financial institutions. That foundation taught me where data ends and decisions begin. Now, pairing engineering instincts with an MSc in Data Analytics and a critical understanding of AI, to create impactfulsolutions.',
   keywords: [
     'Data Analyst Portfolio',
     'Business Analytics',
@@ -31,29 +30,36 @@ export const metadata: Metadata = {
     'SQL',
     'Power BI',
     'Tableau',
+    'Data Visualization',
+    'Data-Driven Decision Making',
+    'Shubham Shirsekar',
+    'Excel',
+    'Business Intelligence',
+    'Data Storytelling',
+    'Business Analyst'
   ],
   authors: [{ name: 'Shubham Shirsekar' }],
   creator: 'Shubham Shirsekar',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://shubhamshirsekar.com',
+    url: 'https://shubham-shirsekar.vercel.app',
     siteName: 'Shubham Shirsekar Portfolio',
-    title: 'Shubham Shirsekar | Data Analyst & Business Analytics',
-    description: 'Data analyst specializing in analytics, automation, and business-driven insights.',
+    title: 'Shubham Shirsekar | MSc Data Analytics',
+    description: 'Started my career building systems that power financial institutions. That foundation taught me where data ends and decisions begin. Now, pairing engineering instincts with an MSc in Data Analytics and a critical understanding of AI, to create impactful solutions.',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Shubham Shirsekar - Data Analyst Portfolio',
+        alt: 'Shubham Shirsekar - MSc Data Analytics',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Shubham Shirsekar | Data Analyst & Business Analytics',
-    description: 'Data analyst specializing in analytics, automation, and business-driven insights.',
+    title: 'Shubham Shirsekar | MSc Data Analytics',
+    description: 'Started my career building systems that power financial institutions. That foundation taught me where data ends and decisions begin. Now, pairing engineering instincts with an MSc in Data Analytics and a critical understanding of AI, to create impactful solutions.',
     images: ['/og-image.png'],
   },
   robots: {
@@ -77,7 +83,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.variable} ${silkscreen.variable} font-sans`}>
-        <Starfield />
         <Navbar />
         <main className="relative z-10 min-h-screen pt-16 md:pt-20">
           {children}

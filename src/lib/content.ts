@@ -47,8 +47,8 @@ export const socialLinks: SocialLink[] = [
 
 export const heroContent = {
   headline: 'Turning Data into Business Decisions',
-  subheadline: 'Data analyst blending technical depth with real-world business impact',
-  intro: 'Transforming data into decisions through analytics and automation',
+  subheadline: 'Because guessing is not a strategy',
+  intro: 'Built it once, now I analyze it twice',
   primaryCTA: { label: 'View Projects', href: '/projects' },
   secondaryCTA: { label: 'Download Resume', href: 'https://docs.google.com/document/d/1r3z8sXlJRHt1B86RPlUoF4MgoPvi3dQjNbgRnHlYeFg/edit?usp=sharing' },
 };
@@ -72,9 +72,9 @@ export const valuePropositions: ValueProposition[] = [
 ];
 
 export const impactMetrics: Metric[] = [
-  { label: 'Years Experience', value: '3+' },
-  { label: 'REST APIs Built', value: '30+' },
-  { label: 'Efficiency Improvement', value: '20%' },
+  { label: 'Years Experience', value: '3' },
+  { label: 'Production Releases per Month', value: '20' },
+  { label: 'End-to-End Projects Owned', value: '4' },
   { label: 'Hours Saved / Release', value: '5+' },
 ];
 
@@ -110,26 +110,15 @@ I thrive at the intersection of data, technology, and business, and I am activel
 
 export const experiences: Experience[] = [
   {
-    role: 'Engineer',
+    role: 'Business Analyst',
     company: 'Acidaes Solutions Pvt Ltd',
     location: 'Mumbai, India',
-    duration: 'Oct 2023 – Jul 2025',
+    duration: 'Jun 2022 – Jul 2025',
     achievements: [
-      'Delivered technical-business consultations optimizing CRM implementations and improving operational efficiency by 15–20% across 3+ major banks',
-      'Built 30+ REST API integrations with external banking systems, reducing service request processing time by 20%',
-      'Developed and deployed batch automation scripts, reducing manual deployment effort by 80% and saving 5+ hours per release',
-      'Led the creation of dashboards and project trackers, improving governance accuracy by 30%',
-    ],
-  },
-  {
-    role: 'Graduate Engineer Trainee',
-    company: 'Acidaes Solutions Pvt Ltd',
-    location: 'Mumbai, India',
-    duration: 'Sep 2022 – Sep 2023',
-    achievements: [
-      'Collaborated with 5+ cross-functional teams to deploy CRM solutions with error-free delivery',
-      'Conducted training sessions for 10+ team members, improving tool adoption and proficiency by 35%',
-      'Maintained and updated 50+ technical documents, improving knowledge transfer efficiency by 20%',
+      'Took full ownership of an independent project within 6 months of joining, handling requirement gathering, documentation, development, and delivery',
+      'Led delivery of 20+ change requests per month across concurrent projects, while reviewing migration scripts and owning production deployments, cut deployment eﬀort by 80% by developing a custom automation solution to eliminate manual intervention',
+      'Grew from Intern to Junior Engineer, contributed directly to a presales cycle for a Middle Eastern bank designing, developing, and delivering 2 customer-facing demo journeys end-to-end under a tight deadline',
+      'Led the full on-premises to cloud migration by mastering Azure DevOps CICD pipelines writing C# code and XSLT transformations throughout on the .NET platform'
     ],
   },
   {
@@ -138,9 +127,8 @@ export const experiences: Experience[] = [
     location: 'Mumbai, India',
     duration: 'Nov 2021 – Jan 2022',
     achievements: [
-      'Managed lead distribution across 8 cities, overseeing 2,000+ leads per month',
-      'Improved lead response time by 40% through process optimization',
-      'Built dashboards and reports used by leadership to track performance',
+      'Tracked 2,000+ monthly leads across 8 regions, building a structured market intelligence pipeline that informed senior leadership on expansion strategy',
+      'Recovered dormant pipelines through RCA and CRM hygiene, driving a 15% uplift in lead recovery across 12 marketing initiatives'
     ],
   },
 ];
@@ -239,23 +227,41 @@ export const skills: Skill[] = [
   { name: 'Tableau', category: 'technical' },
   { name: 'API Integration', category: 'technical' },
   { name: 'XSLT', category: 'technical' },
-  { name: 'C#', category: 'technical' },
+  { name: '.NET', category: 'technical' },
+  { name: 'JavaScript', category: 'technical' },
+  { name: 'Azure', category: 'technical' },
+  { name: 'Git', category: 'technical' },
+  { name: 'CRM', category: 'technical' },
+  { name: 'LLMs', category: 'technical' },
   
   // Soft Skills
   { name: 'Project Management (Agile, Scrum)', category: 'soft' },
-  { name: 'Communication', category: 'soft' },
+  { name: 'Critical Thinking', category: 'soft' }, 
+  { name: 'Effective Communication', category: 'soft' },
   { name: 'Collaboration', category: 'soft' },
   { name: 'Adaptability', category: 'soft' },
-  { name: 'Time Management', category: 'soft' },
+  { name: 'Proactive', category: 'soft' },
+  { name: 'Problem Solving', category: 'soft' },
+  { name: 'Emotional Intelligence', category: 'soft' },
+  
   
   // Languages
-  { name: 'English — C1 (Advanced)', category: 'language' },
-  { name: 'French — B1 (Professional Working Proficiency)', category: 'language' },
+  { name: 'English — C2 (Native/Bilingual)', category: 'language' },
+  { name: 'French — B2 (Working Proficiency)', category: 'language' },
+  { name: 'Hindi — C2 (Native/Bilingual)', category: 'language' },
+  { name: 'Marathi — C2 (Native/Bilingual)', category: 'language' },
+
+  // Certifications
+  { name: 'AI-900 Azure AI Fundamentals by Microsoft', category: 'certification', logo: '/logos/Microsoft.svg' },
+  { name: 'Professional Scrum Master I by Scrum.org', category: 'certification', logo: '/logos/scrum.png' },
+  { name: 'AI Fluency: Frameworks & Foundations by Anthropic', category: 'certification', logo: '/logos/Claude.svg' },
+  { name: 'Revenue Operations by HubSpot', category: 'certification', logo: '/logos/HubSpot.svg' },
 ];
 
 export const technicalSkills = skills.filter((s) => s.category === 'technical');
 export const softSkills = skills.filter((s) => s.category === 'soft');
 export const languages = skills.filter((s) => s.category === 'language');
+export const certifications = skills.filter((s) => s.category === 'certification');
 
 // ============================================
 // EDUCATION DATA

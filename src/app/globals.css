@@ -66,11 +66,7 @@
   }
 
   /* Star particle */
-  .star {
-    @apply absolute rounded-full bg-white;
-    animation: twinkle var(--duration, 4s) ease-in-out infinite;
-    animation-delay: var(--delay, 0s);
-  }
+  /* Star particle removed - previously used for page background effect */
 }
 
 @layer utilities {

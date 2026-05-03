@@ -29,7 +29,7 @@ function HeroSection() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="text-accent-cyan text-sm md:text-base font-medium tracking-wider uppercase mb-6"
           >
-            Available for internship • May 2026
+            Available for internship • Immediate Joiner
           </motion.p>
 
           <h1 className="text-hero-mobile md:text-hero font-bold text-white mb-6">
@@ -165,7 +165,7 @@ function ProjectsSection() {
       <Container>
         <SectionHeading
           title="Featured Projects"
-          subtitle="A selection of data analytics and machine learning projects demonstrating real-world impact."
+          subtitle="A sneak peek into my work."
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {featuredProjects.map((project, index) => (
@@ -207,11 +207,11 @@ function CTASection() {
           
           <div className="relative z-10">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Let&apos;s Work Together
+              Caught your attention? Let&apos;s chat.
             </h2>
             <p className="text-gray-400 max-w-xl mx-auto mb-8">
-              I&apos;m actively seeking an end-of-studies internship starting May 2026.
-              If you&apos;re looking for a data analyst who can deliver business impact, let&apos;s connect.
+              I&apos;m actively seeking an end-of-studies internship ideally where I can make the most impact by turning data into decisions (and not just more dashboards or spreadsheets). 
+              If you&apos;re looking for a data analyst who makes decision-making a little easier and a lot more informed, let&apos;s connect.
             </p>
             <Button href="/contact" size="lg">
               Get in Touch
@@ -242,7 +242,7 @@ export default function HomePage() {
       {/* GIF Background - Full Page */}
       <div className="fixed inset-0 z-0">
         <img
-          src="/home-bg.gif"
+          src="/home-bg.jpg"
           alt=""
           className="w-full h-full object-cover opacity-30"
         />

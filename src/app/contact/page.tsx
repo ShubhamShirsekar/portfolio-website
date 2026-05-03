@@ -78,7 +78,7 @@ export default function ContactPage() {
       {/* Background GIF */}
       <div className="fixed inset-0 z-0">
         <Image
-          src="/contact-bg.gif"
+          src="/extra-bg.jpg"
           alt=""
           fill
           className="object-cover opacity-20"

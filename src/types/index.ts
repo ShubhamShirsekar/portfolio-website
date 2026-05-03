@@ -22,7 +22,8 @@ export type Experience = {
 
 export type Skill = {
   name: string;
-  category: 'technical' | 'soft' | 'language';
+  category: 'technical' | 'soft' | 'language' | 'certification';
+  logo?: string;
 };
 
 export type Education = {
