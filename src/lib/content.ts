@@ -50,7 +50,7 @@ export const heroContent = {
   subheadline: 'Because guessing is not a strategy',
   intro: 'Built it once, now I analyze it twice',
   primaryCTA: { label: 'View Projects', href: '/projects' },
-  secondaryCTA: { label: 'Download Resume', href: 'https://docs.google.com/document/d/1r3z8sXlJRHt1B86RPlUoF4MgoPvi3dQjNbgRnHlYeFg/edit?usp=sharing' },
+  secondaryCTA: { label: 'Download Resume', href: 'https://www.overleaf.com/read/bfhbkthnrbpw#7f311b' },
 };
 
 export const valuePropositions: ValueProposition[] = [
