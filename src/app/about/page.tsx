@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import ReflectiveCard from '@/components/reactbits/ReflectiveCard';
+import SpecularSurface from '@/components/reactbits/SpecularSurface';
 import { Section, Container, SectionHeading, ExperienceTimeline, FunFacts } from '@/components/ui';
 import {
   aboutContent,
@@ -23,7 +25,13 @@ export default function AboutPage() {
     <div className="relative min-h-screen">
       {/* Background */}
       <div className="fixed inset-0 z-0">
-        <Image src="/about-bg-tv.jpg" alt="" fill className="object-cover object-[center_55%] opacity-40 blur-md scale-110" priority />
+        <Image
+          src="/about-bg-tv.jpg"
+          alt=""
+          fill
+          className="scale-110 object-cover object-[center_55%] opacity-40 blur-md"
+          priority
+        />
         <div className="absolute inset-0 bg-space-900/40" />
       </div>
 
@@ -32,10 +40,10 @@ export default function AboutPage() {
         {/* Hero */}
         <Section className="pt-8">
           <Container>
-            <div className="flex flex-col md:flex-row items-center gap-8 max-w-5xl">
+            <div className="flex max-w-5xl flex-col items-center gap-8 md:flex-row">
               {/* Photo */}
               <div className="flex-shrink-0">
-                <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-2xl overflow-hidden border-2 border-glass-border">
+                <div className="relative h-48 w-48 overflow-hidden rounded-2xl border-2 border-glass-border md:h-64 md:w-64">
                   <Image
                     src="/pfp_2.jpg"
                     alt="Portrait of Shubham Shirsekar"
@@ -48,8 +56,8 @@ export default function AboutPage() {
 
               {/* Text */}
               <div className="flex-1 text-center md:text-right">
-                <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">About Me</h1>
-                <p className="text-xl text-gray-300 mb-4">{siteConfig.role}</p>
+                <h1 className="mb-6 text-4xl font-bold text-white md:text-5xl">About Me</h1>
+                <p className="mb-4 text-xl text-gray-300">{siteConfig.role}</p>
                 <p className="text-accent-cyan">{siteConfig.availability}</p>
               </div>
             </div>
@@ -59,12 +67,12 @@ export default function AboutPage() {
         {/* Summary + Quick Facts */}
         <Section className="pt-8">
           <Container>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
               <div className="lg:col-span-2">
-                <SectionHeading title="Summary" className="text-left mb-6" />
-                <div className="glass-card p-8 space-y-4">
+                <SectionHeading title="Summary" className="mb-6 text-left" />
+                <div className="glass-card space-y-4 p-8">
                   {aboutContent.summary.map((paragraph) => (
-                    <p key={paragraph} className="text-gray-300 leading-relaxed">
+                    <p key={paragraph} className="leading-relaxed text-gray-300">
                       {paragraph}
                     </p>
                   ))}
@@ -72,13 +80,13 @@ export default function AboutPage() {
               </div>
 
               <div>
-                <SectionHeading title="Quick Facts" className="text-left mb-6" />
-                <dl className="glass-card p-6 space-y-4">
+                <SectionHeading title="Quick Facts" className="mb-6 text-left" />
+                <dl className="glass-card space-y-4 p-6">
                   {aboutContent.quickFacts.map((fact) => (
                     <div key={fact.label}>
                       <dt className="text-sm text-gray-400">{fact.label}</dt>
                       <dd className="text-white">{fact.value}</dd>
-                      {fact.detail && <dd className="text-gray-400 text-sm">{fact.detail}</dd>}
+                      {fact.detail && <dd className="text-sm text-gray-400">{fact.detail}</dd>}
                     </div>
                   ))}
                 </dl>
@@ -101,27 +109,41 @@ export default function AboutPage() {
         {/* Education + Certifications */}
         <Section id="education">
           <Container>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
               <div>
-                <h2 className="text-2xl font-semibold text-white mb-4">Education</h2>
-                <div className="space-y-4">
+                <h2 className="mb-4 text-2xl font-semibold text-white">Education</h2>
+                <div className="space-y-5">
                   {education.map((edu) => (
-                    <div key={edu.degree} className="glass-card p-6 relative overflow-hidden">
-                      <div
-                        className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-accent-blue via-accent-violet to-accent-cyan"
-                        aria-hidden="true"
-                      />
-                      <h3 className="text-lg font-semibold text-white">{edu.degree}</h3>
-                      <p className="text-accent-blue">{edu.institution}</p>
-                      <p className="text-gray-400 text-sm mt-1">{edu.years}</p>
-                    </div>
+                    <ReflectiveCard
+                      key={edu.degree}
+                      width="100%"
+                      height={148}
+                      radius={18}
+                      theme="dark"
+                      tiltStrength={8}
+                      tint="#7d8fb8"
+                      shine={0.6}
+                      glare={0.35}
+                    >
+                      <div className="flex h-full flex-col justify-between">
+                        <p className="text-xs uppercase tracking-[0.18em] text-gray-300">
+                          {edu.years}
+                        </p>
+                        <div>
+                          <h3 className="text-lg font-semibold leading-snug text-white">
+                            {edu.degree}
+                          </h3>
+                          <p className="text-sm font-medium text-gray-100">{edu.institution}</p>
+                        </div>
+                      </div>
+                    </ReflectiveCard>
                   ))}
                 </div>
               </div>
 
               <div>
-                <h2 className="text-2xl font-semibold text-white mb-4">Certifications</h2>
-                <ul className="glass-card p-6 grid grid-cols-1 gap-3">
+                <h2 className="mb-4 text-2xl font-semibold text-white">Certifications</h2>
+                <ul className="glass-card grid grid-cols-1 gap-3 p-6">
                   {certifications.map((certification) => {
                     const body = (
                       <>
@@ -136,13 +158,13 @@ export default function AboutPage() {
                         ) : (
                           <span className="h-7 w-7 shrink-0" aria-hidden="true" />
                         )}
-                        <span className="text-sm text-gray-100 flex-1">
+                        <span className="flex-1 text-sm text-gray-100">
                           {certification.name}
                           <span className="text-gray-400"> · {certification.issuer}</span>
                         </span>
                         {certification.url && (
                           <svg
-                            className="w-4 h-4 shrink-0 text-gray-400 group-hover:text-accent-blue transition-colors"
+                            className="h-4 w-4 shrink-0 text-gray-400 transition-colors group-hover:text-accent-blue"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -169,7 +191,7 @@ export default function AboutPage() {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label={`View certificate: ${certification.name} by ${certification.issuer} (opens in a new tab)`}
-                            className={`${rowClass} group hover:border-accent-blue/40 hover:bg-glass-white-hover transition-colors`}
+                            className={`${rowClass} group transition-colors hover:border-accent-blue/40 hover:bg-glass-white-hover`}
                           >
                             {body}
                           </a>
@@ -192,30 +214,38 @@ export default function AboutPage() {
               title="Skills & Languages"
               subtitle="What I build with, and how I work with clients."
             />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
               {skillGroups.map((group) => (
                 <div key={group.title}>
-                  <h3 className="text-xl font-semibold text-white mb-4">{group.title}</h3>
-                  <ul className="glass-card p-6 flex flex-wrap gap-3">
-                    {group.skills.map((skill) => (
-                      <li
-                        key={skill}
-                        className="px-4 py-2 rounded-lg bg-space-900/70 backdrop-blur-sm border border-accent-blue/40 text-accent-blue-light text-sm"
-                      >
-                        {skill}
-                      </li>
-                    ))}
-                  </ul>
+                  <h3 className="mb-4 text-xl font-semibold text-white">{group.title}</h3>
+                  <SpecularSurface
+                    radius={16}
+                    tintOpacity={0.05}
+                    blur={8}
+                    lineColor="#bfdbfe"
+                    baseColor="#3f3f56"
+                  >
+                    <ul className="flex flex-wrap gap-3 p-6">
+                      {group.skills.map((skill) => (
+                        <li
+                          key={skill}
+                          className="rounded-lg border border-accent-blue/40 bg-space-900/70 px-4 py-2 text-sm text-accent-blue-light backdrop-blur-sm"
+                        >
+                          {skill}
+                        </li>
+                      ))}
+                    </ul>
+                  </SpecularSurface>
                 </div>
               ))}
 
               <div className="md:col-span-2">
-                <h3 className="text-xl font-semibold text-white mb-4">Languages</h3>
-                <dl className="glass-card p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <h3 className="mb-4 text-xl font-semibold text-white">Languages</h3>
+                <dl className="glass-card grid grid-cols-1 gap-4 p-6 sm:grid-cols-2">
                   {languages.map((lang) => (
                     <div key={lang.name} className="flex items-center justify-between gap-4">
                       <dt className="text-gray-300">{lang.name}</dt>
-                      <dd className="text-accent-cyan text-sm">{lang.level}</dd>
+                      <dd className="text-sm text-accent-cyan">{lang.level}</dd>
                     </div>
                   ))}
                 </dl>
@@ -227,7 +257,10 @@ export default function AboutPage() {
         {/* Fun facts */}
         <Section id="beyond-work">
           <Container>
-            <SectionHeading title="Beyond Work" subtitle="A few things that keep me curious off the clock." />
+            <SectionHeading
+              title="Beyond Work"
+              subtitle="A few things that keep me curious off the clock."
+            />
             <FunFacts facts={funFacts} />
           </Container>
         </Section>

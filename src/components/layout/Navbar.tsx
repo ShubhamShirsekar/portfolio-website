@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import RubberSegment from '@/components/reactbits/RubberSegment';
 import { motion, AnimatePresence } from 'framer-motion';
 import { navLinks, siteConfig } from '@/lib/content';
 import { cn } from '@/lib/utils';
@@ -9,6 +11,11 @@ import { cn } from '@/lib/utils';
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
+  // Highlight the section you're in (e.g. /projects/stackmint-agents -> Projects)
+  const activeHref =
+    navLinks.find((link) => (link.href === '/' ? pathname === '/' : pathname.startsWith(link.href)))?.href ?? '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,29 +39,20 @@ export function Navbar() {
             <span className="text-accent-blue">.</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) =>
-              link.isCTA ? (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="px-4 py-2 rounded-lg bg-accent-blue/10 text-accent-blue border border-accent-blue/30 
-                           hover:bg-accent-blue/20 hover:border-accent-blue/50 transition-all duration-200"
-                >
-                  {link.label}
-                </Link>
-              ) : (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-gray-300 hover:text-white transition-colors relative group"
-                >
-                  {link.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent-blue group-hover:w-full transition-all duration-200" />
-                </Link>
-              )
-            )}
+          {/* Desktop Navigation (React Bits Rubber Segment, links mode) */}
+          <div className="hidden md:block">
+            <RubberSegment
+              navigation
+              items={navLinks.map((link) => ({ value: link.href, label: link.label }))}
+              value={activeHref}
+              onChange={(href) => router.push(href)}
+              trackColor="rgba(255,255,255,0.06)"
+              thumbColor="#3b82f6"
+              textColor="#d1d5db"
+              activeTextColor="#ffffff"
+              radius={12}
+              size="md"
+            />
           </div>
 
           {/* Mobile Menu Button */}

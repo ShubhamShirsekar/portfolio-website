@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Button, Section, Container, SectionHeading, ProjectCard, MetricCard, ValueCard, TypewriterRotator } from '@/components/ui';
+import TechText from '@/components/reactbits/TechText';
 import { heroContent, valuePropositions, impactMetrics, featuredProjects, siteConfig } from '@/lib/content';
 
 // Hero Section
@@ -32,9 +33,19 @@ function HeroSection() {
             {siteConfig.availability}
           </motion.p>
 
-          <h1 className="text-hero-mobile md:text-hero font-bold text-white mb-6">
-            <span className="text-gradient">{heroContent.headline}</span>
-          </h1>
+          <h1 className="sr-only">{heroContent.headline}</h1>
+          {/* Interactive title (React Bits Tech Text), tinted with the brand gradient */}
+          <div className="relative mx-auto mb-6 h-20 md:h-28 w-full max-w-4xl" aria-hidden="true">
+            <TechText
+              text={heroContent.headline}
+              fontWeight={700}
+              fontSize={64}
+              letterSpacing={-0.02}
+              color="#ffffff"
+              accentColor="#ffffff"
+              gradient={['#3b82f6', '#8b5cf6', '#06b6d4']}
+            />
+          </div>
 
           <motion.p
             initial={{ opacity: 0 }}
