@@ -23,7 +23,7 @@ export default function AboutPage() {
     <div className="relative min-h-screen">
       {/* Background */}
       <div className="fixed inset-0 z-0">
-        <Image src="/about-bg-tv.jpg" alt="" fill className="object-cover object-[center_55%] opacity-40" priority />
+        <Image src="/about-bg-tv.jpg" alt="" fill className="object-cover object-[center_55%] opacity-40 blur-md scale-110" priority />
         <div className="absolute inset-0 bg-space-900/40" />
       </div>
 
