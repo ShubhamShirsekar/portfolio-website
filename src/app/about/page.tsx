@@ -128,13 +128,13 @@ export default function AboutPage() {
                       >
                         <div className="flex h-full items-center gap-4">
                           <div className="min-w-0 flex-1">
-                            <p className="mb-1.5 text-xs uppercase tracking-[0.18em] text-gray-300">
-                              {edu.years}
-                            </p>
                             <h3 className="text-lg font-semibold leading-snug text-white">
                               {edu.degree}
                             </h3>
                             <p className="text-sm font-medium text-gray-100">{edu.institution}</p>
+                            <p className="mt-1.5 text-xs uppercase tracking-[0.18em] text-gray-300">
+                              {edu.years}
+                            </p>
                           </div>
                           {edu.logo && (
                             <Image
