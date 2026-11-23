@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Button, Section, Container, SectionHeading, ProjectCard, MetricCard, ValueCard } from '@/components/ui';
+import { Button, Section, Container, SectionHeading, ProjectCard, MetricCard, ValueCard, TypewriterRotator } from '@/components/ui';
 import { heroContent, valuePropositions, impactMetrics, featuredProjects, siteConfig } from '@/lib/content';
 
 // Hero Section
@@ -42,7 +42,7 @@ function HeroSection() {
             transition={{ delay: 0.4, duration: 0.6 }}
             className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto"
           >
-            {heroContent.tagline}
+            <TypewriterRotator texts={heroContent.taglines} />
           </motion.p>
 
           <motion.div

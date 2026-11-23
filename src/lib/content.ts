@@ -51,7 +51,14 @@ export const socialLinks: SocialLink[] = [
 
 export const heroContent = {
   headline: 'Forward Deployed Engineer',
-  tagline: 'Shipping AI agents into production that cut multi-day workflows to under a few hours.',
+  // Rotated in the hero with a typewriter effect (first line is the default / SSR text)
+  taglines: [
+    'Shipping AI agents into production that cut multi-day workflows to under a few hours.',
+    'Connecting agents to the tools clients already use, securely, over OAuth, MCP and APIs.',
+    'Enabling clients to turn their expertise into productized and reusable agents.',
+    'Running technical discovery with client teams to scope agents around how their work really happens.',
+    'Staying close to client teams after launch until the agents actually work for the people using them.',
+  ],
   primaryCTA: { label: 'View Projects', href: '/projects' },
   secondaryCTA: { label: 'Download Resume', href: siteConfig.resumeUrl },
 };
