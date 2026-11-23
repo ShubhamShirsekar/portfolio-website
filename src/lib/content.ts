@@ -271,7 +271,7 @@ export const skillGroups: SkillGroup[] = [
       'Mistral',
       'DeepSeek',
       'Gemini',
-      'RoBERTa fine-tuning',
+      'Model fine-tuning',
     ],
   },
   {
