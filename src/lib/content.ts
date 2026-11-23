@@ -74,10 +74,10 @@ export const valuePropositions: ValueProposition[] = [
     icon: 'agent',
   },
   {
-    title: 'Integrations: OAuth, MCP, APIs',
+    title: 'Integrations',
     points: [
-      'Every integration secure, approved and production-ready.',
-      'Agents wired securely into your existing tools.',
+      'Secure, approved and production-ready integrations.',
+      'Agents wired to your existing tools.',
       'OAuth, MCP and API keys, done right.',
     ],
     icon: 'plug',
@@ -85,7 +85,7 @@ export const valuePropositions: ValueProposition[] = [
   {
     title: 'Client-Facing Delivery',
     points: [
-      'Discovery to delivery, side by side with clients.',
+      'Discovery to delivery.',
       'Scoped with clients, built for their teams.',
       'Clear communication that uncovers the real problem.',
     ],
