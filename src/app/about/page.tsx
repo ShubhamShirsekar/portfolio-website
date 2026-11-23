@@ -125,16 +125,29 @@ export default function AboutPage() {
                       shine={0.6}
                       glare={0.35}
                     >
-                      <div className="flex h-full flex-col justify-between">
-                        <p className="text-xs uppercase tracking-[0.18em] text-gray-300">
-                          {edu.years}
-                        </p>
-                        <div>
-                          <h3 className="text-lg font-semibold leading-snug text-white">
-                            {edu.degree}
-                          </h3>
-                          <p className="text-sm font-medium text-gray-100">{edu.institution}</p>
+                      <div className="flex h-full items-center gap-4">
+                        <div className="flex h-full min-w-0 flex-1 flex-col justify-between">
+                          <p className="text-xs uppercase tracking-[0.18em] text-gray-300">
+                            {edu.years}
+                          </p>
+                          <div>
+                            <h3 className="text-lg font-semibold leading-snug text-white">
+                              {edu.degree}
+                            </h3>
+                            <p className="text-sm font-medium text-gray-100">{edu.institution}</p>
+                          </div>
                         </div>
+                        {edu.logo && (
+                          <Image
+                            src={edu.logo}
+                            alt={`${edu.institution} logo`}
+                            width={96}
+                            height={96}
+                            className={`h-20 w-20 shrink-0 object-contain sm:h-24 sm:w-24${
+                              edu.logoInvert ? ' brightness-0 invert opacity-90' : ''
+                            }`}
+                          />
+                        )}
                       </div>
                     </ReflectiveCard>
                   ))}
@@ -241,14 +254,16 @@ export default function AboutPage() {
 
               <div className="md:col-span-2">
                 <h3 className="mb-4 text-xl font-semibold text-white">Languages</h3>
-                <dl className="glass-card grid grid-cols-1 gap-4 p-6 sm:grid-cols-2">
-                  {languages.map((lang) => (
-                    <div key={lang.name} className="flex items-center justify-between gap-4">
-                      <dt className="text-gray-300">{lang.name}</dt>
-                      <dd className="text-sm text-accent-cyan">{lang.level}</dd>
-                    </div>
-                  ))}
-                </dl>
+                <SpecularSurface radius={16} tintOpacity={0.05} blur={8} lineColor="#bfdbfe" baseColor="#3f3f56">
+                  <dl className="grid grid-cols-1 gap-4 p-6 sm:grid-cols-2">
+                    {languages.map((lang) => (
+                      <div key={lang.name} className="flex items-center justify-between gap-4">
+                        <dt className="text-gray-300">{lang.name}</dt>
+                        <dd className="text-sm text-accent-cyan">{lang.level}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </SpecularSurface>
               </div>
             </div>
           </Container>

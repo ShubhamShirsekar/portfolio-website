@@ -44,6 +44,10 @@ export type Education = {
   degree: string;
   institution: string;
   years: string;
+  /** Institution logo shown on the right of the card. */
+  logo?: string;
+  /** Render a dark/black logo as white on the dark card. */
+  logoInvert?: boolean;
 };
 
 export type Metric = {

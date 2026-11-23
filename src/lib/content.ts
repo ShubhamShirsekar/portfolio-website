@@ -358,6 +358,8 @@ export const education: Education[] = [
     degree: 'M.Sc. Data Analytics for Business',
     institution: 'KEDGE Business School',
     years: 'Sept 2025 – Apr 2027',
+    logo: '/logos/kedge.png',
+    logoInvert: true,
   },
   {
     degree: 'Bachelor of Engineering',

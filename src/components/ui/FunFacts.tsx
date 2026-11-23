@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import SpecularSurface from '@/components/reactbits/SpecularSurface';
 import type { FunFact } from '@/types';
 
 function FactIcon({ icon }: { icon: FunFact['icon'] }) {
@@ -58,13 +59,24 @@ export function FunFacts({ facts }: { facts: FunFact[] }) {
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.45, delay: i * 0.08, ease: 'easeOut' }}
           whileHover={{ y: -4 }}
-          className="glass-card p-5 hover:border-accent-cyan/30 transition-colors"
+          className="h-full"
         >
-          <span className="inline-flex w-11 h-11 items-center justify-center rounded-xl bg-accent-cyan/10 text-accent-cyan mb-3">
-            <FactIcon icon={fact.icon} />
-          </span>
-          <h3 className="text-white font-semibold mb-1">{fact.title}</h3>
-          <p className="text-gray-400 text-sm">{fact.text}</p>
+          <SpecularSurface
+            radius={16}
+            tintOpacity={0.05}
+            blur={8}
+            lineColor="#a5f3fc"
+            baseColor="#3f3f56"
+            className="h-full"
+          >
+            <div className="p-5">
+              <span className="inline-flex w-11 h-11 items-center justify-center rounded-xl bg-accent-cyan/10 text-accent-cyan mb-3">
+                <FactIcon icon={fact.icon} />
+              </span>
+              <h3 className="text-white font-semibold mb-1">{fact.title}</h3>
+              <p className="text-gray-400 text-sm">{fact.text}</p>
+            </div>
+          </SpecularSurface>
         </motion.li>
       ))}
     </ul>
