@@ -8,6 +8,8 @@ export type Project = {
   tools: string[];
   github?: string;
   demo?: string;
+  image?: string;
+  imageAlt?: string;
   featured: boolean;
   date: string;
 };
