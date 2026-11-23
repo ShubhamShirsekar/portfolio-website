@@ -110,43 +110,45 @@ export default function AboutPage() {
         <Section id="education">
           <Container>
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-              <div>
+              {/* Column stretches to the Certifications column; the cards split that height */}
+              <div className="flex flex-col">
                 <h2 className="mb-4 text-2xl font-semibold text-white">Education</h2>
-                <div className="space-y-5">
+                <div className="flex flex-1 flex-col gap-5">
                   {education.map((edu) => (
-                    <ReflectiveCard
-                      key={edu.degree}
-                      width="100%"
-                      height={112}
-                      radius={18}
-                      theme="dark"
-                      tiltStrength={8}
-                      tint="#7d8fb8"
-                      shine={0.6}
-                      glare={0.35}
-                    >
-                      <div className="flex h-full items-center gap-4">
-                        <div className="min-w-0 flex-1">
-                          <p className="mb-1.5 text-xs uppercase tracking-[0.18em] text-gray-300">
-                            {edu.years}
-                          </p>
-                          <h3 className="text-lg font-semibold leading-snug text-white">
-                            {edu.degree}
-                          </h3>
-                          <p className="text-sm font-medium text-gray-100">{edu.institution}</p>
+                    <div key={edu.degree} className="min-h-[112px] flex-1">
+                      <ReflectiveCard
+                        width="100%"
+                        height="100%"
+                        radius={18}
+                        theme="dark"
+                        tiltStrength={8}
+                        tint="#7d8fb8"
+                        shine={0.6}
+                        glare={0.35}
+                      >
+                        <div className="flex h-full items-center gap-4">
+                          <div className="min-w-0 flex-1">
+                            <p className="mb-1.5 text-xs uppercase tracking-[0.18em] text-gray-300">
+                              {edu.years}
+                            </p>
+                            <h3 className="text-lg font-semibold leading-snug text-white">
+                              {edu.degree}
+                            </h3>
+                            <p className="text-sm font-medium text-gray-100">{edu.institution}</p>
+                          </div>
+                          {edu.logo && (
+                            <Image
+                              src={edu.logo}
+                              alt={`${edu.institution} logo`}
+                              unoptimized
+                              width={128}
+                              height={128}
+                              className={`shrink-0 ${edu.logoClassName ?? ''}`}
+                            />
+                          )}
                         </div>
-                        {edu.logo && (
-                          <Image
-                            src={edu.logo}
-                            alt={`${edu.institution} logo`}
-                            unoptimized
-                            width={128}
-                            height={128}
-                            className={`shrink-0 ${edu.logoClassName ?? ''}`}
-                          />
-                        )}
-                      </div>
-                    </ReflectiveCard>
+                      </ReflectiveCard>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -251,7 +253,13 @@ export default function AboutPage() {
 
               <div className="md:col-span-2">
                 <h3 className="mb-4 text-xl font-semibold text-white">Languages</h3>
-                <SpecularSurface radius={16} tintOpacity={0.05} blur={8} lineColor="#bfdbfe" baseColor="#3f3f56">
+                <SpecularSurface
+                  radius={16}
+                  tintOpacity={0.05}
+                  blur={8}
+                  lineColor="#bfdbfe"
+                  baseColor="#3f3f56"
+                >
                   <dl className="grid grid-cols-1 gap-4 p-6 sm:grid-cols-2">
                     {languages.map((lang) => (
                       <div key={lang.name} className="flex items-center justify-between gap-4">
