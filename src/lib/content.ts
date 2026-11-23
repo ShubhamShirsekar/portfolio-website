@@ -76,7 +76,7 @@ export const valuePropositions: ValueProposition[] = [
   {
     title: 'Integrations',
     points: [
-      'Secure, approved and production-ready integrations.',
+      'Secure and production-ready integrations.',
       'Agents wired to your existing tools.',
       'OAuth, MCP and API keys, done right.',
     ],
