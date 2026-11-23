@@ -142,7 +142,7 @@ export default function ContactPage() {
                 {/* Download Resume */}
                 <div className="glass-card p-6">
                   <h3 className="text-white font-medium mb-3">
-                    Prefer a document?
+                    Want the full picture?
                   </h3>
                   <p className="text-gray-400 text-sm mb-4">
                     Download my resume for a complete overview.

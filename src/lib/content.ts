@@ -96,7 +96,7 @@ export const aboutContent = {
   ],
   quickFacts: [
     { label: 'Location', value: 'Paris, France' },
-    { label: 'Role', value: 'Forward Deployed Engineer', detail: 'AI agents and integrations' },
+    { label: 'Role', value: 'Forward Deployed Engineer' },
     { label: 'Experience', value: '3 years', detail: 'CRM and integration delivery for financial institutions' },
     { label: 'Education', value: 'M.Sc. Data Analytics for Business', detail: 'KEDGE Business School' },
   ],
