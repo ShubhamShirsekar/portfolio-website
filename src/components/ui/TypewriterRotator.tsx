@@ -30,8 +30,8 @@ function commonPrefixLength(a: string, b: string) {
 export function TypewriterRotator({
   texts,
   className,
-  typeSpeed = 38,
-  deleteSpeed = 16,
+  typeSpeed = 55,
+  deleteSpeed = 8,
   holdMs = 2800,
 }: TypewriterRotatorProps) {
   const shouldReduce = useReducedMotion();
