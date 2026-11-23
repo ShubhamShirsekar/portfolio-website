@@ -13,7 +13,7 @@ import type { BrandLogo, Project } from '@/types';
  * centre while the image settles from a slight zoom (parallax), driven by the
  * image's own position in the viewport.
  */
-const LOGO_HEIGHT = 22;
+const LOGO_HEIGHT = 18;
 
 /** Logo recoloured with the site gradient via CSS mask (uses the logo file's alpha as its shape). */
 function BrandMark({ logo }: { logo: BrandLogo }) {
@@ -35,8 +35,9 @@ function RevealImage({ src, alt, logos }: { src: string; alt: string; logos?: Br
     target: ref,
     offset: ['start end', 'center center'],
   });
-  const clipPath = useTransform(scrollYProgress, [0, 1], ['inset(0% 50% 0% 50% round 16px)', 'inset(0% 0% 0% 0% round 16px)']);
-  const scale = useTransform(scrollYProgress, [0, 1], [1.3, 1]);
+  // Fully open by 80% of the scroll range, so the image (and corner logo) is complete when a row settles
+  const clipPath = useTransform(scrollYProgress, [0, 0.8], ['inset(0% 50% 0% 50% round 16px)', 'inset(0% 0% 0% 0% round 16px)']);
+  const scale = useTransform(scrollYProgress, [0, 0.8], [1.3, 1]);
 
   return (
     <div ref={ref} className="relative aspect-[8/5] w-full">
