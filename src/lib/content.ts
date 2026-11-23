@@ -278,6 +278,7 @@ const projectLogos: Record<string, BrandLogo[]> = {
   synthpanel: [{ name: 'BNP Paribas', src: '/logos/brands/bnp-paribas.png', aspect: 4.85 }],
   'loreal-hackathon': [{ name: "L'Oréal", src: '/logos/brands/loreal.png', aspect: 5.52 }],
   'iea-analysis': [{ name: 'IEA', src: '/logos/brands/iea.png', aspect: 2.39 }],
+  'btc-dca-vs-dip': [{ name: 'Bitcoin', src: '/logos/brands/bitcoin.png', aspect: 1 }],
   'spotify-reconstruction': [{ name: 'Spotify', src: '/logos/brands/spotify.svg', aspect: 1 }],
   'spotify-recommendation': [{ name: 'Spotify', src: '/logos/brands/spotify.svg', aspect: 1 }],
 };
