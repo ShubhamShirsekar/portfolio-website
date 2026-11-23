@@ -23,7 +23,7 @@ export default function ProjectsPage() {
       <PageScrollSnap />
       <div className="relative z-10">
         <Section>
-          <Container>
+          <Container className="max-w-7xl">
             <div className="snap-start">
               <SectionHeading
                 as="h1"
@@ -32,7 +32,7 @@ export default function ProjectsPage() {
               />
             </div>
 
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-7xl mx-auto">
               {allProjects.map((project, index) => (
                 <ProjectRevealRow key={project.slug} project={project} index={index} />
               ))}

@@ -30,7 +30,7 @@ function RevealImage({ src, alt }: { src: string; alt: string }) {
         className="absolute inset-0 overflow-hidden rounded-2xl border border-glass-border shadow-glass"
       >
         <motion.div style={shouldReduce ? undefined : { scale }} className="absolute inset-0 will-change-transform">
-          <Image src={src} alt={alt} fill unoptimized sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
+          <Image src={src} alt={alt} fill unoptimized sizes="(min-width: 768px) 60vw, 100vw" className="object-cover" />
         </motion.div>
       </motion.div>
     </div>
@@ -55,7 +55,13 @@ export function ProjectRevealRow({ project, index }: ProjectRevealRowProps) {
     <motion.article
       ref={rowRef}
       style={shouldReduce ? undefined : { opacity }}
-      className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 items-center content-center snap-start min-h-[calc(100svh-4rem)] md:min-h-[calc(100svh-5rem)] py-12">
+      className={cn(
+        'grid grid-cols-1 gap-8 md:gap-12 items-center',
+        // Image column gets ~60% of the row
+        imageFirst ? 'md:grid-cols-[3fr_2fr]' : 'md:grid-cols-[2fr_3fr]',
+        'content-center snap-start min-h-[calc(100svh-4rem)] md:min-h-[calc(100svh-5rem)] py-12'
+      )}
+    >
       {project.image && (
         <div className={cn(!imageFirst && 'md:order-2')}>
           <RevealImage src={project.image} alt={project.imageAlt ?? ''} />
