@@ -117,7 +117,7 @@ export default function AboutPage() {
                     <ReflectiveCard
                       key={edu.degree}
                       width="100%"
-                      height={148}
+                      height={112}
                       radius={18}
                       theme="dark"
                       tiltStrength={8}
@@ -126,25 +126,23 @@ export default function AboutPage() {
                       glare={0.35}
                     >
                       <div className="flex h-full items-center gap-4">
-                        <div className="flex h-full min-w-0 flex-1 flex-col justify-between">
-                          <p className="text-xs uppercase tracking-[0.18em] text-gray-300">
+                        <div className="min-w-0 flex-1">
+                          <p className="mb-1.5 text-xs uppercase tracking-[0.18em] text-gray-300">
                             {edu.years}
                           </p>
-                          <div>
-                            <h3 className="text-lg font-semibold leading-snug text-white">
-                              {edu.degree}
-                            </h3>
-                            <p className="text-sm font-medium text-gray-100">{edu.institution}</p>
-                          </div>
+                          <h3 className="text-lg font-semibold leading-snug text-white">
+                            {edu.degree}
+                          </h3>
+                          <p className="text-sm font-medium text-gray-100">{edu.institution}</p>
                         </div>
                         {edu.logo && (
                           <Image
                             src={edu.logo}
                             alt={`${edu.institution} logo`}
                             unoptimized
-                            width={96}
-                            height={96}
-                            className={`h-20 w-20 shrink-0 object-contain sm:h-24 sm:w-24 ${edu.logoClassName ?? ''}`}
+                            width={128}
+                            height={128}
+                            className={`shrink-0 ${edu.logoClassName ?? ''}`}
                           />
                         )}
                       </div>
