@@ -24,6 +24,7 @@ export const siteConfig = {
   footerTagline: 'Forward Deployed Engineer',
   location: 'Paris, France',
   availability: 'Open to work · Paris, France',
+  workAuthorization: 'Authorized to work in France',
   email: 'shubham.shirsekar@outlook.com',
   linkedin: 'https://linkedin.com/in/shubhamshirsekar21',
   github: 'https://github.com/shubhamshirsekar',
@@ -96,7 +97,7 @@ export const valuePropositions: ValueProposition[] = [
 ];
 
 export const impactMetrics: Metric[] = [
-  { value: '4 yrs', label: 'Building client-facing systems, from banks to AI agents' },
+  { value: '3+ yrs', label: 'Building client-facing systems, from banks to AI agents' },
   { value: '50+', label: 'Change requests delivered per month' },
   { value: '0 → 1', label: 'Platform docs, written from scratch' },
   { value: '< 2 hrs', label: 'Per workflow, down from days' },
@@ -114,8 +115,9 @@ export const aboutContent = {
   ],
   quickFacts: [
     { label: 'Location', value: 'Paris, France' },
+    { label: 'Work authorization', value: 'Authorized to work in France' },
     { label: 'Role', value: 'Forward Deployed Engineer' },
-    { label: 'Experience', value: '4 years', detail: 'Building client-facing systems, from banks to AI agents' },
+    { label: 'Experience', value: '3+ years', detail: 'Building client-facing systems, from banks to AI agents' },
     { label: 'Education', value: 'M.Sc. Data Analytics for Business', detail: 'KEDGE Business School' },
   ],
 };
@@ -180,7 +182,7 @@ const projectList: Project[] = [
     title: 'SynthPanel',
     slug: 'synthpanel',
     summary:
-      'Azure OpenAI powered platform that clusters 2,400+ consumer survey records into validated personas for synthetic panel simulations with confidence scoring, cutting traditional market research cost and time by 80%.',
+      'Led a team of 6 to build an Azure OpenAI powered platform that clusters 2,400+ consumer survey records into validated personas for synthetic panel simulations with confidence scoring, cutting traditional market research cost and time by 80%.',
     tags: ['Generative AI', 'Hackathon'],
     tools: ['Azure OpenAI', 'Streamlit'],
     github: 'https://github.com/ShubhamShirsekar/Synthpanel',
@@ -192,7 +194,7 @@ const projectList: Project[] = [
     title: "L'Oréal Product Classification",
     slug: 'loreal-hackathon',
     summary:
-      "Fine-tuned RoBERTa on a custom product description dataset provided by L'Oréal, reaching 79% accuracy on product classification and enabling segmentation from descriptions alone.",
+      "Led a team of 5 to fine-tune RoBERTa on a custom product description dataset provided by L'Oréal, reaching 79% accuracy on product classification and enabling segmentation from descriptions alone.",
     tags: ['NLP', 'Hackathon'],
     tools: ['Python', 'RoBERTa', 'PyTorch', 'TensorFlow'],
     github: 'https://github.com/ShubhamShirsekar/L-Oreal-Hackathon',
@@ -214,24 +216,12 @@ const projectList: Project[] = [
     title: 'Spotify Recommendation System',
     slug: 'spotify-recommendation',
     summary:
-      'Enhancing music recommendations through feature engineering and advanced modeling. Built a personalized recommendation system using correlation analysis and ML models.',
+      'Content-based music recommender: a One-Class SVM per user learns the audio-feature profile of their tracks and flags new tracks that fit it, reaching 86% average recall.',
     tags: ['Recommendation Systems', 'ML'],
     tools: ['Python', 'Pandas', 'Scikit-learn'],
     github: 'https://github.com/ShubhamShirsekar/Data_Analytics/tree/main/MLI_Spotify_Project_Task2',
     featured: false,
     date: '2024-10',
-  },
-  {
-    title: 'EventSphere',
-    slug: 'eventsphere',
-    summary:
-      'Django-based event management platform with user authentication, event creation, and ticketing.',
-    tags: ['Web Development', 'Full Stack'],
-    tools: ['Python', 'Django', 'PostgreSQL', 'HTML/CSS'],
-    github: 'https://github.com/ShubhamShirsekar/eventsphere',
-    demo: 'https://eventsphere-demo.vercel.app',
-    featured: false,
-    date: '2025-11',
   },
   {
     title: 'IEA Energy Analysis',
@@ -265,7 +255,6 @@ const projectImageAlts: Record<string, string> = {
   'loreal-hackathon': 'Illustration of text tokens flowing through model layers into classification bars',
   'spotify-reconstruction': 'Illustration of a mixed audio waveform sorted into four colour-coded playlists',
   'spotify-recommendation': 'Illustration of tracks on vinyl-style rings with recommended tracks highlighted',
-  eventsphere: 'Illustration of a calendar grid with highlighted events and a ticket',
   'iea-analysis': 'Illustration of energy trend lines with a lightning bolt',
   'btc-dca-vs-dip': 'Illustration of a price chart with regular buys and buy-the-dip markers',
 };

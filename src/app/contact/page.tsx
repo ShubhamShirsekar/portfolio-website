@@ -97,12 +97,13 @@ export default function ContactPage() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="flex justify-center mb-12"
+              className="flex flex-col items-center gap-2 mb-12"
             >
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan text-sm">
                 <span className="w-2 h-2 rounded-full bg-accent-cyan animate-pulse motion-reduce:animate-none" aria-hidden="true" />
                 {contactContent.availability}
               </span>
+              <span className="text-xs text-gray-400">{siteConfig.workAuthorization}</span>
             </motion.div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">

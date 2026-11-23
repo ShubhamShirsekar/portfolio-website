@@ -60,7 +60,7 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
           </div>
 
           <div className="flex items-center text-accent-blue text-sm font-medium group">
-            View Case Study
+            More details
             <svg
               className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"
               fill="none"

@@ -131,9 +131,9 @@ export function ProjectRevealRow({ project, index }: ProjectRevealRowProps) {
         <Link
           href={`/projects/${project.slug}`}
           className="inline-flex items-center text-accent-blue text-sm font-medium group"
-          aria-label={`View case study: ${project.title}`}
+          aria-label={`More details: ${project.title}`}
         >
-          View Case Study
+          More details
           <svg
             className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"
             fill="none"

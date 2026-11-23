@@ -141,29 +141,6 @@ art['spotify-recommendation'] = (() => {
   return frame(parts.join('\n'), [[600, 375, C.violet], [200, 600, C.blue], [1000, 150, C.cyan]]);
 })();
 
-// 6. EventSphere: calendar grid with a ticket
-art['eventsphere'] = (() => {
-  const parts = [], x0 = 170, y0 = 170, cw = 92, ch = 78;
-  const hi = { 3: C.blue, 9: C.violet, 17: C.cyan, 24: C.violet, 30: C.blue };
-  parts.push(`<rect x="${x0 - 30}" y="${y0 - 70}" width="${7 * cw + 50}" height="${5 * ch + 110}" rx="28" fill="#12121c" fill-opacity="0.8" stroke="#ffffff" stroke-opacity="0.1"/>`);
-  parts.push(`<rect x="${x0}" y="${y0 - 44}" width="160" height="14" rx="7" fill="url(#acc)"/>`);
-  for (let i = 0; i < 35; i++) {
-    const x = x0 + (i % 7) * cw, y = y0 + Math.floor(i / 7) * ch, col = hi[i];
-    parts.push(`<rect x="${x}" y="${y}" width="${cw - 12}" height="${ch - 12}" rx="12" fill="${col || '#ffffff'}" fill-opacity="${col ? 0.25 : 0.04}" stroke="${col || '#ffffff'}" stroke-opacity="${col ? 0.9 : 0.08}" stroke-width="${col ? 2 : 1}"/>`);
-    if (col) parts.push(`<circle cx="${x + 20}" cy="${y + 20}" r="6" fill="${col}"/>`);
-  }
-  const tx = 760, ty = 300;
-  parts.push(`<g transform="rotate(-8 ${tx + 170} ${ty + 90})" filter="url(#glow)">
-    <path d="M${tx} ${ty} h340 v66 a24 24 0 0 0 0 48 v66 h-340 v-66 a24 24 0 0 0 0 -48 z" fill="#12121c" stroke="url(#acc)" stroke-width="3"/>
-    <line x1="${tx + 250}" y1="${ty + 14}" x2="${tx + 250}" y2="${ty + 166}" stroke="#ffffff" stroke-opacity="0.25" stroke-dasharray="6 8"/>
-    <rect x="${tx + 36}" y="${ty + 44}" width="170" height="14" rx="7" fill="${C.violetL}"/>
-    <rect x="${tx + 36}" y="${ty + 76}" width="120" height="10" rx="5" fill="#ffffff" opacity="0.3"/>
-    <rect x="${tx + 36}" y="${ty + 100}" width="90" height="10" rx="5" fill="#ffffff" opacity="0.2"/>
-    <rect x="${tx + 272}" y="${ty + 56}" width="46" height="68" rx="6" fill="${C.cyan}" opacity="0.6"/>
-  </g>`);
-  return frame(parts.join('\n'));
-})();
-
 // 7. IEA: energy trend lines with area fill
 art['iea-analysis'] = (() => {
   const parts = [], x0 = 120, x1 = 1080, yb = 620, defs = [];

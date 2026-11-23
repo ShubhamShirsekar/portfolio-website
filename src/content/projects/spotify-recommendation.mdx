@@ -1,7 +1,7 @@
 ---
 title: "Spotify Recommendation System"
 slug: "spotify-recommendation"
-summary: "Enhancing music recommendations through feature engineering and advanced modeling."
+summary: "Content-based music recommender: a One-Class SVM per user learns the audio-feature profile of their tracks and flags new tracks that fit it, reaching 86% average recall."
 tags: ["Recommendation Systems", "ML"]
 tools: ["Python", "Pandas", "Scikit-learn"]
 github: "https://github.com/ShubhamShirsekar/Data_Analytics/tree/main/MLI_Spotify_Project_Task2"
@@ -11,16 +11,15 @@ featured: false
 
 ## Overview
 
-Built a personalized music recommendation system that suggests songs based on listening history and audio feature analysis. The system combines collaborative filtering with content-based approaches for hybrid recommendations.
+A content-based recommender built for the Machine Learning I assessment. For each user, a One-Class SVM learns the audio-feature profile of the tracks they already listen to, then flags new tracks that fall inside that profile as recommendations.
 
 ---
 
 ## Problem Statement
 
 Generic music recommendations often miss personal preferences. This project creates a personalized recommender that:
-- Learns from individual listening patterns
-- Uses audio features for content-based similarity
-- Provides explainable recommendations
+- Learns each user's taste from the tracks they already have (positive examples only)
+- Uses audio features for content-based matching
 
 ---
 
@@ -39,7 +38,8 @@ Generic music recommendations often miss personal preferences. This project crea
    - Introduced derived features
 
 2. **Model**
-   - One-Class SVM Configuration
+   - One-Class SVM per user, trained only on that user's tracks
+   - New tracks inside the learned boundary are recommended
 
 3. **Evaluation**
    - System Recall for each User
@@ -55,7 +55,7 @@ Generic music recommendations often miss personal preferences. This project crea
 
 ## Key Learnings
 
-- Hybrid approaches outperform single-method recommenders
+- One-Class SVM fits recommendation when only positive examples (a user's own tracks) are available
 - Feature correlation analysis reveals interesting musical patterns
 
 ---
