@@ -296,7 +296,7 @@ export const certifications: Certification[] = [
   { name: 'Azure AI Fundamentals', issuer: 'Microsoft', logo: '/logos/Microsoft.svg' },
   { name: 'Professional Scrum Master I', issuer: 'Scrum.org', logo: '/logos/scrum.png' },
   { name: 'AI Fluency: Framework & Foundations', issuer: 'Anthropic', logo: '/logos/Claude.svg' },
-  { name: 'SQL (Advanced)', issuer: 'HackerRank' },
+  { name: 'SQL (Advanced)', issuer: 'HackerRank', logo: '/logos/HackerRank.svg' },
 ];
 
 export const languages: Language[] = [

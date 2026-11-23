@@ -1,0 +1,5 @@
+<svg width="150" height="150" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+  <!-- HackerRank-style mark: green hexagon with a white H -->
+  <path d="M48 4 86 26v44L48 92 10 70V26z" fill="#2EC866"/>
+  <path d="M35 28v40M61 28v40M35 48h26" stroke="#ffffff" stroke-width="8" stroke-linecap="round" fill="none"/>
+</svg>
