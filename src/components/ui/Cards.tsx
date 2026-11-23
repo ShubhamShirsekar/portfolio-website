@@ -194,9 +194,11 @@ export function ValueCard({ value, index = 0 }: ValueCardProps) {
 interface ExperienceCardProps {
   experience: Experience;
   index?: number;
+  /** Render the card's own timeline dot (off when a parent timeline draws dots). */
+  showDot?: boolean;
 }
 
-export function ExperienceCard({ experience, index = 0 }: ExperienceCardProps) {
+export function ExperienceCard({ experience, index = 0, showDot = true }: ExperienceCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
@@ -206,7 +208,9 @@ export function ExperienceCard({ experience, index = 0 }: ExperienceCardProps) {
       className="glass-card p-6 relative"
     >
       {/* Timeline dot */}
-      <div className="absolute left-0 top-8 w-3 h-3 rounded-full bg-accent-blue -translate-x-1/2 hidden md:block" />
+      {showDot && (
+        <div className="absolute left-0 top-8 w-3 h-3 rounded-full bg-accent-blue -translate-x-1/2 hidden md:block" />
+      )}
       
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-4">
         <div>

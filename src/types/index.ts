@@ -69,3 +69,9 @@ export type NavLink = {
   href: string;
   isCTA?: boolean;
 };
+
+export type FunFact = {
+  title: string;
+  text: string;
+  icon: 'sport' | 'book' | 'game' | 'globe';
+};

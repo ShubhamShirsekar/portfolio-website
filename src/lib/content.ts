@@ -4,6 +4,7 @@ import type {
   SkillGroup,
   Certification,
   Language,
+  FunFact,
   Education,
   Metric,
   ValueProposition,
@@ -117,6 +118,14 @@ export const aboutContent = {
     { label: 'Education', value: 'M.Sc. Data Analytics for Business', detail: 'KEDGE Business School' },
   ],
 };
+
+// Fun facts (from the interests on the previous About page; edit freely)
+export const funFacts: FunFact[] = [
+  { title: 'On the pitch', text: 'Football, cricket and badminton keep me moving.', icon: 'sport' },
+  { title: 'Plot twists', text: 'Mystery novels and thrillers are my go-to reads.', icon: 'book' },
+  { title: 'Player two', text: 'Online video games, usually with friends.', icon: 'game' },
+  { title: 'Culture curious', text: 'Travelling and discovering new cultures.', icon: 'globe' },
+];
 
 // ============================================
 // EXPERIENCE DATA

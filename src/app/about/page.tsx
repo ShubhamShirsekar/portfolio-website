@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { Section, Container, SectionHeading, ExperienceCard } from '@/components/ui';
+import { Section, Container, SectionHeading, ExperienceTimeline, FunFacts } from '@/components/ui';
 import {
   aboutContent,
   siteConfig,
@@ -9,6 +9,7 @@ import {
   skillGroups,
   certifications,
   languages,
+  funFacts,
 } from '@/lib/content';
 
 export const metadata: Metadata = {
@@ -22,7 +23,7 @@ export default function AboutPage() {
     <div className="relative min-h-screen">
       {/* Background */}
       <div className="fixed inset-0 z-0">
-        <Image src="/about-bg.jpg" alt="" fill className="object-cover opacity-30" priority />
+        <Image src="/about-hamster.jpg" alt="" fill className="object-cover object-[center_40%] opacity-30" priority />
         <div className="absolute inset-0 bg-space-900/40" />
       </div>
 
@@ -93,19 +94,7 @@ export default function AboutPage() {
               title="Experience"
               subtitle="From CRM and integration delivery for financial institutions to AI agents in production."
             />
-            <div className="relative max-w-4xl mx-auto">
-              <div
-                className="hidden md:block absolute left-0 top-0 bottom-0 w-px bg-glass-border"
-                aria-hidden="true"
-              />
-              <ol className="space-y-6 md:pl-8">
-                {experiences.map((experience, index) => (
-                  <li key={`${experience.company}-${experience.role}`}>
-                    <ExperienceCard experience={experience} index={index} />
-                  </li>
-                ))}
-              </ol>
-            </div>
+            <ExperienceTimeline experiences={experiences} />
           </Container>
         </Section>
 
@@ -232,6 +221,14 @@ export default function AboutPage() {
                 </dl>
               </div>
             </div>
+          </Container>
+        </Section>
+
+        {/* Fun facts */}
+        <Section id="beyond-work">
+          <Container>
+            <SectionHeading title="Beyond Work" subtitle="A few things that keep me curious off the clock." />
+            <FunFacts facts={funFacts} />
           </Container>
         </Section>
       </div>

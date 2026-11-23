@@ -5,3 +5,5 @@ export { ProjectCard, MetricCard, ValueCard, ExperienceCard, SkillCard } from '.
 export { ProjectRevealRow } from './ProjectReveal';
 export { PageScrollSnap } from './PageScrollSnap';
 export { TypewriterRotator } from './TypewriterRotator';
+export { ExperienceTimeline } from './ExperienceTimeline';
+export { FunFacts } from './FunFacts';
