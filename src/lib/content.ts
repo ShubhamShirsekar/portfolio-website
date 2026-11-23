@@ -276,7 +276,7 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: 'Integrations & Platforms',
-    skills: ['MCP', 'OAuth', 'REST APIs', 'Supabase', 'Render', 'Azure', 'Azure DevOps CI/CD'],
+    skills: ['MCP', 'OAuth', 'REST APIs', 'Supabase', 'Render', 'Azure', 'DevOps CI/CD'],
   },
   {
     title: 'Client Skills',
