@@ -10,8 +10,18 @@ export type Project = {
   demo?: string;
   image?: string;
   imageAlt?: string;
+  /** Partner/brand logos shown subtly in the image corner (recoloured to the site palette). */
+  logos?: BrandLogo[];
   featured: boolean;
   date: string;
+};
+
+/** Single-colour logo file (SVG or transparent PNG); its shape is used as a mask and filled with the site gradient. */
+export type BrandLogo = {
+  name: string;
+  src: string;
+  /** Width/height ratio of the logo artwork */
+  aspect: number;
 };
 
 export type Experience = {

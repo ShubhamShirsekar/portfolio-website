@@ -5,6 +5,7 @@ import type {
   Certification,
   Language,
   FunFact,
+  BrandLogo,
   Education,
   Metric,
   ValueProposition,
@@ -269,10 +270,18 @@ const projectImageAlts: Record<string, string> = {
   'btc-dca-vs-dip': 'Illustration of a price chart with regular buys and buy-the-dip markers',
 };
 
+// Brand logos shown in the corner of each project image (files in public/logos/brands/).
+// Missing files are simply not listed yet.
+const projectLogos: Record<string, BrandLogo[]> = {
+  'spotify-reconstruction': [{ name: 'Spotify', src: '/logos/brands/spotify.svg', aspect: 1 }],
+  'spotify-recommendation': [{ name: 'Spotify', src: '/logos/brands/spotify.svg', aspect: 1 }],
+};
+
 export const projects: Project[] = projectList.map((project) => ({
   ...project,
   image: `/images/projects/${project.slug}.svg`,
   imageAlt: projectImageAlts[project.slug],
+  logos: projectLogos[project.slug],
 }));
 
 export const featuredProjects = projects.filter((p) => p.featured);

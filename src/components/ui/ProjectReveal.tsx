@@ -6,14 +6,29 @@ import Link from 'next/link';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { Badge } from './Badge';
 import { cn } from '@/lib/utils';
-import type { Project } from '@/types';
+import type { BrandLogo, Project } from '@/types';
 
 /**
  * Scroll-linked image reveal: a horizontal clip-path "curtain" opens from the
  * centre while the image settles from a slight zoom (parallax), driven by the
  * image's own position in the viewport.
  */
-function RevealImage({ src, alt }: { src: string; alt: string }) {
+const LOGO_HEIGHT = 22;
+
+/** Logo recoloured with the site gradient via CSS mask (uses the logo file's alpha as its shape). */
+function BrandMark({ logo }: { logo: BrandLogo }) {
+  const mask = `url(${logo.src}) center / contain no-repeat`;
+  return (
+    <span
+      role="img"
+      aria-label={logo.name}
+      className="block bg-gradient-to-r from-accent-blue-light via-accent-violet-light to-accent-cyan-light"
+      style={{ width: LOGO_HEIGHT * logo.aspect, height: LOGO_HEIGHT, mask, WebkitMask: mask }}
+    />
+  );
+}
+
+function RevealImage({ src, alt, logos }: { src: string; alt: string; logos?: BrandLogo[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const shouldReduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
@@ -32,6 +47,13 @@ function RevealImage({ src, alt }: { src: string; alt: string }) {
         <motion.div style={shouldReduce ? undefined : { scale }} className="absolute inset-0 will-change-transform">
           <Image src={src} alt={alt} fill unoptimized sizes="(min-width: 768px) 60vw, 100vw" className="object-cover" />
         </motion.div>
+        {logos && logos.length > 0 && (
+          <div className="absolute bottom-3 right-3 z-10 flex items-center gap-3 rounded-full bg-space-900/50 px-3 py-2 opacity-80 backdrop-blur-sm">
+            {logos.map((logo) => (
+              <BrandMark key={logo.name} logo={logo} />
+            ))}
+          </div>
+        )}
       </motion.div>
     </div>
   );
@@ -64,7 +86,7 @@ export function ProjectRevealRow({ project, index }: ProjectRevealRowProps) {
     >
       {project.image && (
         <div className={cn(!imageFirst && 'md:order-2')}>
-          <RevealImage src={project.image} alt={project.imageAlt ?? ''} />
+          <RevealImage src={project.image} alt={project.imageAlt ?? ''} logos={project.logos} />
         </div>
       )}
 
