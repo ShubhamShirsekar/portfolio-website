@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Silkscreen } from 'next/font/google';
 import { Navbar, Footer } from '@/components/layout';
+import { PageTransition } from '@/components/ui';
 import './globals.css';
 
 const inter = Inter({ 
@@ -85,7 +86,9 @@ export default function RootLayout({
       <body className={`${inter.variable} ${silkscreen.variable} font-sans`}>
         <Navbar />
         <main className="relative z-10 min-h-screen pt-16 md:pt-20">
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
         </main>
         <Footer />
       </body>

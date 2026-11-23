@@ -18,16 +18,16 @@ interface ProjectCardProps {
 export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, delay: index * 0.08 }}
+      className="h-full"
     >
       <Link href={`/projects/${project.slug}`}>
         <article
           className={cn(
             'glass-card p-6 h-full flex flex-col',
-            'hover:shadow-glow-blue/20 hover:-translate-y-1 transition-all duration-300'
+            'hover:bg-glass-white/80 hover:border-glass-border/70 hover:shadow-glass-sm transition-all duration-300'
           )}
         >
           <div className="flex flex-wrap gap-2 mb-4">
@@ -59,7 +59,7 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
             )}
           </div>
 
-          <div className="flex items-center text-accent-blue text-sm font-medium group">
+          <div className="mt-auto flex items-center text-accent-blue text-sm font-medium group">
             View Case Study
             <svg
               className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"
@@ -94,9 +94,8 @@ export function MetricCard({ metric, index = 0 }: MetricCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.35, delay: index * 0.08 }}
       className="text-center p-6"
     >
       <div className="text-4xl md:text-5xl font-bold text-gradient mb-2">
@@ -146,11 +145,10 @@ function ValueIcon({ icon }: { icon?: string }) {
 export function ValueCard({ value, index = 0 }: ValueCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.15 }}
-      className="glass-card p-6 text-center hover:shadow-glow-violet/20 transition-all duration-300"
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, delay: index * 0.08 }}
+      className="glass-card p-6 text-center hover:bg-glass-white/80 hover:border-glass-border/70 hover:shadow-glow-violet/20 transition-all duration-300"
     >
       <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-accent-violet/10 text-accent-violet mb-4">
         <ValueIcon icon={value.icon} />
@@ -177,30 +175,27 @@ interface ExperienceCardProps {
 export function ExperienceCard({ experience, index = 0 }: ExperienceCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="glass-card p-6 relative"
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, delay: index * 0.08 }}
+      className="glass-card p-6 relative hover:bg-glass-white/80 hover:border-glass-border/70 hover:shadow-glow-blue/20 transition-all duration-300"
     >
       {/* Timeline dot */}
       <div className="absolute left-0 top-8 w-3 h-3 rounded-full bg-accent-blue -translate-x-1/2 hidden md:block" />
-      
+
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-4">
         <div>
           <h3 className="text-xl font-semibold text-white">
             {experience.role}
           </h3>
-          <p className="text-accent-blue">
-            {experience.company}
-          </p>
+          <p className="text-accent-blue">{experience.company}</p>
         </div>
         <div className="text-sm text-gray-400">
           <p>{experience.location}</p>
           <p>{experience.duration}</p>
         </div>
       </div>
-      
+
       <ul className="space-y-2">
         {experience.achievements.map((achievement, i) => (
           <li key={i} className="flex items-start gap-3 text-gray-300 text-sm">
@@ -225,11 +220,10 @@ interface SkillCardProps {
 export function SkillCard({ skill, index = 0 }: SkillCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.3, delay: index * 0.05 }}
-      className="glass-card px-4 py-2 text-center hover:border-accent-blue/30 transition-colors"
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.35, delay: index * 0.05 }}
+      className="glass-card px-4 py-2 text-center hover:border-accent-blue/30 hover:shadow-glow-blue/20 transition-all duration-300"
     >
       <span className="text-gray-200 text-sm">{skill}</span>
     </motion.div>
