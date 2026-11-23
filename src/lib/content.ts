@@ -87,7 +87,7 @@ export const valuePropositions: ValueProposition[] = [
     points: [
       'Discovery to delivery.',
       'Scoped with clients, built for their teams.',
-      'Clear communication to uncover real challenges.',
+      'Clear communication.',
     ],
     icon: 'people',
   },
