@@ -19,7 +19,7 @@ import type {
 export const siteConfig = {
   name: 'Shubham Shirsekar',
   role: 'Forward Deployed Engineer',
-  footerTagline: 'Forward Deployed Engineer | AI agents and integrations',
+  footerTagline: 'Forward Deployed Engineer',
   location: 'Paris, France',
   availability: 'Open to work · Paris, France',
   email: 'shubham.shirsekar@outlook.com',
