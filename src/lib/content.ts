@@ -69,7 +69,7 @@ export const valuePropositions: ValueProposition[] = [
     points: [
       'From prototype to production, end to end.',
       'Agents that run in production, not demos.',
-      'Model agnostic agents.',
+      'Model-agnostic agents.',
     ],
     icon: 'agent',
   },
@@ -87,7 +87,7 @@ export const valuePropositions: ValueProposition[] = [
     points: [
       'Discovery to delivery.',
       'Scoped with clients, built for their teams.',
-      'Clear communication that uncovers the real problem.',
+      'Clear communication to uncover real challenges.',
     ],
     icon: 'people',
   },
