@@ -22,6 +22,110 @@ Workflows at the agency took **1 to 3 days** each. The aim was to hand them to a
 
 ---
 
+## Two Kinds of Agents
+
+I worked on both sides:
+
+- **Internal operations agents** that assist the agency's own team, such as onboarding new clients and generating monthly reports
+- **Product agents** that the agency resells to its clients through the Stackmint platform, as part of its vision of an AI-native marketing agency
+
+Three of them in detail below.
+
+---
+
+## 1. Client Onboarding Agent
+
+*Internal operations*
+
+| | |
+|---|---|
+| **Triggered by** | The agency's CEO, through the Stackmint Slack bot |
+| **Input** | A client or prospect brief |
+| **Output** | Drive folders, a Monday board and a Slack channel, ready for the team |
+
+### How it works
+
+- **Reads the brief** and extracts what the client is looking to buy from the agency, which departments are involved, and which team members to align with the client
+- **Pulls call context** from the CEO's connected transcription app (Read.ai), using the actual call transcripts between the CEO and the client
+- **Sets up Google Drive** with a client folder and a sub-folder for each department or service
+- **Sets up a Monday board** in the agency's standard format, shaped by the services or products the client is buying
+- **Creates the Slack channel** and adds every team member named in the brief
+
+**Connected systems:** Slack, Read.ai, Google Drive, Monday.com
+
+---
+
+## 2. Local Keyword Strategy & GBP Optimisation Agent
+
+*Product agent, used by the agency's SEO department*
+
+| | |
+|---|---|
+| **Triggered by** | SEO team members, from Slack (Stackmint Slack bot), the Stackmint app, or the Stackmint MCP |
+| **Input** | Client name, location, seed SEO keywords, internal SEO preferences, competitor context |
+| **Output** | A slide deck for the end client, reviewed by the agency's SEO experts first |
+
+### How it works
+
+- **Generates a few hundred candidate keywords** from the inputs alone
+- **Narrows them to a handful** worth sending to the end client, based on real data:
+  - **Ahrefs:** domain rating and keyword difficulty
+  - **Google Keyword Planner:** search volume
+  - **LocalFalcon:** a 5-mile scan per keyword, with grid position, review volume and ratings
+- **Rates the client's Google Business Profile (GBP)** and recommends improvements, based on real data from the GBP API
+- **Finds gaps and opportunities** for the client and turns them into a **structured 12-month plan** to close the gaps and capture the opportunities
+- **Produces the deliverable:** a slide deck, reviewed by the agency's internal SEO experts before it goes to the end client
+
+**Connected systems:** Slack, Stackmint app and MCP, Ahrefs, Google Keyword Planner, LocalFalcon, Google Business Profile API
+
+---
+
+## 3. Blog Agent
+
+*Product agent, and by far the most complex one I worked on*
+
+A single run talks to **more than 10 external systems**.
+
+| | |
+|---|---|
+| **Triggered by** | SEO team members |
+| **Input** | Client name, client website, seed topic |
+| **Output** | A finished, SEO-optimised blog article, approved by the end client before it goes live |
+
+### Stage 1: Research workbook
+
+- **Builds an SEO keyword shortlist** using Ahrefs, Semrush and Ubersuggest
+- **Audits the client's website**, fetching and summarising every existing blog post
+- **Researches competitors** and their blogs
+- **Searches Reddit** for real discussion around the seed topic
+- **Analyses AI search queries** on the topic with DataForSEO and Athena
+- **Recommends a blog outline**: section titles, the target keywords for each section, and the purpose each section serves
+
+*Checkpoint: the agency's SEO expert approves the research workbook.*
+
+### Stage 2: Detailed outline
+
+- Writes the full outline from everything gathered, with the exact heading (H-tag) structure and the content planned for each section
+
+*Checkpoint: the outline is approved.*
+
+### Stage 3: Draft, score, rewrite
+
+- **Drafts the article**, generating images or using images provided by the client
+- **Scores the draft in Surfer SEO**. If the score is below the agreed threshold, the agent **rewrites the article** to improve keyword coverage and content quality, and repeats until it passes
+
+*Checkpoint: the end client reviews and confirms the blog before it is published to their website and the other channels they're active on.*
+
+**Connected systems:** Ahrefs, Semrush, Ubersuggest, the client's website, competitor websites, Reddit, DataForSEO, Athena, Surfer SEO, image generation
+
+---
+
+## Humans in the Loop
+
+None of these agents publish blindly. Each has review points built in: the agency's SEO experts approve research, outlines and decks, and the end client confirms final deliverables. That's how the team's manual effort became **review only**.
+
+---
+
 ## Technical Discovery
 
 - Ran technical discovery with the client's team to scope the agents
@@ -29,9 +133,7 @@ Workflows at the agency took **1 to 3 days** each. The aim was to hand them to a
 
 ---
 
-## What I Built
-
-### Stack
+## Stack
 
 | Layer | Technology |
 |-------|------------|

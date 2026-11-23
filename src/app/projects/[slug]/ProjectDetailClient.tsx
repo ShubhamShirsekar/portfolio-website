@@ -142,7 +142,7 @@ export function ProjectDetailClient({ project, content }: ProjectDetailClientPro
                   hr: () => <hr className="border-glass-border my-8" />,
                   table: ({ children }) => (
                     <div className="overflow-x-auto my-8">
-                      <table className="w-full border-collapse bg-space-800/50 rounded-lg overflow-hidden">
+                      <table className="w-full border-collapse bg-space-800/50 rounded-lg overflow-hidden [&_thead:has(th:empty)]:hidden">
                         {children}
                       </table>
                     </div>
