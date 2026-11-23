@@ -288,6 +288,10 @@ export const skillGroups: SkillGroup[] = [
     skills: ['Python', 'TypeScript', 'SQL', 'Pydantic', 'Git', 'Power BI'],
   },
   {
+    title: 'Integrations & Platforms',
+    skills: ['MCP', 'OAuth', 'REST APIs', 'Supabase', 'Render', 'Azure', 'DevOps CI/CD'],
+  },
+  {
     title: 'AI',
     skills: [
       'LLM Agents',
@@ -300,10 +304,6 @@ export const skillGroups: SkillGroup[] = [
       'Gemini',
       'Model fine-tuning',
     ],
-  },
-  {
-    title: 'Integrations & Platforms',
-    skills: ['MCP', 'OAuth', 'REST APIs', 'Supabase', 'Render', 'Azure', 'DevOps CI/CD'],
   },
   {
     title: 'Client Skills',
