@@ -141,11 +141,10 @@ export default function AboutPage() {
                           <Image
                             src={edu.logo}
                             alt={`${edu.institution} logo`}
+                            unoptimized
                             width={96}
                             height={96}
-                            className={`h-20 w-20 shrink-0 object-contain sm:h-24 sm:w-24${
-                              edu.logoInvert ? ' brightness-0 invert opacity-90' : ''
-                            }`}
+                            className={`h-20 w-20 shrink-0 object-contain sm:h-24 sm:w-24 ${edu.logoClassName ?? ''}`}
                           />
                         )}
                       </div>

@@ -359,12 +359,14 @@ export const education: Education[] = [
     institution: 'KEDGE Business School',
     years: 'Sept 2025 – Apr 2027',
     logo: '/logos/kedge.png',
-    logoInvert: true,
+    logoClassName: 'brightness-0 invert opacity-90', // black wordmark -> white
   },
   {
     degree: 'Bachelor of Engineering',
     institution: 'University of Mumbai',
     years: 'Aug 2018 – May 2022',
+    logo: '/logos/university-of-mumbai.svg',
+    logoClassName: 'invert opacity-90', // dark line-art crest -> light, keeps detail
   },
 ];
 
