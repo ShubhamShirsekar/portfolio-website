@@ -53,7 +53,8 @@ export type Metric = {
 
 export type ValueProposition = {
   title: string;
-  description: string;
+  /** Short, self-contained phrases shown one per line. */
+  points: string[];
   icon?: string;
 };
 

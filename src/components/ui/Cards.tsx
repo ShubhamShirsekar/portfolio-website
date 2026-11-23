@@ -173,12 +173,16 @@ export function ValueCard({ value, index = 0 }: ValueCardProps) {
       <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-accent-violet/10 text-accent-violet mb-4">
         <ValueIcon icon={value.icon} />
       </div>
-      <h3 className="text-xl font-semibold text-white mb-2">
+      <h3 className="text-xl font-semibold text-white mb-3">
         {value.title}
       </h3>
-      <p className="text-gray-400 text-sm">
-        {value.description}
-      </p>
+      <ul className="space-y-1.5">
+        {value.points.map((point) => (
+          <li key={point} className="text-gray-400 text-sm">
+            {point}
+          </li>
+        ))}
+      </ul>
     </motion.div>
   );
 }

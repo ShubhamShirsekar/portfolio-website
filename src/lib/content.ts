@@ -66,20 +66,29 @@ export const heroContent = {
 export const valuePropositions: ValueProposition[] = [
   {
     title: 'AI Agents in Production',
-    description:
-      'Designing, building and deploying AI agents on a Python and Pydantic AI backend with a TypeScript frontend, across OpenAI, Anthropic, Mistral, DeepSeek and Gemini models. Several are now live.',
+    points: [
+      'From prototype to production, end to end.',
+      'Agents that run in production, not demos.',
+      'Multi-model agents in Python and TypeScript.',
+    ],
     icon: 'agent',
   },
   {
     title: 'Integrations: OAuth, MCP, APIs',
-    description:
-      'Owning integrations over OAuth, MCP and API keys, and getting each one approved and set up securely. Backed by three years of CRM and integration delivery for financial institutions.',
+    points: [
+      'Every integration secure, approved and production-ready.',
+      'Agents wired securely into your existing tools.',
+      'OAuth, MCP and API keys, done right.',
+    ],
     icon: 'plug',
   },
   {
     title: 'Client-Facing Delivery',
-    description:
-      'Running technical discovery with client teams, gathering requirements, and enabling clients to build directly in the platform themselves.',
+    points: [
+      'Discovery to delivery, side by side with clients.',
+      'Scoped with clients, built for their teams.',
+      'Clear communication that uncovers the real problem.',
+    ],
     icon: 'people',
   },
 ];
