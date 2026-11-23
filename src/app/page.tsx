@@ -10,30 +10,27 @@ function HeroSection() {
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
       <Container className="text-center py-20">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: 'easeOut' }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
         >
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.1, duration: 0.4 }}
+            transition={{ delay: 0.1, duration: 0.6 }}
             className="font-silkscreen text-hero-mobile md:text-hero text-white mb-3"
           >
             Shubham Shirsekar
           </motion.div>
-
-          <motion.div
+          
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.4 }}
-            className="flex justify-center mb-6"
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="text-accent-cyan text-sm md:text-base font-medium tracking-wider uppercase mb-6"
           >
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan text-sm font-medium tracking-wider uppercase">
-              <span className="w-2 h-2 rounded-full bg-accent-cyan animate-pulse motion-reduce:animate-none" aria-hidden="true" />
-              {siteConfig.availability}
-            </span>
-          </motion.div>
+            {siteConfig.availability}
+          </motion.p>
 
           <h1 className="text-hero-mobile md:text-hero font-bold text-white mb-6">
             <span className="text-gradient">{heroContent.headline}</span>
@@ -42,16 +39,16 @@ function HeroSection() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.4 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
             className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto"
           >
             {heroContent.tagline}
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.4 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Button href={heroContent.primaryCTA.href} size="lg">
@@ -93,7 +90,7 @@ function HeroSection() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.4 }}
+          transition={{ delay: 1, duration: 0.6 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
           <motion.div
@@ -138,9 +135,9 @@ function MetricsSection() {
     <Section className="bg-space-800/30">
       <Container>
         <div className="glass-card p-8 md:p-12">
-          <h2 className="text-center text-gray-400 text-sm uppercase tracking-wider mb-8">
+          <h3 className="text-center text-gray-400 text-sm uppercase tracking-wider mb-8">
             Track Record
-          </h2>
+          </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {impactMetrics.map((metric, index) => (
               <MetricCard key={metric.label} metric={metric} index={index} />
@@ -198,7 +195,7 @@ function CTASection() {
           {/* Glow effects */}
           <div className="absolute top-0 left-1/4 w-64 h-64 bg-glow-blue opacity-20 blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-glow-violet opacity-20 blur-3xl" />
-
+          
           <div className="relative z-10">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Caught your attention? Let&apos;s chat.
@@ -232,10 +229,16 @@ function CTASection() {
 export default function HomePage() {
   return (
     <div className="relative">
-      {/* Replaced heavy GIF background with subtle CSS gradient orbs */}
-      <div className="fixed inset-0 z-0 bg-orbs bg-space-900/80" />
-      <div className="absolute inset-0 bg-space-900/40" />
-
+      {/* GIF Background - Full Page */}
+      <div className="fixed inset-0 z-0">
+        <img
+          src="/home-bg.jpg"
+          alt=""
+          className="w-full h-full object-cover opacity-30"
+        />
+        <div className="absolute inset-0 bg-space-900/40" />
+      </div>
+      
       <div className="relative z-10">
         <HeroSection />
         <ValueSection />

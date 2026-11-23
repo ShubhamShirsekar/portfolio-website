@@ -16,11 +16,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    'inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed bg-accent-blue text-white hover:bg-accent-blue/90 hover:shadow-glow-blue focus-visible:ring-2 focus-visible:ring-accent-blue/60 focus-visible:ring-offset-2 focus-visible:ring-offset-space-900',
+    'bg-accent-blue text-white hover:bg-accent-blue/90 shadow-glow-blue hover:shadow-glow-blue/50',
   secondary:
-    'inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed bg-glass-white/60 border border-glass-border/50 text-gray-100 hover:bg-glass-white/80 hover:border-glass-border/70 focus-visible:ring-2 focus-visible:ring-accent-blue/60 focus-visible:ring-offset-2 focus-visible:ring-offset-space-900',
+    'bg-glass-white border border-glass-border text-gray-100 hover:bg-glass-white-hover hover:border-glass-border-hover',
   ghost:
-    'inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-gray-300 hover:text-white hover:bg-glass-white focus-visible:ring-2 focus-visible:ring-accent-blue/60 focus-visible:ring-offset-2 focus-visible:ring-offset-space-900',
+    'text-gray-300 hover:text-white hover:bg-glass-white',
 };
 
 const sizes: Record<ButtonSize, string> = {
@@ -38,10 +38,10 @@ export function Button({
   className,
   ...props
 }: ButtonProps) {
-  const baseStyles = 'inline-flex items-center justify-center gap-2 rounded-lg font-medium';
-  const variantStyles = variants[variant];
-  const sizeStyles = sizes[size];
-  const combinedClassName = cn(baseStyles, variantStyles, sizeStyles, className);
+  const baseStyles =
+    'inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed';
+
+  const combinedClassName = cn(baseStyles, variants[variant], sizes[size], className);
 
   if (href) {
     if (external) {

@@ -24,38 +24,17 @@
   ::selection {
     @apply bg-accent-blue/30 text-white;
   }
-
-  /* Respect reduced motion globally */
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
-
-  /* Subtle floating gradient orbs behind content */
-  .bg-orbs {
-    background-image:
-      radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 50% 20%, rgba(6, 182, 212, 0.05) 0%, transparent 40%);
-    background-attachment: fixed;
-  }
 }
 
 @layer components {
   /* Glassmorphism card */
   .glass-card {
-    @apply bg-glass-white/60 backdrop-blur-md border border-glass-border/50 rounded-2xl;
-    @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+    @apply bg-glass-white backdrop-blur-md border border-glass-border rounded-xl;
+    @apply transition-all duration-300 ease-out;
   }
 
   .glass-card:hover {
-    @apply bg-glass-white/80 border-glass-border-hover/70 shadow-glass-sm;
+    @apply bg-glass-white-hover border-glass-border-hover;
   }
 
   /* Glow effect on hover */
@@ -92,17 +71,6 @@
 
 @layer utilities {
   /* Hide scrollbar */
-  /* Focus-visible ring for accessibility */
-  :focus-visible {
-    @apply outline-none ring-2 ring-accent-blue/60 ring-offset-2 ring-offset-space-900;
-  }
-
-  /* Focus ring within glass surfaces */
-  .glass-card *:focus-visible,
-  .glass-card:focus-visible {
-    @apply ring-offset-1 ring-offset-space-800/60;
-  }
-
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }

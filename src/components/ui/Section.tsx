@@ -1,7 +1,6 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
-import { variants } from '@/lib/motion';
+import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import type { ReactNode } from 'react';
 
@@ -9,28 +8,16 @@ interface SectionProps {
   children: ReactNode;
   className?: string;
   id?: string;
-  reveal?: boolean;
 }
 
-export function Section({
-  children,
-  className,
-  id,
-  reveal = true,
-}: SectionProps) {
-  const shouldReduce = useReducedMotion();
-
+export function Section({ children, className, id }: SectionProps) {
   return (
     <motion.section
       id={id}
-      initial={shouldReduce ? 'reduced' : 'hidden'}
-      whileInView={{
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.01, ease: 'linear' },
-      }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-100px' }}
-      variants={variants.fadeUp}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
       className={cn('py-16 md:py-24', className)}
     >
       {children}

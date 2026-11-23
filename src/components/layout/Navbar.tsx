@@ -20,7 +20,7 @@ export function Navbar() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-space-900/90 backdrop-blur-md border-b border-glass-border/50 transition-all duration-300">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-space-900 border-b border-glass-border">
       <nav className="section-container">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
@@ -39,28 +39,16 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="px-4 py-2 rounded-lg bg-accent-blue/10 text-accent-blue border border-accent-blue/30 hover:bg-accent-blue/20 hover:border-accent-blue/50 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue/60 focus-visible:ring-offset-2 focus-visible:ring-offset-space-900 flex items-center gap-2"
+                  className="px-4 py-2 rounded-lg bg-accent-blue/10 text-accent-blue border border-accent-blue/30 
+                           hover:bg-accent-blue/20 hover:border-accent-blue/50 transition-all duration-200"
                 >
                   {link.label}
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
                 </Link>
               ) : (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-gray-300 hover:text-white transition-colors relative group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue/60 focus-visible:ring-offset-2 focus-visible:ring-offset-space-900 px-1 py-1 rounded"
+                  className="text-gray-300 hover:text-white transition-colors relative group"
                 >
                   {link.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent-blue group-hover:w-full transition-all duration-200" />
@@ -109,7 +97,7 @@ export function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden bg-space-800/95 backdrop-blur-lg border-t border-glass-border"
+            className="md:hidden bg-space-800/95 backdrop-blur-lg border-b border-glass-border"
           >
             <div className="section-container py-4 flex flex-col gap-4">
               {navLinks.map((link) => (
@@ -118,7 +106,7 @@ export function Navbar() {
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={cn(
-                    'py-2 px-1 rounded transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue/60 focus-visible:ring-offset-2 focus-visible:ring-offset-space-900',
+                    'py-2 transition-colors',
                     link.isCTA
                       ? 'text-accent-blue font-medium'
                       : 'text-gray-300 hover:text-white'
