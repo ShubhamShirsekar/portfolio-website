@@ -23,7 +23,12 @@ function BrandMark({ logo }: { logo: BrandLogo }) {
       role="img"
       aria-label={logo.name}
       className="block bg-gradient-to-r from-accent-blue-light via-accent-violet-light to-accent-cyan-light"
-      style={{ width: LOGO_HEIGHT * logo.aspect, height: LOGO_HEIGHT, mask, WebkitMask: mask }}
+      style={{
+        width: LOGO_HEIGHT * (logo.scale ?? 1) * logo.aspect,
+        height: LOGO_HEIGHT * (logo.scale ?? 1),
+        mask,
+        WebkitMask: mask,
+      }}
     />
   );
 }

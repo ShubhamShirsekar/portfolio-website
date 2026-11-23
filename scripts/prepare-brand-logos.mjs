@@ -15,6 +15,7 @@ const LOGOS = [
   { name: 'iea', file: 'International_Energy_Agency_(IEA)_logo.svg.webp', mode: 'ink' },
   { name: 'loreal', file: 'LOreal-Logo.png', mode: 'ink' },
   { name: 'bitcoin', file: 'Bitcoin.svg.webp', mode: 'ink', boost: 3 },
+  { name: 'cgi', file: 'CGI_logo.svg.webp', mode: 'ink' },
 ];
 
 for (const { name, file, mode, boost = 1.6 } of LOGOS) {

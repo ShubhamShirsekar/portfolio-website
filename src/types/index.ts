@@ -22,6 +22,8 @@ export type BrandLogo = {
   src: string;
   /** Width/height ratio of the logo artwork */
   aspect: number;
+  /** Optical size tweak relative to the standard logo height (default 1) */
+  scale?: number;
 };
 
 export type Experience = {
