@@ -23,7 +23,7 @@ export default function AboutPage() {
     <div className="relative min-h-screen">
       {/* Background */}
       <div className="fixed inset-0 z-0">
-        <Image src="/about-bg-tv.jpg" alt="" fill className="object-cover object-[center_55%] opacity-60" priority />
+        <Image src="/about-bg-tv.jpg" alt="" fill className="object-cover object-[center_55%] opacity-40" priority />
         <div className="absolute inset-0 bg-space-900/40" />
       </div>
 
@@ -200,7 +200,7 @@ export default function AboutPage() {
                     {group.skills.map((skill) => (
                       <li
                         key={skill}
-                        className="px-4 py-2 rounded-lg bg-accent-blue/10 border border-accent-blue/30 text-accent-blue text-sm"
+                        className="px-4 py-2 rounded-lg bg-space-900/70 backdrop-blur-sm border border-accent-blue/40 text-accent-blue-light text-sm"
                       >
                         {skill}
                       </li>
