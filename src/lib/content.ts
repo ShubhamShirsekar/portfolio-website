@@ -69,7 +69,7 @@ export const valuePropositions: ValueProposition[] = [
     points: [
       'From prototype to production, end to end.',
       'Agents that run in production, not demos.',
-      'Multi-model agents in Python and TypeScript.',
+      'Model agnostic agents.',
     ],
     icon: 'agent',
   },
