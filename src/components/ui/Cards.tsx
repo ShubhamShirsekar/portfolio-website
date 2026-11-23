@@ -249,9 +249,9 @@ export function ExperienceCard({ experience, index = 0, showDot = true }: Experi
       
       <ul className="space-y-2">
         {experience.achievements.map((achievement, i) => (
-          <li key={i} className="flex items-start gap-3 text-gray-300 text-sm">
-            <span className="text-accent-cyan mt-1">•</span>
-            {achievement}
+          <li key={i} className="flex items-start gap-3 text-gray-300 text-sm leading-relaxed">
+            <span className="mt-[calc(0.8125em-3px)] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-cyan" aria-hidden="true" />
+            <span>{achievement}</span>
           </li>
         ))}
       </ul>

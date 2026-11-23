@@ -121,9 +121,9 @@ export function ProjectDetailClient({ project, content }: ProjectDetailClientPro
                     </ol>
                   ),
                   li: ({ children }) => (
-                    <li className="flex items-start gap-3 text-gray-300">
-                      <span className="text-accent-cyan mt-1.5">•</span>
-                      <span>{children}</span>
+                    <li className="flex items-start gap-3 leading-relaxed text-gray-300">
+                      <span className="mt-[calc(0.8125em-3px)] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-cyan" aria-hidden="true" />
+                      <span className="min-w-0">{children}</span>
                     </li>
                   ),
                   strong: ({ children }) => (
