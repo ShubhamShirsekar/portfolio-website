@@ -94,10 +94,10 @@ export const valuePropositions: ValueProposition[] = [
 ];
 
 export const impactMetrics: Metric[] = [
-  { value: '3 yrs', label: 'CRM and integration delivery for financial institutions' },
+  { value: '4 yrs', label: 'Building client-facing systems, from banks to AI agents' },
   { value: '50+', label: 'Change requests delivered per month' },
-  { value: '80%', label: 'Less deployment effort through custom automation' },
-  { value: '< 2 hrs', label: 'Per workflow with AI agents, down from 1 to 3 days' },
+  { value: '0 → 1', label: 'Platform docs, written from scratch' },
+  { value: '< 2 hrs', label: 'Per workflow, down from days' },
 ];
 
 // ============================================
