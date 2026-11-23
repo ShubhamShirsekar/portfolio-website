@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Section, Container, SectionHeading, ProjectRevealRow } from '@/components/ui';
+import { Section, Container, SectionHeading, ProjectRevealRow, PageScrollSnap } from '@/components/ui';
 import { featuredProjects, secondaryProjects } from '@/lib/content';
 
 export const metadata: Metadata = {
@@ -20,16 +20,19 @@ export default function ProjectsPage() {
         <div className="absolute inset-0 bg-space-900/40" />
       </div>
 
+      <PageScrollSnap />
       <div className="relative z-10">
         <Section>
           <Container>
-            <SectionHeading
-              as="h1"
-              title="Projects"
-              subtitle="AI agents shipped to production for clients, plus the applied AI and machine learning work that led there."
-            />
+            <div className="snap-start">
+              <SectionHeading
+                as="h1"
+                title="Projects"
+                subtitle="AI agents shipped to production for clients, plus the applied AI and machine learning work that led there."
+              />
+            </div>
 
-            <div className="space-y-24 md:space-y-32 max-w-6xl mx-auto">
+            <div className="max-w-6xl mx-auto">
               {allProjects.map((project, index) => (
                 <ProjectRevealRow key={project.slug} project={project} index={index} />
               ))}

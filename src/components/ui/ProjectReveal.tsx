@@ -20,7 +20,7 @@ function RevealImage({ src, alt }: { src: string; alt: string }) {
     target: ref,
     offset: ['start end', 'center center'],
   });
-  const clipPath = useTransform(scrollYProgress, [0, 1], ['inset(0% 50% 0% 50%)', 'inset(0% 0% 0% 0%)']);
+  const clipPath = useTransform(scrollYProgress, [0, 1], ['inset(0% 50% 0% 50% round 16px)', 'inset(0% 0% 0% 0% round 16px)']);
   const scale = useTransform(scrollYProgress, [0, 1], [1.3, 1]);
 
   return (
@@ -44,9 +44,18 @@ interface ProjectRevealRowProps {
 
 export function ProjectRevealRow({ project, index }: ProjectRevealRowProps) {
   const imageFirst = index % 2 === 0;
+  const rowRef = useRef<HTMLElement>(null);
+  const shouldReduce = useReducedMotion();
+  // Each row is one screen tall: fully visible when centred, faded out as it
+  // enters/leaves, so only one project is visible at a time.
+  const { scrollYProgress } = useScroll({ target: rowRef, offset: ['start end', 'end start'] });
+  const opacity = useTransform(scrollYProgress, [0.15, 0.4, 0.6, 0.85], [0, 1, 1, 0]);
 
   return (
-    <article className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 items-center">
+    <motion.article
+      ref={rowRef}
+      style={shouldReduce ? undefined : { opacity }}
+      className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 items-center content-center snap-start min-h-[calc(100svh-4rem)] md:min-h-[calc(100svh-5rem)] py-12">
       {project.image && (
         <div className={cn(!imageFirst && 'md:order-2')}>
           <RevealImage src={project.image} alt={project.imageAlt ?? ''} />
@@ -102,6 +111,6 @@ export function ProjectRevealRow({ project, index }: ProjectRevealRowProps) {
           </svg>
         </Link>
       </motion.div>
-    </article>
+    </motion.article>
   );
 }
