@@ -186,10 +186,10 @@ export function ProjectDetailClient({ project, content }: ProjectDetailClientPro
         <Container>
           <div className="glass-card p-8 text-center">
             <h2 className="text-2xl font-bold text-white mb-4">
-              Interested in this project?
+              Building something similar?
             </h2>
             <p className="text-gray-400 mb-6">
-              Let&apos;s discuss how I can bring similar analytical skills to your team.
+              Let&apos;s talk about shipping AI agents and integrations with your clients.
             </p>
             <Button href="/contact">Get in Touch</Button>
           </div>

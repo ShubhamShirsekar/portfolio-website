@@ -119,6 +119,24 @@ interface ValueCardProps {
 
 function ValueIcon({ icon }: { icon?: string }) {
   switch (icon) {
+    case 'agent':
+      return (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v2m-4 3h8a3 3 0 013 3v5a3 3 0 01-3 3H8a3 3 0 01-3-3v-5a3 3 0 013-3zm1.5 5h.01m4.99 0h.01M9.5 16.5h5M3 13v2m18-2v2" />
+        </svg>
+      );
+    case 'plug':
+      return (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+        </svg>
+      );
+    case 'people':
+      return (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+      );
     case 'chart':
       return (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -190,9 +208,9 @@ export function ExperienceCard({ experience, index = 0 }: ExperienceCardProps) {
           </h3>
           <p className="text-accent-blue">{experience.company}</p>
         </div>
-        <div className="text-sm text-gray-400">
-          <p>{experience.location}</p>
+        <div className="text-sm text-gray-400 md:text-right">
           <p>{experience.duration}</p>
+          {experience.location && <p>{experience.location}</p>}
         </div>
       </div>
 

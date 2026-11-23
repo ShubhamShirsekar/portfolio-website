@@ -2,13 +2,10 @@
 
 import { motion } from 'framer-motion';
 import { Button, Section, Container, SectionHeading, ProjectCard, MetricCard, ValueCard } from '@/components/ui';
-import { heroContent, valuePropositions, impactMetrics, featuredProjects } from '@/lib/content';
-import { useMotionVariant } from '@/lib/motion';
+import { heroContent, valuePropositions, impactMetrics, featuredProjects, siteConfig } from '@/lib/content';
 
 // Hero Section
 function HeroSection() {
-  const heroVisible = useMotionVariant('visible');
-
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
       <Container className="text-center py-20">
@@ -26,14 +23,17 @@ function HeroSection() {
             Shubham Shirsekar
           </motion.div>
 
-          <motion.p
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.4 }}
-            className="text-accent-cyan text-sm md:text-base font-medium tracking-wider uppercase mb-6"
+            className="flex justify-center mb-6"
           >
-            Available for internship • Immediate Joiner
-          </motion.p>
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan text-sm font-medium tracking-wider uppercase">
+              <span className="w-2 h-2 rounded-full bg-accent-cyan animate-pulse motion-reduce:animate-none" aria-hidden="true" />
+              {siteConfig.availability}
+            </span>
+          </motion.div>
 
           <h1 className="text-hero-mobile md:text-hero font-bold text-white mb-6">
             <span className="text-gradient">{heroContent.headline}</span>
@@ -43,18 +43,9 @@ function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.4 }}
-            className="text-lg md:text-xl text-gray-300 mb-4"
+            className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto"
           >
-            {heroContent.subheadline}
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.4 }}
-            className="text-gray-400 mb-10 max-w-xl mx-auto"
-          >
-            {heroContent.intro}
+            {heroContent.tagline}
           </motion.p>
 
           <motion.div
@@ -128,8 +119,8 @@ function ValueSection() {
     <Section id="value">
       <Container>
         <SectionHeading
-          title="What I Bring to the Table"
-          subtitle="Combining technical expertise with business understanding to deliver meaningful outcomes."
+          title="What I Do"
+          subtitle="Taking AI agents from client discovery to production, and wiring them into the tools teams already use."
         />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {valuePropositions.map((value, index) => (
@@ -147,9 +138,9 @@ function MetricsSection() {
     <Section className="bg-space-800/30">
       <Container>
         <div className="glass-card p-8 md:p-12">
-          <h3 className="text-center text-gray-400 text-sm uppercase tracking-wider mb-8">
-            Impact by the Numbers
-          </h3>
+          <h2 className="text-center text-gray-400 text-sm uppercase tracking-wider mb-8">
+            Track Record
+          </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {impactMetrics.map((metric, index) => (
               <MetricCard key={metric.label} metric={metric} index={index} />
@@ -168,7 +159,7 @@ function ProjectsSection() {
       <Container>
         <SectionHeading
           title="Featured Projects"
-          subtitle="A sneak peek into my work."
+          subtitle="Production agents, applied AI and the hackathons along the way."
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {featuredProjects.map((project, index) => (
@@ -213,8 +204,7 @@ function CTASection() {
               Caught your attention? Let&apos;s chat.
             </h2>
             <p className="text-gray-400 max-w-xl mx-auto mb-8">
-              I&apos;m actively seeking an end-of-studies internship ideally where I can make the most impact by turning data into decisions (and not just more dashboards or spreadsheets).
-              If you&apos;re looking for a data analyst who makes decision-making a little easier and a lot more informed, let&apos;s connect.
+              I&apos;m looking for forward deployed engineering roles where I sit with clients, understand how their work really happens, and ship AI agents and integrations that run in production.
             </p>
             <Button href="/contact" size="lg">
               Get in Touch

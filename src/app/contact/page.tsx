@@ -20,12 +20,6 @@ function SocialIcon({ icon }: { icon: string }) {
           <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
         </svg>
       );
-    case 'kaggle':
-      return (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.33-.246.495-.246h3.239c.144 0 .236.06.285.18.046.149.034.255-.036.315l-6.555 6.344 6.836 8.507c.095.104.117.208.071.339z" />
-        </svg>
-      );
     case 'mail':
       return (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,7 +60,7 @@ export default function ContactPage() {
       } else {
         alert('Something went wrong. Please try again or reach out via email.');
       }
-    } catch (error) {
+    } catch {
       alert('Failed to send message. Please try again or contact me directly.');
     } finally {
       setIsSubmitting(false);
@@ -93,6 +87,7 @@ export default function ContactPage() {
         <Container>
           <div className="max-w-4xl mx-auto">
             <SectionHeading
+              as="h1"
               title={contactContent.headline}
               subtitle={contactContent.description}
             />
@@ -105,7 +100,7 @@ export default function ContactPage() {
               className="flex justify-center mb-12"
             >
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan text-sm">
-                <span className="w-2 h-2 rounded-full bg-accent-cyan animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-accent-cyan animate-pulse motion-reduce:animate-none" aria-hidden="true" />
                 {contactContent.availability}
               </span>
             </motion.div>
@@ -117,9 +112,9 @@ export default function ContactPage() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                <h3 className="text-xl font-semibold text-white mb-6">
+                <h2 className="text-xl font-semibold text-white mb-6">
                   Let&apos;s Connect
-                </h3>
+                </h2>
                 
                 {/* Social Links */}
                 <div className="space-y-4 mb-8">
@@ -131,13 +126,13 @@ export default function ContactPage() {
                       rel={social.icon !== 'mail' ? 'noopener noreferrer' : undefined}
                       className="flex items-center gap-4 p-4 glass-card hover:border-accent-blue/30 transition-colors w-full"
                     >
-                      <span className="text-accent-blue">
+                      <span className="text-accent-blue" aria-hidden="true">
                         <SocialIcon icon={social.icon} />
                       </span>
                         <div className="min-w-0">
                           <p className="text-white font-medium">{social.name}</p>
                           <p className="text-gray-400 text-sm w-full truncate">
-                            {social.icon === 'mail' ? siteConfig.email : social.url.replace('https://', '')}
+                            {social.icon === 'mail' ? siteConfig.email : social.url.replace(/^https:\/\/(www\.)?/, '')}
                           </p>
                         </div>
                     </a>
@@ -146,13 +141,13 @@ export default function ContactPage() {
 
                 {/* Download Resume */}
                 <div className="glass-card p-6">
-                  <h4 className="text-white font-medium mb-3">
+                  <h3 className="text-white font-medium mb-3">
                     Prefer a document?
-                  </h4>
+                  </h3>
                   <p className="text-gray-400 text-sm mb-4">
                     Download my resume for a complete overview.
                   </p>
-                  <Button href="https://www.overleaf.com/read/bfhbkthnrbpw#7f311b" variant="secondary" size="sm" external>
+                  <Button href={siteConfig.resumeUrl} variant="secondary" size="sm" external>
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
@@ -183,7 +178,7 @@ export default function ContactPage() {
                       </p>
                       <p className="text-gray-300 text-sm mb-6">
                         I&apos;ll review your inquiry and get back to you within <span className="text-accent-cyan font-medium">24-48 hours</span>. 
-                        If you need an immediate response, feel free to reach out via <a href={`mailto:${siteConfig.email}`} className="text-accent-blue hover:underline">email</a> or <a href="https://www.linkedin.com/in/shubham-shirsekar/" target="_blank" rel="noopener noreferrer" className="text-accent-blue hover:underline">LinkedIn</a>.
+                        If you need an immediate response, feel free to reach out via <a href={`mailto:${siteConfig.email}`} className="text-accent-blue hover:underline">email</a> or <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer" className="text-accent-blue hover:underline">LinkedIn</a>.
                       </p>
                       <Button onClick={() => setSubmitted(false)} variant="secondary">
                         Send Another Message

@@ -40,16 +40,17 @@ export function Section({
 
 interface SectionHeadingProps {
   title: string;
+  as?: 'h1' | 'h2';
   subtitle?: string;
   className?: string;
 }
 
-export function SectionHeading({ title, subtitle, className }: SectionHeadingProps) {
+export function SectionHeading({ title, subtitle, className, as: Heading = 'h2' }: SectionHeadingProps) {
   return (
     <div className={cn('text-center mb-12', className)}>
-      <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+      <Heading className="text-3xl md:text-4xl font-bold text-white mb-4">
         {title}
-      </h2>
+      </Heading>
       {subtitle && (
         <p className="text-gray-400 max-w-2xl mx-auto">
           {subtitle}

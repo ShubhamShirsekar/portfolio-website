@@ -15,23 +15,31 @@ export type Project = {
 export type Experience = {
   role: string;
   company: string;
-  location: string;
+  location?: string;
   duration: string;
   achievements: string[];
 };
 
-export type Skill = {
+export type SkillGroup = {
+  title: string;
+  skills: string[];
+};
+
+export type Certification = {
   name: string;
-  category: 'technical' | 'soft' | 'language' | 'certification';
+  issuer: string;
   logo?: string;
+};
+
+export type Language = {
+  name: string;
+  level: string;
 };
 
 export type Education = {
   degree: string;
   institution: string;
-  location: string;
   years: string;
-  details?: string[];
 };
 
 export type Metric = {

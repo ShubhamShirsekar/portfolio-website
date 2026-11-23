@@ -15,17 +15,23 @@ interface EventProperties {
   cta?: string;
 }
 
+type AnalyticsWindow = Window & {
+  plausible?: (event: string, options?: { props?: object }) => void;
+  posthog?: { capture: (event: string, properties?: object) => void };
+};
+
+function getAnalyticsWindow(): AnalyticsWindow | undefined {
+  return typeof window !== 'undefined' ? (window as AnalyticsWindow) : undefined;
+}
+
 // Track custom events
 export function trackEvent(event: AnalyticsEvent, properties?: EventProperties): void {
   // Plausible Analytics
-  if (typeof window !== 'undefined' && (window as any).plausible) {
-    (window as any).plausible(event, { props: properties });
-  }
+  const w = getAnalyticsWindow();
+  w?.plausible?.(event, { props: properties });
   
   // PostHog Analytics (alternative)
-  if (typeof window !== 'undefined' && (window as any).posthog) {
-    (window as any).posthog.capture(event, properties);
-  }
+  w?.posthog?.capture(event, properties);
   
   // Development logging
   if (process.env.NODE_ENV === 'development') {
@@ -35,9 +41,7 @@ export function trackEvent(event: AnalyticsEvent, properties?: EventProperties):
 
 // Track page views (usually automatic with Plausible/PostHog)
 export function trackPageView(url: string): void {
-  if (typeof window !== 'undefined' && (window as any).plausible) {
-    (window as any).plausible('pageview', { props: { url } });
-  }
+  getAnalyticsWindow()?.plausible?.('pageview', { props: { url } });
 }
 
 // Pre-defined tracking functions for common events

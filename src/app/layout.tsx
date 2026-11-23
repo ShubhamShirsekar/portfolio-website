@@ -15,29 +15,32 @@ const silkscreen = Silkscreen({
   variable: '--font-silkscreen',
 });
 
+const siteTitle = 'Shubham Shirsekar | Forward Deployed Engineer';
+const siteDescription =
+  'Forward Deployed Engineer shipping production AI agents and integrations over OAuth, MCP and APIs, cutting multi-day workflows to under a few hours. Python and TypeScript. Paris, France.';
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://shubham-shirsekar.vercel.app'),
   title: {
-    default: 'Shubham Shirsekar | MSc Data Analytics',
+    default: siteTitle,
     template: '%s | Shubham Shirsekar',
   },
-  description: 'Started my career building systems that power financial institutions. That foundation taught me where data ends and decisions begin. Now, pairing engineering instincts with an MSc in Data Analytics and a critical understanding of AI, to create impactfulsolutions.',
+  description: siteDescription,
   keywords: [
-    'Data Analyst Portfolio',
-    'Business Analytics',
-    'Machine Learning Projects',
-    'Data Analytics Internship',
+    'Forward Deployed Engineer',
+    'AI Agents',
+    'Production AI Agents',
+    'MCP',
+    'Model Context Protocol',
+    'Integrations',
+    'OAuth',
+    'API Integrations',
     'Python',
-    'SQL',
-    'Power BI',
-    'Tableau',
-    'Data Visualization',
-    'Data-Driven Decision Making',
+    'TypeScript',
+    'Pydantic AI',
+    'LLM Agents',
     'Shubham Shirsekar',
-    'Excel',
-    'Business Intelligence',
-    'Data Storytelling',
-    'Business Analyst'
+    'Paris, France',
   ],
   authors: [{ name: 'Shubham Shirsekar' }],
   creator: 'Shubham Shirsekar',
@@ -45,22 +48,22 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://shubham-shirsekar.vercel.app',
-    siteName: 'Shubham Shirsekar Portfolio',
-    title: 'Shubham Shirsekar | MSc Data Analytics',
-    description: 'Started my career building systems that power financial institutions. That foundation taught me where data ends and decisions begin. Now, pairing engineering instincts with an MSc in Data Analytics and a critical understanding of AI, to create impactful solutions.',
+    siteName: 'Shubham Shirsekar',
+    title: siteTitle,
+    description: siteDescription,
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Shubham Shirsekar - MSc Data Analytics',
+        alt: 'Shubham Shirsekar, Forward Deployed Engineer',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Shubham Shirsekar | MSc Data Analytics',
-    description: 'Started my career building systems that power financial institutions. That foundation taught me where data ends and decisions begin. Now, pairing engineering instincts with an MSc in Data Analytics and a critical understanding of AI, to create impactful solutions.',
+    title: siteTitle,
+    description: siteDescription,
     images: ['/og-image.png'],
   },
   robots: {
