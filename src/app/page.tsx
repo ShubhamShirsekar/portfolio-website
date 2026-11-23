@@ -157,16 +157,9 @@ function ProjectsSection() {
     <section id="featured-projects" aria-labelledby="featured-projects-heading">
       <HorizontalProjectGallery
         projects={galleryProjects}
-        heading={
-          <div className="text-center mb-10">
-            <h2 id="featured-projects-heading" className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Projects
-            </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Production agents, applied AI and the hackathons along the way.
-            </p>
-          </div>
-        }
+        title="Projects"
+        subtitle="Production agents, applied AI and the hackathons along the way."
+        headingId="featured-projects-heading"
         footer={
           <div className="text-center mt-8">
             <Button href="/projects" variant="secondary" size="lg">

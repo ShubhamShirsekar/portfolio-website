@@ -7,7 +7,11 @@ import type { Project } from '@/types';
 
 interface HorizontalProjectGalleryProps {
   projects: Project[];
-  heading: ReactNode;
+  title: string;
+  subtitle?: string;
+  /** Heading level: h1 when the gallery is the page's main content. */
+  as?: 'h1' | 'h2';
+  headingId?: string;
   footer?: ReactNode;
 }
 
@@ -16,7 +20,23 @@ interface HorizontalProjectGalleryProps {
  * scrolls vertically, and the row of project cards translates sideways.
  * Falls back to a plain horizontally scrollable strip under reduced motion.
  */
-export function HorizontalProjectGallery({ projects, heading, footer }: HorizontalProjectGalleryProps) {
+export function HorizontalProjectGallery({
+  projects,
+  title,
+  subtitle,
+  as: Heading = 'h2',
+  headingId,
+  footer,
+}: HorizontalProjectGalleryProps) {
+  const heading = (
+    <div className="text-center mb-10">
+      <Heading id={headingId} className="text-3xl md:text-4xl font-bold text-white mb-4">
+        {title}
+      </Heading>
+      {subtitle && <p className="text-gray-400 max-w-2xl mx-auto">{subtitle}</p>}
+    </div>
+  );
+
   const containerRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
