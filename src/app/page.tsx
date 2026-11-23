@@ -1,8 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Button, Section, Container, SectionHeading, ProjectCard, MetricCard, ValueCard } from '@/components/ui';
-import { heroContent, valuePropositions, impactMetrics, featuredProjects, siteConfig } from '@/lib/content';
+import { Button, Section, Container, SectionHeading, MetricCard, ValueCard, HorizontalProjectGallery } from '@/components/ui';
+import { heroContent, valuePropositions, impactMetrics, featuredProjects, secondaryProjects, siteConfig } from '@/lib/content';
+
+const galleryProjects = [...featuredProjects, ...secondaryProjects];
 
 // Hero Section
 function HeroSection() {
@@ -152,37 +154,42 @@ function MetricsSection() {
 // Featured Projects Section
 function ProjectsSection() {
   return (
-    <Section id="featured-projects">
-      <Container>
-        <SectionHeading
-          title="Featured Projects"
-          subtitle="Production agents, applied AI and the hackathons along the way."
-        />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featuredProjects.map((project, index) => (
-            <ProjectCard key={project.slug} project={project} index={index} />
-          ))}
-        </div>
-        <div className="text-center mt-12">
-          <Button href="/projects" variant="secondary" size="lg">
-            View All Projects
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-          </Button>
-        </div>
-      </Container>
-    </Section>
+    <section id="featured-projects" aria-labelledby="featured-projects-heading">
+      <HorizontalProjectGallery
+        projects={galleryProjects}
+        heading={
+          <div className="text-center mb-10">
+            <h2 id="featured-projects-heading" className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Projects
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Production agents, applied AI and the hackathons along the way.
+            </p>
+          </div>
+        }
+        footer={
+          <div className="text-center mt-8">
+            <Button href="/projects" variant="secondary" size="lg">
+              View All Projects
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </Button>
+          </div>
+        }
+      />
+    </section>
   );
 }
 
@@ -231,6 +238,7 @@ export default function HomePage() {
     <div className="relative">
       {/* GIF Background - Full Page */}
       <div className="fixed inset-0 z-0">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/home-bg.jpg"
           alt=""
