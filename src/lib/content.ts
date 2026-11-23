@@ -293,10 +293,30 @@ export const skillGroups: SkillGroup[] = [
 ];
 
 export const certifications: Certification[] = [
-  { name: 'Azure AI Fundamentals', issuer: 'Microsoft', logo: '/logos/Microsoft.svg' },
-  { name: 'Professional Scrum Master I', issuer: 'Scrum.org', logo: '/logos/scrum.png' },
-  { name: 'AI Fluency: Framework & Foundations', issuer: 'Anthropic', logo: '/logos/Claude.svg' },
-  { name: 'SQL (Advanced)', issuer: 'HackerRank', logo: '/logos/HackerRank.svg' },
+  {
+    name: 'Azure AI Fundamentals',
+    issuer: 'Microsoft',
+    logo: '/logos/Microsoft.svg',
+    url: 'https://drive.google.com/file/d/1BynB33p5JObW7ve7p06ul1vMzHPJtQdI/view?usp=drive_link',
+  },
+  {
+    name: 'Professional Scrum Master I',
+    issuer: 'Scrum.org',
+    logo: '/logos/scrum.png',
+    url: 'https://drive.google.com/file/d/1sFjoNQYdH4ueM0Gu-ZeZX511Xb6vc0t5/view?usp=drive_link',
+  },
+  {
+    name: 'AI Fluency: Framework & Foundations',
+    issuer: 'Anthropic',
+    logo: '/logos/Claude.svg',
+    url: 'https://drive.google.com/file/d/1ak3HcfUamfkmBAlaplVaHRNa0w07GHsn/view?usp=drive_link',
+  },
+  {
+    name: 'SQL (Advanced)',
+    issuer: 'HackerRank',
+    logo: '/logos/HackerRank.svg',
+    url: 'https://drive.google.com/file/d/10SNRg0-xmBexSg9I_BDe3eZbAwNmbyM0/view?usp=drive_link',
+  },
 ];
 
 export const languages: Language[] = [

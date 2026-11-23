@@ -31,6 +31,8 @@ export type Certification = {
   name: string;
   issuer: string;
   logo?: string;
+  /** Link to the certificate (e.g. a shared Drive file). */
+  url?: string;
 };
 
 export type Language = {

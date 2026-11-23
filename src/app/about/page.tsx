@@ -133,28 +133,63 @@ export default function AboutPage() {
               <div>
                 <h2 className="text-2xl font-semibold text-white mb-4">Certifications</h2>
                 <ul className="glass-card p-6 grid grid-cols-1 gap-3">
-                  {certifications.map((certification) => (
-                    <li
-                      key={certification.name}
-                      className="flex items-center gap-3 rounded-lg border border-accent-green/20 bg-accent-green/10 px-4 py-3"
-                    >
-                      {certification.logo ? (
-                        <Image
-                          src={certification.logo}
-                          alt=""
-                          width={28}
-                          height={28}
-                          className="h-7 w-7 shrink-0 object-contain"
-                        />
-                      ) : (
-                        <span className="h-7 w-7 shrink-0" aria-hidden="true" />
-                      )}
-                      <span className="text-sm text-gray-100">
-                        {certification.name}
-                        <span className="text-gray-400"> · {certification.issuer}</span>
-                      </span>
-                    </li>
-                  ))}
+                  {certifications.map((certification) => {
+                    const body = (
+                      <>
+                        {certification.logo ? (
+                          <Image
+                            src={certification.logo}
+                            alt=""
+                            width={28}
+                            height={28}
+                            className="h-7 w-7 shrink-0 object-contain"
+                          />
+                        ) : (
+                          <span className="h-7 w-7 shrink-0" aria-hidden="true" />
+                        )}
+                        <span className="text-sm text-gray-100 flex-1">
+                          {certification.name}
+                          <span className="text-gray-400"> · {certification.issuer}</span>
+                        </span>
+                        {certification.url && (
+                          <svg
+                            className="w-4 h-4 shrink-0 text-gray-400 group-hover:text-accent-blue transition-colors"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                            />
+                          </svg>
+                        )}
+                      </>
+                    );
+                    const rowClass =
+                      'flex items-center gap-3 rounded-lg border border-accent-green/20 bg-accent-green/10 px-4 py-3';
+
+                    return (
+                      <li key={certification.name}>
+                        {certification.url ? (
+                          <a
+                            href={certification.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`View certificate: ${certification.name} by ${certification.issuer} (opens in a new tab)`}
+                            className={`${rowClass} group hover:border-accent-blue/40 hover:bg-glass-white-hover transition-colors`}
+                          >
+                            {body}
+                          </a>
+                        ) : (
+                          <div className={rowClass}>{body}</div>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             </div>
