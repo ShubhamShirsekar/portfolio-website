@@ -347,8 +347,8 @@ export const certifications: Certification[] = [
 ];
 
 export const languages: Language[] = [
-  { name: 'English', level: 'C2' },
-  { name: 'French', level: 'B2' },
+  { name: 'English', level: 'C2', proficiency: 'Bilingual/Native' },
+  { name: 'French', level: 'B2', proficiency: 'Professional working proficiency' },
 ];
 
 // ============================================

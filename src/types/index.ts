@@ -39,7 +39,10 @@ export type Certification = {
 
 export type Language = {
   name: string;
+  /** CEFR level, e.g. C2 */
   level: string;
+  /** Plain-language proficiency, e.g. Bilingual/Native */
+  proficiency: string;
 };
 
 export type Education = {

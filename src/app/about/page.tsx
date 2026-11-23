@@ -253,22 +253,28 @@ export default function AboutPage() {
 
               <div className="md:col-span-2">
                 <h3 className="mb-4 text-xl font-semibold text-white">Languages</h3>
-                <SpecularSurface
-                  radius={16}
-                  tintOpacity={0.05}
-                  blur={8}
-                  lineColor="#bfdbfe"
-                  baseColor="#3f3f56"
-                >
-                  <dl className="grid grid-cols-1 gap-4 p-6 sm:grid-cols-2">
-                    {languages.map((lang) => (
-                      <div key={lang.name} className="flex items-center justify-between gap-4">
-                        <dt className="text-gray-300">{lang.name}</dt>
-                        <dd className="text-sm text-accent-cyan">{lang.level}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                </SpecularSurface>
+                {/* One pill per language */}
+                <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {languages.map((lang) => (
+                    <li key={lang.name}>
+                      <SpecularSurface
+                        radius={16}
+                        tintOpacity={0.05}
+                        blur={8}
+                        lineColor="#bfdbfe"
+                        baseColor="#3f3f56"
+                      >
+                        <div className="flex items-center justify-between gap-4 px-6 py-4">
+                          <span className="font-medium text-white">{lang.name}</span>
+                          <span className="text-right text-sm">
+                            <span className="font-medium text-accent-cyan">{lang.level}</span>
+                            <span className="text-gray-400"> · {lang.proficiency}</span>
+                          </span>
+                        </div>
+                      </SpecularSurface>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </Container>
