@@ -17,6 +17,8 @@ export type Project = {
 export type Experience = {
   role: string;
   company: string;
+  /** Company website */
+  companyUrl?: string;
   location?: string;
   duration: string;
   achievements: string[];

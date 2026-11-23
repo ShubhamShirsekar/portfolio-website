@@ -135,6 +135,7 @@ export const experiences: Experience[] = [
   {
     role: 'Forward Deployed Engineering Intern',
     company: 'Stackmint.ai',
+    companyUrl: 'https://stackmint.ai/en',
     location: 'Paris, France',
     duration: 'May 2026 – Nov 2026',
     achievements: [
@@ -148,6 +149,7 @@ export const experiences: Experience[] = [
   {
     role: 'Engineer',
     company: 'BUSINESSNEXT',
+    companyUrl: 'https://www.businessnext.com/',
     duration: 'Jun 2022 – Jul 2025',
     achievements: [
       'Delivered CRM and integration solutions for banks and financial institutions; joined as an intern and took full ownership of an independent client project within 6 months',

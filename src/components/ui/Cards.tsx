@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
 import { Badge } from './Badge';
 import { cn } from '@/lib/utils';
@@ -199,12 +199,13 @@ interface ExperienceCardProps {
 }
 
 export function ExperienceCard({ experience, index = 0, showDot = true }: ExperienceCardProps) {
+  const shouldReduce = useReducedMotion();
   return (
     <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      initial={shouldReduce ? false : { opacity: 0, y: 12, filter: 'blur(6px)' }}
+      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      viewport={{ once: true, margin: '0px 0px -15% 0px' }}
+      transition={{ duration: 0.7, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
       className="glass-card p-6 relative"
     >
       {/* Timeline dot */}
@@ -217,9 +218,28 @@ export function ExperienceCard({ experience, index = 0, showDot = true }: Experi
           <h3 className="text-xl font-semibold text-white">
             {experience.role}
           </h3>
-          <p className="text-accent-blue">
-            {experience.company}
-          </p>
+          {experience.companyUrl ? (
+            <a
+              href={experience.companyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-1 text-accent-blue hover:text-accent-blue-light transition-colors"
+              aria-label={`${experience.company} website (opens in a new tab)`}
+            >
+              {experience.company}
+              <svg
+                className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M9 7h8v8" />
+              </svg>
+            </a>
+          ) : (
+            <p className="text-accent-blue">{experience.company}</p>
+          )}
         </div>
         <div className="text-sm text-gray-400 md:text-right">
           <p>{experience.duration}</p>
