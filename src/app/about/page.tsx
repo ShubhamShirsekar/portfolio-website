@@ -3,6 +3,7 @@ import Image from 'next/image';
 import ReflectiveCard from '@/components/reactbits/ReflectiveCard';
 import SpecularSurface from '@/components/reactbits/SpecularSurface';
 import { Section, Container, SectionHeading, ExperienceTimeline, FunFacts } from '@/components/ui';
+import { DoubleTapHeart } from '@/components/ui/DoubleTapHeart';
 import {
   aboutContent,
   siteConfig,
@@ -42,16 +43,20 @@ export default function AboutPage() {
           <Container>
             <div className="flex max-w-5xl flex-col items-center gap-8 md:flex-row">
               {/* Photo */}
-              <div className="flex-shrink-0">
-                <div className="relative h-48 w-48 overflow-hidden rounded-2xl border-2 border-glass-border md:h-64 md:w-64">
+              <div className="flex-shrink-0 text-center">
+                <DoubleTapHeart className="h-48 w-48 overflow-hidden rounded-2xl border-2 border-glass-border md:h-64 md:w-64">
                   <Image
                     src="/pfp_2.jpg"
                     alt="Portrait of Shubham Shirsekar"
                     fill
-                    className="object-cover"
+                    className="pointer-events-none object-cover"
+                    draggable={false}
                     priority
                   />
-                </div>
+                </DoubleTapHeart>
+                <p className="mt-2 text-xs text-gray-500" aria-hidden="true">
+                  Double-tap the photo
+                </p>
               </div>
 
               {/* Text */}
