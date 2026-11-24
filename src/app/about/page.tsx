@@ -120,7 +120,7 @@ export default function AboutPage() {
                 <h2 className="mb-4 text-2xl font-semibold text-white">Education</h2>
                 <div className="flex flex-1 flex-col gap-5">
                   {education.map((edu) => (
-                    <div key={edu.degree} className="min-h-[112px] flex-1">
+                    <div key={edu.degree} className="min-h-[112px] lg:flex-1">
                       <ReflectiveCard
                         width="100%"
                         height="100%"

@@ -3,9 +3,9 @@
 // Adapted from React Bits "Specular Button" by David Haz — https://reactbits.dev
 // Source: https://github.com/DavidHDev/react-bits/blob/main/src/ts-tailwind/Components/SpecularButton/SpecularButton.tsx
 // License: MIT + Commons Clause (use in this site is permitted; do not resell the component itself).
-// Changes: rendered as a non-interactive surface (div) for content boxes instead of a <button>; size presets removed.
+// Changes: WebGL only on hover/fine-pointer devices with context-loss fallback; rendered as a non-interactive surface (div) for content boxes instead of a <button>; size presets removed.
 
-import { useEffect, useRef, type CSSProperties, type HTMLAttributes, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type HTMLAttributes, type ReactNode } from 'react';
 
 const SURFACE =
   'relative isolate block [color:var(--sb-text-color)] [border-radius:var(--sb-radius)] [background:color-mix(in_srgb,var(--sb-tint)_calc(var(--sb-tint-opacity)*100%),transparent)] shadow-[0_10px_24px_-14px_rgba(0,0,0,0.45)] [-webkit-backdrop-filter:blur(var(--sb-blur))] [backdrop-filter:blur(var(--sb-blur))]';
@@ -237,6 +237,17 @@ const SpecularSurface = ({
 }: SpecularSurfaceProps) => {
   const buttonRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  // Site addition: the effect tracks the mouse, so only run WebGL on devices with a fine
+  // pointer that can hover. Touch devices get a static border, which also keeps phones
+  // under their (low) limit of live WebGL contexts.
+  const [webgl, setWebgl] = useState(false);
+  useEffect(() => {
+    const query = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const update = () => setWebgl(query.matches);
+    update();
+    query.addEventListener('change', update);
+    return () => query.removeEventListener('change', update);
+  }, []);
   const wakeRef = useRef<(() => void) | null>(null);
   const settings: Settings = {
     radius: Math.max(0, radius),
@@ -258,6 +269,7 @@ const SpecularSurface = ({
   settingsRef.current = settings;
 
   useEffect(() => {
+    if (!webgl) return undefined;
     const button = buttonRef.current;
     const canvas = canvasRef.current;
     const gl = canvas?.getContext('webgl2', {
@@ -267,9 +279,21 @@ const SpecularSurface = ({
       depth: false,
       stencil: false
     });
-    if (!button || !canvas || !gl) return undefined;
+    if (!button || !canvas || !gl) {
+      setWebgl(false);
+      return undefined;
+    }
     const program = link(gl);
-    if (!program) return undefined;
+    if (!program) {
+      setWebgl(false);
+      return undefined;
+    }
+    // If the browser drops this context (e.g. too many on the page), fall back instead of a blank box.
+    const onContextLost = (event: Event) => {
+      event.preventDefault();
+      setWebgl(false);
+    };
+    canvas.addEventListener('webglcontextlost', onContextLost);
     const uniforms: Record<string, WebGLUniformLocation | null> = {};
     for (const name of UNIFORMS) uniforms[name] = gl.getUniformLocation(program, name);
     const buffer = gl.createBuffer();
@@ -461,12 +485,13 @@ const SpecularSurface = ({
       window.removeEventListener('pointercancel', onPointerEnd);
       document.documentElement.removeEventListener('pointerleave', onPointerLeave);
       button.removeEventListener('pointerdown', onPointerDown);
+      canvas.removeEventListener('webglcontextlost', onContextLost);
       gl.deleteBuffer(buffer);
       gl.deleteVertexArray(vao);
       gl.deleteProgram(program);
       if (!canvas.isConnected) gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
-  }, []);
+  }, [webgl]);
 
   useEffect(() => {
     wakeRef.current?.();
@@ -475,7 +500,7 @@ const SpecularSurface = ({
   return (
     <div
       ref={buttonRef}
-      className={`${SURFACE}${className ? ` ${className}` : ''}`}
+      className={`${SURFACE}${webgl ? '' : ' border border-white/10'}${className ? ` ${className}` : ''}`}
       style={
         {
           '--sb-radius': `${radius}px`,
@@ -488,11 +513,13 @@ const SpecularSurface = ({
       }
       {...rest}
     >
-      <canvas
-        ref={canvasRef}
-        className="pointer-events-none absolute -inset-6 z-[1] block h-[calc(100%+48px)] w-[calc(100%+48px)]"
-        aria-hidden="true"
-      />
+      {webgl && (
+        <canvas
+          ref={canvasRef}
+          className="pointer-events-none absolute -inset-6 z-[1] block h-[calc(100%+48px)] w-[calc(100%+48px)]"
+          aria-hidden="true"
+        />
+      )}
       <div className="relative z-[2]">{children}</div>
     </div>
   );
