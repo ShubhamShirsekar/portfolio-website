@@ -1,9 +1,9 @@
 ---
 title: "L'Oréal Product Classification"
 slug: "loreal-hackathon"
-summary: "Led a team of 5 to match 2,500+ L'Oréal product descriptions to the 20+ skin conditions each product suits: 79% accuracy on held-out data, then distilled RoBERTa-large into DistilRoBERTa, cutting emissions by 96.5% while keeping 96.8% of its F1 score."
+summary: "Led a team of 5 to tag 6,240 L'Oréal product descriptions with 33 labels (skin concerns, skin type, age, routine step): 78% weighted F1 with RoBERTa-large, then distilled it into DistilRoBERTa with 77% fewer parameters while keeping 96.8% of its F1."
 tags: ["NLP", "Hackathon"]
-tools: ["Python", "RoBERTa", "DistilRoBERTa", "PyTorch", "TensorFlow"]
+tools: ["Python", "RoBERTa", "DistilRoBERTa", "PyTorch", "CodeCarbon"]
 github: "https://github.com/ShubhamShirsekar/L-Oreal-Hackathon"
 date: "2026-01"
 featured: true
@@ -19,25 +19,32 @@ A product classification model built for the **L'Oréal and KEDGE Hackathon** (J
 
 ## The Problem
 
-L'Oréal gave us a labelled dataset of **2,500+ product descriptions**, each tagged with the **20+ skin conditions** the product is suitable for. The brief: run a **sustainable** ML model on top of it to recreate that product-to-skin-condition table as accurately as possible.
+L'Oréal gave us **6,240 labelled product descriptions**. Each product is tagged with the labels it suits, out of **33 in total**: skin concerns, skin type, sensitivity, age group, gender and routine step (about 4 per product). The brief: run a **sustainable** ML model that recreates those labels from the description text as accurately as possible.
 
 ---
 
 ## Approach
 
-- **Fine-tuned RoBERTa-large** on the product descriptions to predict which skin conditions each product suits
-- **Distilled it into DistilRoBERTa** (knowledge distillation): a much smaller student model trained to mimic the large teacher, to cut the carbon and compute cost
+- **Fine-tuned RoBERTa-large** as a multi-label classifier, with a tuned decision threshold per label
+- **Distilled it into DistilRoBERTa** (knowledge distillation): a smaller student model trained to mimic the large teacher's predictions
+- **Quantised the student to INT8** for a smaller saved model
+- **Tracked emissions with CodeCarbon** for every training run
 
 ---
 
-## Results & Impact
+## Results
 
-| Metric | Result |
-|--------|--------|
-| Accuracy on held-out data (not used in training) | **79%** |
-| F1 score retained by the distilled model | **96.8%** |
-| Emissions reduction | **96.5%** |
-| Model size reduction | **76.9%** |
-| Training time reduction | **89.8%** |
+Scores are on a **20% test split (1,349 products)**. Weighted F1 averages the per-label F1 scores, weighted by how often each label appears. Jaccard is the overlap between the predicted and true label sets for each product.
 
-- The distilled model runs fast on CPU, making it practical for production deployment
+| Model | Weighted F1 | Macro F1 | Jaccard | Parameters | Saved size | Training time | Training emissions |
+|-------|-------------|----------|---------|------------|------------|---------------|--------------------|
+| **RoBERTa-large** (teacher) | 78.2% | 77.0% | 55.8% | 355M | 1,360 MB | 214 min | 0.0318 kg CO₂ |
+| **DistilRoBERTa** (student) | 76.3% | 74.5% | 52.6% | 82M | 190 MB (INT8) | 10.9 min | 0.0011 kg CO₂ |
+
+The student keeps **96.8% of the teacher's macro F1** with **77% fewer parameters**.
+
+### What the savings compare
+
+- **Training time (−95%) and training emissions (−96.5%)** compare training the student with training the teacher. Distillation needs the teacher trained first, so these figures do **not** include the teacher's own 214 minutes and 0.0318 kg CO₂. Across the whole pipeline, distillation costs more to train than the teacher alone.
+- **Emissions** were measured with **CodeCarbon** during each training run.
+- **The lasting benefit is at prediction time.** The student is about 4× smaller, and 190 MB once quantised versus 1,360 MB, so every prediction needs much less compute. We didn't benchmark prediction speed during the hackathon, so there's no milliseconds-per-prediction figure here.
