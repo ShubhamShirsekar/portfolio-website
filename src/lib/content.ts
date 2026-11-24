@@ -194,7 +194,7 @@ const projectList: Project[] = [
     title: "L'Oréal Product Classification",
     slug: 'loreal-hackathon',
     summary:
-      "Led a team of 5 to tag 6,240 L'Oréal product descriptions with 33 labels (skin concerns, skin type, age, routine step): 78% weighted F1 with RoBERTa-large, then distilled it into DistilRoBERTa with 77% fewer parameters while keeping 96.8% of its F1.",
+      "Led a team of 5 to tag 6,240 L'Oréal product descriptions with 33 labels (skin concerns, skin type, age, routine step): 78% weighted F1 with RoBERTa-large, then distilled it into DistilRoBERTa with 77% fewer parameters while keeping 97.6% of its weighted F1.",
     tags: ['NLP', 'Hackathon'],
     tools: ['Python', 'RoBERTa', 'DistilRoBERTa', 'PyTorch', 'CodeCarbon'],
     github: 'https://github.com/ShubhamShirsekar/L-Oreal-Hackathon',
