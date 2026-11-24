@@ -28,7 +28,7 @@ export const siteConfig = {
   email: 'shubham.shirsekar@outlook.com',
   linkedin: 'https://linkedin.com/in/shubhamshirsekar21',
   github: 'https://github.com/shubhamshirsekar',
-  resumeUrl: 'https://drive.google.com/file/d/1Bs447TbeUBgFPswCiUu9wNEN0S9xuUzb/view?usp=sharing',
+  resumeUrl: 'https://drive.google.com/file/d/13PTs48cSzH7EdIVKsRum5NEuvmCJx6No/view?usp=sharing',
 };
 
 // ============================================
