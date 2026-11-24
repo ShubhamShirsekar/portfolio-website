@@ -1,9 +1,9 @@
 ---
 title: "L'Oréal Product Classification"
 slug: "loreal-hackathon"
-summary: "Led a team of 5 to fine-tune RoBERTa on a custom product description dataset provided by L'Oréal, reaching 79% accuracy on product classification and enabling segmentation from descriptions alone."
+summary: "Led a team of 5 to match 2,500+ L'Oréal product descriptions to the 20+ skin conditions each product suits: 79% accuracy on held-out data, then distilled RoBERTa-large into DistilRoBERTa, cutting emissions by 96.5% while keeping 96.8% of its F1 score."
 tags: ["NLP", "Hackathon"]
-tools: ["Python", "RoBERTa", "PyTorch", "TensorFlow"]
+tools: ["Python", "RoBERTa", "DistilRoBERTa", "PyTorch", "TensorFlow"]
 github: "https://github.com/ShubhamShirsekar/L-Oreal-Hackathon"
 date: "2026-01"
 featured: true
@@ -11,7 +11,7 @@ featured: true
 
 ## Overview
 
-A product classification and segmentation model built for the **L'Oréal and KEDGE Hackathon** (Jan 2026, L'Oréal, Paris, France).
+A product classification model built for the **L'Oréal and KEDGE Hackathon** (Jan 2026, L'Oréal, Paris, France).
 
 **Team:** 5 people. I was the team lead.
 
@@ -19,19 +19,25 @@ A product classification and segmentation model built for the **L'Oréal and KED
 
 ## The Problem
 
-Classify and segment L'Oréal products using only their text descriptions.
+L'Oréal gave us a labelled dataset of **2,500+ product descriptions**, each tagged with the **20+ skin conditions** the product is suitable for. The brief: run a **sustainable** ML model on top of it to recreate that product-to-skin-condition table as accurately as possible.
 
 ---
 
 ## Approach
 
-- Fine-tuned **RoBERTa** on a custom product description dataset provided by L'Oréal
-- Kept the solution sustainable and carbon-efficient, not only accurate
+- **Fine-tuned RoBERTa-large** on the product descriptions to predict which skin conditions each product suits
+- **Distilled it into DistilRoBERTa** (knowledge distillation): a much smaller student model trained to mimic the large teacher, to cut the carbon and compute cost
 
 ---
 
 ## Results & Impact
 
-- **79% accuracy** on the product classification problem
-  - **How it was measured:** L'Oréal provided a labelled dataset, so accuracy was measured directly against the true product labels while we optimised the models for sustainability
-- Delivered an accurate and sustainable solution for segmentation based only on product descriptions
+| Metric | Result |
+|--------|--------|
+| Accuracy on held-out data (not used in training) | **79%** |
+| F1 score retained by the distilled model | **96.8%** |
+| Emissions reduction | **96.5%** |
+| Model size reduction | **76.9%** |
+| Training time reduction | **89.8%** |
+
+- The distilled model runs fast on CPU, making it practical for production deployment

@@ -182,7 +182,7 @@ const projectList: Project[] = [
     title: 'SynthPanel',
     slug: 'synthpanel',
     summary:
-      'Led a team of 6 to build an Azure OpenAI powered platform that clusters 2,400+ consumer survey records into validated personas for synthetic panel simulations with confidence scoring, cutting traditional market research cost and time by 80%.',
+      'Led a team of 6 to build an Azure OpenAI powered platform that turns 2,400+ survey responses from real BNP Paribas Personal Finance customers into personas for synthetic panel simulations with confidence scoring: panel answers in minutes instead of weeks.',
     tags: ['Generative AI', 'Hackathon'],
     tools: ['Azure OpenAI', 'Streamlit'],
     github: 'https://github.com/ShubhamShirsekar/Synthpanel',
@@ -194,9 +194,9 @@ const projectList: Project[] = [
     title: "L'Oréal Product Classification",
     slug: 'loreal-hackathon',
     summary:
-      "Led a team of 5 to fine-tune RoBERTa on a custom product description dataset provided by L'Oréal, reaching 79% accuracy on product classification and enabling segmentation from descriptions alone.",
+      "Led a team of 5 to match 2,500+ L'Oréal product descriptions to the 20+ skin conditions each product suits: 79% accuracy on held-out data, then distilled RoBERTa-large into DistilRoBERTa, cutting emissions by 96.5% while keeping 96.8% of its F1 score.",
     tags: ['NLP', 'Hackathon'],
-    tools: ['Python', 'RoBERTa', 'PyTorch', 'TensorFlow'],
+    tools: ['Python', 'RoBERTa', 'DistilRoBERTa', 'PyTorch', 'TensorFlow'],
     github: 'https://github.com/ShubhamShirsekar/L-Oreal-Hackathon',
     featured: true,
     date: '2026-01',
@@ -252,7 +252,7 @@ const projectList: Project[] = [
 const projectImageAlts: Record<string, string> = {
   'stackmint-agents': 'Illustration of an AI agent hub connected to six integration nodes',
   synthpanel: 'Illustration of survey data points grouped into four persona clusters',
-  'loreal-hackathon': 'Illustration of text tokens flowing through model layers into classification bars',
+  'loreal-hackathon': 'Illustration of text tokens flowing through model layers into skin-condition classification bars',
   'spotify-reconstruction': 'Illustration of a mixed audio waveform sorted into four colour-coded playlists',
   'spotify-recommendation': 'Illustration of tracks on vinyl-style rings with recommended tracks highlighted',
   'iea-analysis': 'Illustration of energy trend lines with a lightning bolt',
