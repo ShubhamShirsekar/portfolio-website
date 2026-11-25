@@ -13,34 +13,42 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Space theme colors
+        // Near-black, slightly cool neutrals
         space: {
-          900: '#0a0a0f',
-          800: '#0d0d14',
-          700: '#12121c',
-          600: '#1a1a2e',
-          500: '#252540',
+          900: '#050607',
+          800: '#0a0c0e',
+          700: '#101315',
+          600: '#161a1d',
+          500: '#1f2428',
         },
-        // Accent colors
+        // HUD signal colour: a single teal accent
+        hud: {
+          DEFAULT: '#6fd6c8',
+          light: '#a7efe5',
+          dim: '#2b5f59',
+        },
+        // Legacy accent names, remapped onto the HUD palette so older classes stay on-theme
         accent: {
-          blue: '#3b82f6',
-          'blue-light': '#60a5fa',
-          violet: '#8b5cf6',
-          'violet-light': '#a78bfa',
-          cyan: '#06b6d4',
-          'cyan-light': '#22d3ee',
+          blue: '#6fd6c8',
+          'blue-light': '#a7efe5',
+          violet: '#d9c38f',
+          'violet-light': '#ecdcb3',
+          cyan: '#6fd6c8',
+          'cyan-light': '#a7efe5',
+          green: '#6fd6c8',
         },
-        // Glass colors
+        // Hairlines and panel fills
         glass: {
-          white: 'rgba(255, 255, 255, 0.05)',
-          'white-hover': 'rgba(255, 255, 255, 0.1)',
-          border: 'rgba(255, 255, 255, 0.1)',
-          'border-hover': 'rgba(255, 255, 255, 0.2)',
+          white: 'rgba(8, 10, 12, 0.55)',
+          'white-hover': 'rgba(14, 18, 20, 0.7)',
+          border: 'rgba(255, 255, 255, 0.09)',
+          'border-hover': 'rgba(111, 214, 200, 0.35)',
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        silkscreen: ['var(--font-silkscreen)', 'monospace'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'var(--font-inter)', 'sans-serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
       },
       fontSize: {
         'hero': ['4rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
@@ -49,16 +57,16 @@ const config: Config = {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-cosmic': 'linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0d0d14 100%)',
-        'glow-blue': 'radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%)',
-        'glow-violet': 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%)',
-        'glow-cyan': 'radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%)',
+        'glow-blue': 'radial-gradient(circle, rgba(111, 214, 200, 0.12) 0%, transparent 70%)',
+        'glow-violet': 'radial-gradient(circle, rgba(217, 195, 143, 0.12) 0%, transparent 70%)',
+        'glow-cyan': 'radial-gradient(circle, rgba(111, 214, 200, 0.12) 0%, transparent 70%)',
       },
       boxShadow: {
         'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
         'glass-sm': '0 4px 16px 0 rgba(0, 0, 0, 0.25)',
-        'glow-blue': '0 0 20px rgba(59, 130, 246, 0.3)',
-        'glow-violet': '0 0 20px rgba(139, 92, 246, 0.3)',
-        'glow-cyan': '0 0 20px rgba(6, 182, 212, 0.3)',
+        'glow-blue': '0 0 20px rgba(111, 214, 200, 0.25)',
+        'glow-violet': '0 0 20px rgba(217, 195, 143, 0.25)',
+        'glow-cyan': '0 0 20px rgba(111, 214, 200, 0.25)',
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out forwards',

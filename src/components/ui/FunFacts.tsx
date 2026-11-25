@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import SpecularSurface from '@/components/reactbits/SpecularSurface';
 import type { FunFact } from '@/types';
 
 function FactIcon({ icon }: { icon: FunFact['icon'] }) {
@@ -61,22 +60,16 @@ export function FunFacts({ facts }: { facts: FunFact[] }) {
           whileHover={{ y: -4 }}
           className="h-full"
         >
-          <SpecularSurface
-            radius={16}
-            tintOpacity={0.05}
-            blur={8}
-            lineColor="#a5f3fc"
-            baseColor="#3f3f56"
-            className="h-full"
-          >
-            <div className="p-5">
-              <span className="inline-flex w-11 h-11 items-center justify-center rounded-xl bg-accent-cyan/10 text-accent-cyan mb-3">
+          <div className="hud-frame hud-frame-interactive h-full p-5">
+            <div className="mb-4 flex items-center justify-between">
+              <span className="text-hud">
                 <FactIcon icon={fact.icon} />
               </span>
-              <h3 className="text-white font-semibold mb-1">{fact.title}</h3>
-              <p className="text-gray-400 text-sm">{fact.text}</p>
+              <span className="hud-label !text-[0.6rem]">{String(i + 1).padStart(2, '0')}</span>
             </div>
-          </SpecularSurface>
+            <h3 className="mb-1 font-semibold text-white">{fact.title}</h3>
+            <p className="text-sm text-gray-400">{fact.text}</p>
+          </div>
         </motion.li>
       ))}
     </ul>

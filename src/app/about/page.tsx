@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import ReflectiveCard from '@/components/reactbits/ReflectiveCard';
-import SpecularSurface from '@/components/reactbits/SpecularSurface';
 import { Section, Container, SectionHeading, ExperienceTimeline, FunFacts } from '@/components/ui';
 import { DoubleTapHeart } from '@/components/ui/DoubleTapHeart';
 import {
@@ -21,61 +19,69 @@ export const metadata: Metadata = {
     'Shubham Shirsekar, Forward Deployed Engineer. AI agents in production, integrations over OAuth, MCP and APIs, and three years of CRM and integration delivery for financial institutions.',
 };
 
+/** Small heading used inside a section: "01 — Education" */
+function PanelHeading({ index, children }: { index: string; children: React.ReactNode }) {
+  return (
+    <h2 className="mb-5 flex items-center gap-3">
+      <span className="hud-label text-hud">{index}</span>
+      <span className="hud-label text-gray-200">{children}</span>
+      <span className="h-px flex-1 bg-glass-border" aria-hidden="true" />
+    </h2>
+  );
+}
+
 export default function AboutPage() {
   return (
     <div className="relative min-h-screen">
-      {/* Background */}
-      <div className="fixed inset-0 z-0">
-        <Image
-          src="/about-bg-tv.jpg"
-          alt=""
-          fill
-          className="scale-110 object-cover object-[center_55%] opacity-40 blur-md"
-          priority
-        />
-        <div className="absolute inset-0 bg-space-900/40" />
+      {/* Background: the horizon image, faint and blurred */}
+      <div className="pointer-events-none fixed inset-0 z-0" aria-hidden="true">
+        <Image src="/hero/horizon.webp" alt="" fill sizes="100vw" className="scale-110 object-cover opacity-25 blur-sm" priority />
+        <div className="absolute inset-0 bg-gradient-to-b from-space-900/50 via-space-900/85 to-space-900" />
       </div>
 
-      {/* Content */}
       <div className="relative z-10">
         {/* Hero */}
-        <Section className="pt-8">
+        <Section className="pt-12">
           <Container>
-            <div className="flex max-w-5xl flex-col items-center gap-8 md:flex-row">
-              {/* Photo */}
+            <div className="flex flex-col items-center gap-10 md:flex-row md:items-end">
               <div className="flex-shrink-0 text-center">
-                <DoubleTapHeart className="h-48 w-48 overflow-hidden rounded-2xl border-2 border-glass-border md:h-64 md:w-64">
-                  <Image
-                    src="/pfp_2.jpg"
-                    alt="Portrait of Shubham Shirsekar"
-                    fill
-                    className="pointer-events-none object-cover"
-                    draggable={false}
-                    priority
-                  />
-                </DoubleTapHeart>
-                <p className="mt-2 text-xs text-gray-500" aria-hidden="true">
+                <div className="hud-frame p-2">
+                  <DoubleTapHeart className="h-56 w-56 overflow-hidden md:h-64 md:w-64">
+                    <Image
+                      src="/pfp_2.jpg"
+                      alt="Portrait of Shubham Shirsekar"
+                      fill
+                      className="pointer-events-none object-cover grayscale-[30%]"
+                      draggable={false}
+                      priority
+                    />
+                  </DoubleTapHeart>
+                </div>
+                <p className="hud-label mt-3 !text-[0.6rem] text-gray-500" aria-hidden="true">
                   Double-tap the photo
                 </p>
               </div>
 
-              {/* Text */}
-              <div className="flex-1 text-center md:text-right">
-                <h1 className="mb-6 text-4xl font-bold text-white md:text-5xl">About Me</h1>
-                <p className="mb-4 text-xl text-gray-300">{siteConfig.role}</p>
-                <p className="text-accent-cyan">{siteConfig.availability}</p>
+              <div className="flex-1 pb-8 text-center md:text-left">
+                <p className="hud-label mb-5 text-hud">{'// Profile'}</p>
+                <h1 className="hud-title text-3xl md:text-5xl">About Me</h1>
+                <p className="mt-5 font-mono text-xs uppercase tracking-[0.35em] text-gray-300 md:tracking-[0.6em]">{siteConfig.role}</p>
+                <p className="hud-label mt-6 inline-flex items-center gap-3 text-gray-300">
+                  <span className="hud-node !h-1.5 !w-1.5" aria-hidden="true" />
+                  {siteConfig.availability}
+                </p>
               </div>
             </div>
           </Container>
         </Section>
 
         {/* Summary + Quick Facts */}
-        <Section className="pt-8">
+        <Section className="pt-0">
           <Container>
-            <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
               <div className="lg:col-span-2">
-                <SectionHeading title="Summary" className="mb-6 text-left" />
-                <div className="glass-card space-y-4 p-8">
+                <PanelHeading index="01">Summary</PanelHeading>
+                <div className="hud-frame space-y-4 p-7">
                   {aboutContent.summary.map((paragraph) => (
                     <p key={paragraph} className="leading-relaxed text-gray-300">
                       {paragraph}
@@ -85,13 +91,13 @@ export default function AboutPage() {
               </div>
 
               <div>
-                <SectionHeading title="Quick Facts" className="mb-6 text-left" />
-                <dl className="glass-card space-y-4 p-6">
+                <PanelHeading index="02">Quick Facts</PanelHeading>
+                <dl className="hud-frame divide-y divide-glass-border">
                   {aboutContent.quickFacts.map((fact) => (
-                    <div key={fact.label}>
-                      <dt className="text-sm text-gray-400">{fact.label}</dt>
-                      <dd className="text-white">{fact.value}</dd>
-                      {fact.detail && <dd className="text-sm text-gray-400">{fact.detail}</dd>}
+                    <div key={fact.label} className="px-6 py-4">
+                      <dt className="hud-label !text-[0.6rem]">{fact.label}</dt>
+                      <dd className="mt-1.5 text-white">{fact.value}</dd>
+                      {fact.detail && <dd className="mt-0.5 text-sm text-gray-400">{fact.detail}</dd>}
                     </div>
                   ))}
                 </dl>
@@ -100,10 +106,11 @@ export default function AboutPage() {
           </Container>
         </Section>
 
-        {/* Experience Timeline */}
+        {/* Experience */}
         <Section id="experience">
           <Container>
             <SectionHeading
+              index="03"
               title="Experience"
               subtitle="From CRM and integration delivery for financial institutions to AI agents in production."
             />
@@ -115,63 +122,39 @@ export default function AboutPage() {
         <Section id="education">
           <Container>
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-              {/* Column stretches to the Certifications column; the cards split that height */}
               <div className="flex flex-col">
-                <h2 className="mb-4 text-2xl font-semibold text-white">Education</h2>
-                <div className="flex flex-1 flex-col gap-5">
+                <PanelHeading index="04">Education</PanelHeading>
+                <div className="flex flex-1 flex-col gap-4">
                   {education.map((edu) => (
-                    <div key={edu.degree} className="min-h-[112px] lg:flex-1">
-                      <ReflectiveCard
-                        width="100%"
-                        height="100%"
-                        radius={18}
-                        theme="dark"
-                        tiltStrength={8}
-                        tint="#7d8fb8"
-                        shine={0.6}
-                        glare={0.35}
-                      >
-                        <div className="flex h-full items-center gap-4">
-                          <div className="min-w-0 flex-1">
-                            <h3 className="text-lg font-semibold leading-snug text-white">
-                              {edu.degree}
-                            </h3>
-                            <p className="text-sm font-medium text-gray-100">{edu.institution}</p>
-                            <p className="mt-1.5 text-xs uppercase tracking-[0.18em] text-gray-300">
-                              {edu.years}
-                            </p>
-                          </div>
-                          {edu.logo && (
-                            <Image
-                              src={edu.logo}
-                              alt={`${edu.institution} logo`}
-                              unoptimized
-                              width={128}
-                              height={128}
-                              className={`shrink-0 ${edu.logoClassName ?? ''}`}
-                            />
-                          )}
-                        </div>
-                      </ReflectiveCard>
+                    <div key={edu.degree} className="hud-frame flex min-h-[112px] items-center gap-4 p-6 lg:flex-1">
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-lg font-semibold leading-snug text-white">{edu.degree}</h3>
+                        <p className="text-sm text-gray-200">{edu.institution}</p>
+                        <p className="hud-label mt-2 !text-[0.6rem]">{edu.years}</p>
+                      </div>
+                      {edu.logo && (
+                        <Image
+                          src={edu.logo}
+                          alt={`${edu.institution} logo`}
+                          unoptimized
+                          width={128}
+                          height={128}
+                          className={`shrink-0 ${edu.logoClassName ?? ''}`}
+                        />
+                      )}
                     </div>
                   ))}
                 </div>
               </div>
 
               <div>
-                <h2 className="mb-4 text-2xl font-semibold text-white">Certifications</h2>
-                <ul className="glass-card grid grid-cols-1 gap-3 p-6">
+                <PanelHeading index="05">Certifications</PanelHeading>
+                <ul className="grid grid-cols-1 gap-3">
                   {certifications.map((certification) => {
                     const body = (
                       <>
                         {certification.logo ? (
-                          <Image
-                            src={certification.logo}
-                            alt=""
-                            width={28}
-                            height={28}
-                            className="h-7 w-7 shrink-0 object-contain"
-                          />
+                          <Image src={certification.logo} alt="" width={28} height={28} className="h-7 w-7 shrink-0 object-contain" />
                         ) : (
                           <span className="h-7 w-7 shrink-0" aria-hidden="true" />
                         )}
@@ -181,24 +164,18 @@ export default function AboutPage() {
                         </span>
                         {certification.url && (
                           <svg
-                            className="h-4 w-4 shrink-0 text-gray-400 transition-colors group-hover:text-accent-blue"
+                            className="h-4 w-4 shrink-0 text-gray-500 transition-colors group-hover:text-hud"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
                             aria-hidden="true"
                           >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                            />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                           </svg>
                         )}
                       </>
                     );
-                    const rowClass =
-                      'flex items-center gap-3 rounded-lg border border-accent-green/20 bg-accent-green/10 px-4 py-3';
+                    const rowClass = 'hud-frame flex items-center gap-4 px-5 py-4';
 
                     return (
                       <li key={certification.name}>
@@ -208,7 +185,7 @@ export default function AboutPage() {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label={`View certificate: ${certification.name} by ${certification.issuer} (opens in a new tab)`}
-                            className={`${rowClass} group transition-colors hover:border-accent-blue/40 hover:bg-glass-white-hover`}
+                            className={`${rowClass} hud-frame-interactive group`}
                           >
                             {body}
                           </a>
@@ -227,56 +204,32 @@ export default function AboutPage() {
         {/* Skills & Languages */}
         <Section id="skills">
           <Container>
-            <SectionHeading
-              title="Skills & Languages"
-              subtitle="What I build with, and how I work with clients."
-            />
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+            <SectionHeading index="06" title="Skills & Languages" subtitle="What I build with, and how I work with clients." />
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {skillGroups.map((group) => (
-                <div key={group.title}>
-                  <h3 className="mb-4 text-xl font-semibold text-white">{group.title}</h3>
-                  <SpecularSurface
-                    radius={16}
-                    tintOpacity={0.05}
-                    blur={8}
-                    lineColor="#bfdbfe"
-                    baseColor="#3f3f56"
-                  >
-                    <ul className="flex flex-wrap gap-3 p-6">
-                      {group.skills.map((skill) => (
-                        <li
-                          key={skill}
-                          className="rounded-lg border border-accent-blue/40 bg-space-900/70 px-4 py-2 text-sm text-accent-blue-light backdrop-blur-sm"
-                        >
-                          {skill}
-                        </li>
-                      ))}
-                    </ul>
-                  </SpecularSurface>
+                <div key={group.title} className="hud-frame p-6">
+                  <h3 className="hud-label mb-5 !text-gray-200">{group.title}</h3>
+                  <ul className="flex flex-wrap gap-2">
+                    {group.skills.map((skill) => (
+                      <li key={skill} className="border border-hud/25 bg-hud/[0.06] px-3 py-1.5 text-sm text-hud-light">
+                        {skill}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ))}
 
               <div className="md:col-span-2">
-                <h3 className="mb-4 text-xl font-semibold text-white">Languages</h3>
-                {/* One pill per language */}
+                <h3 className="sr-only">Languages</h3>
                 <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   {languages.map((lang) => (
-                    <li key={lang.name}>
-                      <SpecularSurface
-                        radius={16}
-                        tintOpacity={0.05}
-                        blur={8}
-                        lineColor="#bfdbfe"
-                        baseColor="#3f3f56"
-                      >
-                        <div className="flex items-center justify-between gap-4 px-6 py-4">
-                          <span className="font-medium text-white">{lang.name}</span>
-                          <span className="text-right text-sm">
-                            <span className="font-medium text-accent-cyan">{lang.level}</span>
-                            <span className="text-gray-400"> · {lang.proficiency}</span>
-                          </span>
-                        </div>
-                      </SpecularSurface>
+                    <li key={lang.name} className="hud-frame flex items-center justify-between gap-4 px-6 py-5">
+                      <div>
+                        <p className="hud-label !text-[0.6rem]">Language</p>
+                        <p className="mt-1 font-medium text-white">{lang.name}</p>
+                        <p className="text-sm text-gray-400">{lang.proficiency}</p>
+                      </div>
+                      <span className="font-display text-3xl text-hud">{lang.level}</span>
                     </li>
                   ))}
                 </ul>
@@ -288,10 +241,7 @@ export default function AboutPage() {
         {/* Fun facts */}
         <Section id="beyond-work">
           <Container>
-            <SectionHeading
-              title="Beyond Work"
-              subtitle="A few things that keep me curious off the clock."
-            />
+            <SectionHeading index="07" title="Beyond Work" subtitle="A few things that keep me curious off the clock." />
             <FunFacts facts={funFacts} />
           </Container>
         </Section>

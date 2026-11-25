@@ -21,7 +21,7 @@ export function ExperienceTimeline({ experiences }: { experiences: Experience[] 
       {/* Track + drawn line */}
       <div className="hidden md:block absolute left-0 top-0 bottom-0 w-px bg-glass-border" aria-hidden="true" />
       <motion.div
-        className="hidden md:block absolute left-0 top-0 bottom-0 w-px origin-top bg-gradient-to-b from-accent-blue/80 via-accent-violet/70 to-accent-cyan/60"
+        className="hidden md:block absolute left-0 top-0 bottom-0 w-px origin-top bg-hud/70"
         style={{ scaleY: shouldReduce ? 1 : scaleY }}
         aria-hidden="true"
       />
@@ -31,9 +31,9 @@ export function ExperienceTimeline({ experiences }: { experiences: Experience[] 
           <li key={`${experience.company}-${experience.role}`} className="relative">
             {/* Dot sits on the line and lights up when reached */}
             <motion.span
-              className="hidden md:block absolute -left-10 top-8 w-2.5 h-2.5 -translate-x-1/2 rounded-full border border-accent-blue/70"
-              initial={shouldReduce ? false : { backgroundColor: 'rgba(10,10,15,1)' }}
-              whileInView={{ backgroundColor: 'rgba(59,130,246,1)' }}
+              className="hidden md:block absolute -left-10 top-8 w-2.5 h-2.5 -translate-x-1/2 rounded-full border border-hud/70"
+              initial={shouldReduce ? false : { backgroundColor: 'rgba(5,6,7,1)', boxShadow: '0 0 0 0 rgba(111,214,200,0)' }}
+              whileInView={{ backgroundColor: 'rgba(111,214,200,1)', boxShadow: '0 0 14px 2px rgba(111,214,200,0.6)' }}
               viewport={{ once: true, margin: '0px 0px -40% 0px' }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               aria-hidden="true"

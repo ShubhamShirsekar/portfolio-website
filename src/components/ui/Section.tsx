@@ -29,17 +29,31 @@ interface SectionHeadingProps {
   title: string;
   as?: 'h1' | 'h2';
   subtitle?: string;
+  /** Small HUD index shown above the title, e.g. "01" */
+  index?: string;
+  /** Left-align instead of centring */
+  align?: 'center' | 'left';
   className?: string;
 }
 
-export function SectionHeading({ title, subtitle, className, as: Heading = 'h2' }: SectionHeadingProps) {
+export function SectionHeading({
+  title,
+  subtitle,
+  index,
+  align = 'center',
+  className,
+  as: Heading = 'h2',
+}: SectionHeadingProps) {
+  const centered = align === 'center';
   return (
-    <div className={cn('text-center mb-12', className)}>
-      <Heading className="text-3xl md:text-4xl font-bold text-white mb-4">
-        {title}
-      </Heading>
+    <div className={cn('mb-12', centered ? 'text-center' : 'text-left', className)}>
+      <div className={cn('mb-5 flex items-center gap-3', centered && 'justify-center')} aria-hidden="true">
+        <span className="hud-label text-hud">{index ?? '//'}</span>
+        <span className="h-px w-10 bg-hud/40" />
+      </div>
+      <Heading className="hud-title text-2xl leading-tight md:text-4xl">{title}</Heading>
       {subtitle && (
-        <p className="text-gray-400 max-w-2xl mx-auto">
+        <p className={cn('mt-5 max-w-2xl font-mono text-sm leading-relaxed text-gray-400', centered && 'mx-auto')}>
           {subtitle}
         </p>
       )}

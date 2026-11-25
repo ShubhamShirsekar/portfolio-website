@@ -96,3 +96,24 @@ export type FunFact = {
   text: string;
   icon: 'sport' | 'book' | 'game' | 'globe';
 };
+
+/** One full-screen slide of the home hero slider. */
+export type HeroSlide = {
+  id: string;
+  /** Big display title, one entry per line */
+  title: string[];
+  /** Letter-spaced line under the title */
+  subtitle: string;
+  image: string;
+  /** Tailwind classes for the image's object-position (mobile first) */
+  imagePosition: string;
+  /** Tailwind classes that shift the image box (e.g. push the subject right of the text) */
+  imageShift?: string;
+  /** Accent colour picked from the image */
+  accent: string;
+  /** Short lines under the title (the intro slide uses the rotating taglines instead) */
+  points?: string[];
+  cta: { label: string; href: string };
+  /** How long the slide stays before auto-advancing (ms) */
+  duration: number;
+};

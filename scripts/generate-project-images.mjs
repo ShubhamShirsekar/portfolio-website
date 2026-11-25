@@ -5,7 +5,8 @@ import path from 'path';
 const OUT = process.argv[2];
 fs.mkdirSync(OUT, { recursive: true });
 const W = 1200, H = 750;
-const C = { blue: '#3b82f6', blueL: '#60a5fa', violet: '#8b5cf6', violetL: '#a78bfa', cyan: '#06b6d4', cyanL: '#22d3ee' };
+// HUD palette: teal signal, warm gold, ice blue
+const C = { blue: '#6fd6c8', blueL: '#a7efe5', violet: '#d9c38f', violetL: '#ecdcb3', cyan: '#8fd3ee', cyanL: '#c3e8f5' };
 
 // Seeded RNG so the art is reproducible
 function rng(seed) { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); }
@@ -17,7 +18,7 @@ function frame(body, glows = [[250, 180, C.blue], [950, 560, C.violet], [700, 12
   for (let y = 60; y < H; y += 60) grid.push(`<line x1="0" y1="${y}" x2="${W}" y2="${y}"/>`);
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
 <defs>
-  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a0a0f"/><stop offset="0.55" stop-color="#12121c"/><stop offset="1" stop-color="#1a1a2e"/></linearGradient>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#050607"/><stop offset="0.55" stop-color="#0b0e10"/><stop offset="1" stop-color="#12161a"/></linearGradient>
   <linearGradient id="acc" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${C.blue}"/><stop offset="0.5" stop-color="${C.violet}"/><stop offset="1" stop-color="${C.cyan}"/></linearGradient>
   <linearGradient id="accV" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="${C.blue}"/><stop offset="1" stop-color="${C.cyan}"/></linearGradient>
   ${glows.map((g, i) => `<radialGradient id="g${i}"><stop offset="0" stop-color="${g[2]}" stop-opacity="0.35"/><stop offset="1" stop-color="${g[2]}" stop-opacity="0"/></radialGradient>`).join('')}
@@ -42,11 +43,11 @@ art['stackmint-agents'] = (() => {
     parts.push(`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="${col}" stroke-opacity="0.45" stroke-width="2" stroke-dasharray="6 8"/>`);
     const mx = cx + (x - cx) * 0.55, my = cy + (y - cy) * 0.55;
     parts.push(`<circle cx="${mx}" cy="${my}" r="5" fill="${col}" filter="url(#glow)"/>`);
-    parts.push(`<rect x="${x - 42}" y="${y - 42}" width="84" height="84" rx="20" fill="#12121c" stroke="${col}" stroke-opacity="0.8" stroke-width="2"/>`);
+    parts.push(`<rect x="${x - 42}" y="${y - 42}" width="84" height="84" rx="20" fill="#0b0e10" stroke="${col}" stroke-opacity="0.8" stroke-width="2"/>`);
     parts.push(`<rect x="${x - 18}" y="${y - 10}" width="36" height="6" rx="3" fill="${col}" opacity="0.8"/><rect x="${x - 18}" y="${y + 4}" width="24" height="6" rx="3" fill="${col}" opacity="0.45"/>`);
   }
   parts.push(`<circle cx="${cx}" cy="${cy}" r="110" fill="none" stroke="url(#acc)" stroke-opacity="0.25" stroke-width="1"/>`);
-  parts.push(`<rect x="${cx - 70}" y="${cy - 62}" width="140" height="124" rx="34" fill="#12121c" stroke="url(#acc)" stroke-width="3" filter="url(#glow)"/>`);
+  parts.push(`<rect x="${cx - 70}" y="${cy - 62}" width="140" height="124" rx="34" fill="#0b0e10" stroke="url(#acc)" stroke-width="3" filter="url(#glow)"/>`);
   parts.push(`<circle cx="${cx - 26}" cy="${cy - 6}" r="10" fill="${C.cyanL}"/><circle cx="${cx + 26}" cy="${cy - 6}" r="10" fill="${C.cyanL}"/>`);
   parts.push(`<rect x="${cx - 30}" y="${cy + 26}" width="60" height="6" rx="3" fill="${C.violetL}"/>`);
   parts.push(`<line x1="${cx}" y1="${cy - 62}" x2="${cx}" y2="${cy - 92}" stroke="${C.violetL}" stroke-width="3"/><circle cx="${cx}" cy="${cy - 98}" r="7" fill="${C.violetL}"/>`);
@@ -66,7 +67,7 @@ art['synthpanel'] = (() => {
       const px = x + gauss(r) * 55, py = y + gauss(r) * 38;
       parts.push(`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${(2 + r() * 3).toFixed(1)}" fill="${col}" opacity="${(0.35 + r() * 0.5).toFixed(2)}"/>`);
     }
-    parts.push(`<circle cx="${x}" cy="${y}" r="26" fill="#12121c" stroke="${col}" stroke-width="3" filter="url(#glow)"/>`);
+    parts.push(`<circle cx="${x}" cy="${y}" r="26" fill="#0b0e10" stroke="${col}" stroke-width="3" filter="url(#glow)"/>`);
     parts.push(`<circle cx="${x}" cy="${y - 6}" r="7" fill="${col}"/><path d="M${x - 12} ${y + 14} q12 -14 24 0" stroke="${col}" stroke-width="4" fill="none" stroke-linecap="round"/>`);
   }
   return frame(parts.join('\n'));
@@ -88,7 +89,7 @@ art['loreal-hackathon'] = (() => {
   const blockCols = [C.blue, C.violet, C.violet, C.cyan];
   for (let i = 0; i < 4; i++) {
     const y = 230 + i * 74;
-    parts.push(`<rect x="510" y="${y}" width="180" height="56" rx="14" fill="#12121c" stroke="${blockCols[i]}" stroke-width="2.5" ${i === 1 ? 'filter="url(#glow)"' : ''}/>`);
+    parts.push(`<rect x="510" y="${y}" width="180" height="56" rx="14" fill="#0b0e10" stroke="${blockCols[i]}" stroke-width="2.5" ${i === 1 ? 'filter="url(#glow)"' : ''}/>`);
     parts.push(`<rect x="534" y="${y + 24}" width="${70 + i * 18}" height="8" rx="4" fill="${blockCols[i]}" opacity="0.6"/>`);
   }
   const bars = [0.18, 0.79, 0.27, 0.12, 0.34, 0.08];
@@ -112,7 +113,7 @@ art['spotify-reconstruction'] = (() => {
   }
   users.forEach((col, k) => {
     const y = 450 + k * 62;
-    parts.push(`<circle cx="190" cy="${y + 12}" r="18" fill="#12121c" stroke="${col}" stroke-width="3" filter="url(#glow)"/>`);
+    parts.push(`<circle cx="190" cy="${y + 12}" r="18" fill="#0b0e10" stroke="${col}" stroke-width="3" filter="url(#glow)"/>`);
     let x = 240;
     for (let j = 0; j < 9 + k; j++) {
       const w = 40 + r() * 50;
@@ -135,7 +136,7 @@ art['spotify-recommendation'] = (() => {
     pts.push([cx + rad * Math.cos(a), cy + rad * Math.sin(a), r() < 0.2]);
   }
   pts.filter(p => p[2]).forEach(p => parts.push(`<line x1="${cx}" y1="${cy}" x2="${p[0].toFixed(1)}" y2="${p[1].toFixed(1)}" stroke="${C.violetL}" stroke-opacity="0.45" stroke-width="1.5"/>`));
-  parts.push(`<circle cx="${cx}" cy="${cy}" r="62" fill="#12121c" stroke="url(#acc)" stroke-width="3" filter="url(#glow)"/><circle cx="${cx}" cy="${cy}" r="10" fill="${C.cyanL}"/>`);
+  parts.push(`<circle cx="${cx}" cy="${cy}" r="62" fill="#0b0e10" stroke="url(#acc)" stroke-width="3" filter="url(#glow)"/><circle cx="${cx}" cy="${cy}" r="10" fill="${C.cyanL}"/>`);
   pts.forEach(p => parts.push(`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="${p[2] ? 9 : 4}" fill="${p[2] ? C.violetL : C.blueL}" opacity="${p[2] ? 1 : 0.5}" ${p[2] ? 'filter="url(#glow)"' : ''}/>`));
   for (let i = 0; i < 14; i++) { const h = 20 + Math.abs(Math.sin(i * 0.9)) * 70; parts.push(`<rect x="${960 + i * 14}" y="${(690 - h).toFixed(0)}" width="8" height="${h.toFixed(0)}" rx="4" fill="url(#accV)" opacity="0.7"/>`); }
   return frame(parts.join('\n'), [[600, 375, C.violet], [200, 600, C.blue], [1000, 150, C.cyan]]);

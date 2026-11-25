@@ -67,212 +67,216 @@ export default function ContactPage() {
     }
   };
 
+  const channelLabel: Record<string, string> = { github: 'View profile', linkedin: 'Connect', mail: 'Write' };
+
   return (
     <div className="relative min-h-screen">
-      {/* Background GIF */}
-      <div className="fixed inset-0 z-0">
-        <Image
-          src="/extra-bg.jpg"
-          alt=""
-          fill
-          className="object-cover opacity-20"
-          priority
-        />
-        <div className="absolute inset-0 bg-space-900/40" />
+      <div className="pointer-events-none fixed inset-0 z-0" aria-hidden="true">
+        <Image src="/moon.webp" alt="" fill sizes="100vw" className="object-cover object-[50%_15%] opacity-30" priority />
+        <div className="absolute inset-0 bg-gradient-to-b from-space-900/40 via-space-900/85 to-space-900" />
       </div>
 
-      {/* Content */}
       <div className="relative z-10">
-        <Section className="pt-8">
-        <Container>
-          <div className="max-w-4xl mx-auto">
-            <SectionHeading
-              as="h1"
-              title={contactContent.headline}
-              subtitle={contactContent.description}
-            />
+        <Section className="pt-12">
+          <Container>
+            <SectionHeading as="h1" index="//" title={contactContent.headline} subtitle={contactContent.description} />
 
-            {/* Availability Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="flex flex-col items-center gap-2 mb-12"
-            >
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan text-sm">
-                <span className="w-2 h-2 rounded-full bg-accent-cyan animate-pulse motion-reduce:animate-none" aria-hidden="true" />
-                {contactContent.availability}
+            {/* Step rail: 01 Connect ——●—— 02 Message */}
+            <div className="mx-auto mb-14 flex max-w-xl items-center gap-4" aria-hidden="true">
+              <span className="hud-label text-gray-200">01 Connect</span>
+              <span className="relative h-px flex-1 bg-glass-border">
+                <span className="hud-node absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
               </span>
-              <span className="text-xs text-gray-400">{siteConfig.workAuthorization}</span>
-            </motion.div>
+              <span className="hud-label">02 Message</span>
+            </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Contact Info */}
-              <motion.div
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-[280px_1fr]">
+              {/* Left column: the summary panel */}
+              <motion.aside
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3 }}
+                transition={{ delay: 0.2 }}
+                className="space-y-6"
               >
-                <h2 className="text-xl font-semibold text-white mb-6">
-                  Let&apos;s Connect
-                </h2>
-                
-                {/* Social Links */}
-                <div className="space-y-4 mb-8">
-                  {socialLinks.map((social) => (
-                    <a
-                      key={social.name}
-                      href={social.url}
-                      target={social.icon !== 'mail' ? '_blank' : undefined}
-                      rel={social.icon !== 'mail' ? 'noopener noreferrer' : undefined}
-                      className="flex items-center gap-4 p-4 glass-card hover:border-accent-blue/30 transition-colors w-full"
-                    >
-                      <span className="text-accent-blue" aria-hidden="true">
-                        <SocialIcon icon={social.icon} />
-                      </span>
-                        <div className="min-w-0">
-                          <p className="text-white font-medium">{social.name}</p>
-                          <p className="text-gray-400 text-sm w-full truncate">
-                            {social.icon === 'mail' ? siteConfig.email : social.url.replace(/^https:\/\/(www\.)?/, '')}
-                          </p>
-                        </div>
-                    </a>
-                  ))}
-                </div>
-
-                {/* Download Resume */}
-                <div className="glass-card p-6">
-                  <h3 className="text-white font-medium mb-3">
-                    Want the full picture?
-                  </h3>
-                  <p className="text-gray-400 text-sm mb-4">
-                    Download my resume for a complete overview.
+                <div>
+                  <p className="hud-label !text-[0.6rem]">Status</p>
+                  <p className="mt-2 inline-flex items-center gap-3 text-white">
+                    <span className="hud-node !h-1.5 !w-1.5 animate-pulse motion-reduce:animate-none" aria-hidden="true" />
+                    {contactContent.availability}
                   </p>
+                  <div className="mt-4 h-px bg-glass-border" />
+                </div>
+                <div>
+                  <p className="hud-label !text-[0.6rem]">Work authorization</p>
+                  <p className="mt-2 text-sm text-gray-300">{siteConfig.workAuthorization}</p>
+                </div>
+                <div>
+                  <p className="hud-label !text-[0.6rem]">Email</p>
+                  <a href={`mailto:${siteConfig.email}`} className="mt-2 block break-all text-sm text-gray-300 transition-colors hover:text-hud">
+                    {siteConfig.email}
+                  </a>
+                </div>
+                <div className="hud-frame p-5">
+                  <h2 className="mb-2 font-medium text-white">Want the full picture?</h2>
+                  <p className="mb-4 text-sm text-gray-400">Download my resume for a complete overview.</p>
                   <Button href={siteConfig.resumeUrl} variant="secondary" size="sm" external>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                     Download Resume
                   </Button>
                 </div>
-              </motion.div>
+              </motion.aside>
 
-              {/* Contact Form */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4 }}
-              >
-                <div className="glass-card p-8">
-                  {submitted ? (
-                    <div className="text-center py-8">
-                      <div className="w-16 h-16 rounded-full bg-green-500/10 text-green-500 flex items-center justify-center mx-auto mb-4">
-                        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      <h3 className="text-xl font-semibold text-white mb-2">
-                        Message Received!
-                      </h3>
-                      <p className="text-gray-400 mb-4">
-                        Thank you for reaching out! Your message has been successfully sent.
-                      </p>
-                      <p className="text-gray-300 text-sm mb-6">
-                        I&apos;ll review your inquiry and get back to you within <span className="text-accent-cyan font-medium">24-48 hours</span>. 
-                        If you need an immediate response, feel free to reach out via <a href={`mailto:${siteConfig.email}`} className="text-accent-blue hover:underline">email</a> or <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer" className="text-accent-blue hover:underline">LinkedIn</a>.
-                      </p>
-                      <Button onClick={() => setSubmitted(false)} variant="secondary">
-                        Send Another Message
-                      </Button>
-                    </div>
-                  ) : (
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                      <div>
-                        <label htmlFor="name" className="block text-sm text-gray-400 mb-2">
-                          Name
-                        </label>
-                        <input
-                          type="text"
-                          id="name"
-                          required
-                          value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          className="w-full px-4 py-3 rounded-lg bg-space-700 border border-glass-border text-white placeholder-gray-500 focus:outline-none focus:border-accent-blue transition-colors"
-                          placeholder="Your name"
-                        />
-                      </div>
+              <div className="space-y-8">
+                {/* Channel tiles */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <h2 className="sr-only">Let&apos;s Connect</h2>
+                  <ul className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                    {socialLinks.map((social) => (
+                      <li key={social.name}>
+                        <a
+                          href={social.url}
+                          target={social.icon !== 'mail' ? '_blank' : undefined}
+                          rel={social.icon !== 'mail' ? 'noopener noreferrer' : undefined}
+                          className="hud-frame hud-frame-interactive group flex h-full flex-col items-center px-4 pb-5 pt-8 text-center"
+                        >
+                          <span className="text-gray-200 transition-colors group-hover:text-hud" aria-hidden="true">
+                            <SocialIcon icon={social.icon} />
+                          </span>
+                          <span className="hud-label mt-4 !text-gray-100">{social.name}</span>
+                          <span className="mt-1 w-full truncate text-xs text-gray-500">
+                            {social.icon === 'mail' ? siteConfig.email : social.url.replace(/^https:\/\/(www\.)?/, '')}
+                          </span>
+                          <span className="mt-6 w-full border border-hud/40 bg-hud/10 py-2 font-mono text-[0.62rem] uppercase tracking-[0.25em] text-hud-light transition-colors group-hover:bg-hud/20">
+                            {channelLabel[social.icon] ?? 'Open'}
+                          </span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
 
-                      <div>
-                        <label htmlFor="email" className="block text-sm text-gray-400 mb-2">
-                          Email
-                        </label>
-                        <input
-                          type="email"
-                          id="email"
-                          required
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="w-full px-4 py-3 rounded-lg bg-space-700 border border-glass-border text-white placeholder-gray-500 focus:outline-none focus:border-accent-blue transition-colors"
-                          placeholder="your@email.com"
-                        />
-                      </div>
-
-                      <div>
-                        <label htmlFor="subject" className="block text-sm text-gray-400 mb-2">
-                          Subject
-                        </label>
-                        <input
-                          type="text"
-                          id="subject"
-                          required
-                          value={formData.subject}
-                          onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                          className="w-full px-4 py-3 rounded-lg bg-space-700 border border-glass-border text-white placeholder-gray-500 focus:outline-none focus:border-accent-blue transition-colors"
-                          placeholder="What is this about?"
-                        />
-                      </div>
-
-                      <div>
-                        <label htmlFor="message" className="block text-sm text-gray-400 mb-2">
-                          Message
-                        </label>
-                        <textarea
-                          id="message"
-                          required
-                          rows={5}
-                          value={formData.message}
-                          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                          className="w-full px-4 py-3 rounded-lg bg-space-700 border border-glass-border text-white placeholder-gray-500 focus:outline-none focus:border-accent-blue transition-colors resize-none"
-                          placeholder="Your message..."
-                        />
-                      </div>
-
-                      <Button type="submit" className="w-full" disabled={isSubmitting}>
-                        {isSubmitting ? (
-                          <>
-                            <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
-                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                            </svg>
-                            Sending...
-                          </>
+                {/* Message form */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="hud-frame p-6 md:p-8"
+                >
+                  <p className="hud-label mb-6 text-hud">{'02 // Send a message'}</p>
+                        {submitted ? (
+                          <div className="text-center py-8">
+                            <div className="w-16 h-16 rounded-full border border-hud/40 bg-hud/10 text-hud flex items-center justify-center mx-auto mb-4">
+                              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                              </svg>
+                            </div>
+                            <h3 className="hud-title text-lg mb-3">
+                              Message Received!
+                            </h3>
+                            <p className="text-gray-400 mb-4">
+                              Thank you for reaching out! Your message has been successfully sent.
+                            </p>
+                            <p className="text-gray-300 text-sm mb-6">
+                              I&apos;ll review your inquiry and get back to you within <span className="text-accent-cyan font-medium">24-48 hours</span>. 
+                              If you need an immediate response, feel free to reach out via <a href={`mailto:${siteConfig.email}`} className="text-accent-blue hover:underline">email</a> or <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer" className="text-accent-blue hover:underline">LinkedIn</a>.
+                            </p>
+                            <Button onClick={() => setSubmitted(false)} variant="secondary">
+                              Send Another Message
+                            </Button>
+                          </div>
                         ) : (
-                          <>
-                            Send Message
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                            </svg>
-                          </>
+                          <form onSubmit={handleSubmit} className="space-y-6">
+                            <div>
+                              <label htmlFor="name" className="hud-label mb-2 block">
+                                Name
+                              </label>
+                              <input
+                                type="text"
+                                id="name"
+                                required
+                                value={formData.name}
+                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                className="w-full border border-glass-border bg-black/40 px-4 py-3 text-white placeholder-gray-600 transition-colors focus:border-hud focus:outline-none"
+                                placeholder="Your name"
+                              />
+                            </div>
+
+                            <div>
+                              <label htmlFor="email" className="hud-label mb-2 block">
+                                Email
+                              </label>
+                              <input
+                                type="email"
+                                id="email"
+                                required
+                                value={formData.email}
+                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                className="w-full border border-glass-border bg-black/40 px-4 py-3 text-white placeholder-gray-600 transition-colors focus:border-hud focus:outline-none"
+                                placeholder="your@email.com"
+                              />
+                            </div>
+
+                            <div>
+                              <label htmlFor="subject" className="hud-label mb-2 block">
+                                Subject
+                              </label>
+                              <input
+                                type="text"
+                                id="subject"
+                                required
+                                value={formData.subject}
+                                onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                                className="w-full border border-glass-border bg-black/40 px-4 py-3 text-white placeholder-gray-600 transition-colors focus:border-hud focus:outline-none"
+                                placeholder="What is this about?"
+                              />
+                            </div>
+
+                            <div>
+                              <label htmlFor="message" className="hud-label mb-2 block">
+                                Message
+                              </label>
+                              <textarea
+                                id="message"
+                                required
+                                rows={5}
+                                value={formData.message}
+                                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                                className="w-full border border-glass-border bg-black/40 px-4 py-3 text-white placeholder-gray-600 transition-colors focus:border-hud focus:outline-none resize-none"
+                                placeholder="Your message..."
+                              />
+                            </div>
+
+                            <Button type="submit" className="w-full" disabled={isSubmitting}>
+                              {isSubmitting ? (
+                                <>
+                                  <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                                  </svg>
+                                  Sending...
+                                </>
+                              ) : (
+                                <>
+                                  Send Message
+                                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                  </svg>
+                                </>
+                              )}
+                            </Button>
+                          </form>
                         )}
-                      </Button>
-                    </form>
-                  )}
-                </div>
-              </motion.div>
+                </motion.div>
+              </div>
             </div>
-          </div>
-        </Container>
-      </Section>
+          </Container>
+        </Section>
       </div>
     </div>
   );

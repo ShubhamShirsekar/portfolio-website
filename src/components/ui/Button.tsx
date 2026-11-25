@@ -15,18 +15,20 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants: Record<ButtonVariant, string> = {
+  // Teal-filled HUD button (the "CONTINUE" button in the booking flow)
   primary:
-    'bg-accent-blue text-white hover:bg-accent-blue/90 shadow-glow-blue hover:shadow-glow-blue/50',
+    'border border-hud/50 bg-hud/15 text-hud-light hover:bg-hud/25 hover:border-hud hover:shadow-glow-cyan',
+  // Hairline outline (the "GET STARTED" button on the slider)
   secondary:
-    'bg-glass-white border border-glass-border text-gray-100 hover:bg-glass-white-hover hover:border-glass-border-hover',
+    'border border-white/25 bg-black/20 text-gray-100 hover:border-white/60 hover:bg-white/5',
   ghost:
-    'text-gray-300 hover:text-white hover:bg-glass-white',
+    'text-gray-300 hover:text-white hover:bg-white/5',
 };
 
 const sizes: Record<ButtonSize, string> = {
-  sm: 'px-4 py-2 text-sm',
-  md: 'px-6 py-2.5 text-base',
-  lg: 'px-8 py-3 text-lg',
+  sm: 'px-4 py-2 text-[0.65rem]',
+  md: 'px-6 py-3 text-[0.7rem]',
+  lg: 'px-7 py-3.5 text-[0.72rem]',
 };
 
 export function Button({
@@ -39,7 +41,7 @@ export function Button({
   ...props
 }: ButtonProps) {
   const baseStyles =
-    'inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed';
+    'inline-flex items-center justify-center gap-2.5 font-mono uppercase tracking-[0.25em] backdrop-blur-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:h-4 [&_svg]:w-4';
 
   const combinedClassName = cn(baseStyles, variants[variant], sizes[size], className);
 

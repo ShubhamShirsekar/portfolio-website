@@ -9,6 +9,7 @@ import type {
   Education,
   Metric,
   ValueProposition,
+  HeroSlide,
   NavLink,
   SocialLink,
 } from '@/types';
@@ -93,6 +94,57 @@ export const valuePropositions: ValueProposition[] = [
       'Clear communication.',
     ],
     icon: 'people',
+  },
+];
+
+// Home hero slider: the intro, then one slide per value proposition above.
+export const heroSlides: HeroSlide[] = [
+  {
+    id: 'intro',
+    title: ['Shubham', 'Shirsekar'],
+    subtitle: heroContent.headline,
+    image: '/hero/horizon.webp',
+    imagePosition: 'object-[60%_50%] md:object-center',
+    imageShift: 'md:left-[6%]',
+    accent: '#e8cf9c',
+    cta: heroContent.primaryCTA,
+    duration: 14000,
+  },
+  {
+    id: 'agents',
+    title: ['AI Agents'],
+    subtitle: 'in Production',
+    image: '/hero/agents.webp',
+    imagePosition: 'object-[50%_50%]',
+    imageShift: 'md:left-[16%]',
+    accent: '#e6b77a',
+    points: valuePropositions[0].points,
+    cta: heroContent.primaryCTA,
+    duration: 8000,
+  },
+  {
+    id: 'integrations',
+    title: ['Integrations'],
+    subtitle: 'OAuth · MCP · APIs',
+    image: '/hero/orbit.webp',
+    imagePosition: 'object-[60%_45%] md:object-[50%_46%]',
+    imageShift: 'md:left-[12%]',
+    accent: '#8fd3ee',
+    points: valuePropositions[1].points,
+    cta: heroContent.primaryCTA,
+    duration: 8000,
+  },
+  {
+    id: 'delivery',
+    title: ['Client-Facing'],
+    subtitle: 'Delivery',
+    image: '/hero/delivery.webp',
+    imagePosition: 'object-[42%_50%]',
+    imageShift: 'md:left-[18%]',
+    accent: '#f0a64a',
+    points: valuePropositions[2].points,
+    cta: { label: 'Get in Touch', href: '/contact' },
+    duration: 8000,
   },
 ];
 

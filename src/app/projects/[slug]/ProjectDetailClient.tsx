@@ -27,7 +27,7 @@ export function ProjectDetailClient({ project, content }: ProjectDetailClientPro
             <nav className="mb-8">
               <Link 
                 href="/projects" 
-                className="text-gray-400 hover:text-white transition-colors inline-flex items-center gap-2"
+                className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.22em] text-gray-400 transition-colors hover:text-white"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -44,12 +44,12 @@ export function ProjectDetailClient({ project, content }: ProjectDetailClientPro
             </div>
 
             {/* Title */}
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <h1 className="hud-title mb-6 text-2xl leading-snug md:text-4xl">
               {project.title}
             </h1>
 
             {/* Summary */}
-            <p className="text-xl text-gray-300 mb-6 max-w-3xl">
+            <p className="mb-6 max-w-3xl text-lg leading-relaxed text-gray-300">
               {project.summary}
             </p>
 
@@ -96,7 +96,7 @@ export function ProjectDetailClient({ project, content }: ProjectDetailClientPro
               <ReactMarkdown
                 components={{
                   h2: ({ children }) => (
-                    <h2 className="text-2xl font-bold text-white mt-12 mb-4 first:mt-0">
+                    <h2 className="mb-5 mt-14 border-b border-glass-border pb-3 font-display text-lg uppercase tracking-[0.12em] text-white first:mt-0">
                       {children}
                     </h2>
                   ),
@@ -122,7 +122,7 @@ export function ProjectDetailClient({ project, content }: ProjectDetailClientPro
                   ),
                   li: ({ children }) => (
                     <li className="flex items-start gap-3 leading-relaxed text-gray-300">
-                      <span className="mt-[calc(0.8125em-3px)] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-cyan" aria-hidden="true" />
+                      <span className="mt-[0.8em] h-px w-3 shrink-0 bg-hud" aria-hidden="true" />
                       <span className="min-w-0">{children}</span>
                     </li>
                   ),
@@ -142,7 +142,7 @@ export function ProjectDetailClient({ project, content }: ProjectDetailClientPro
                   hr: () => <hr className="border-glass-border my-8" />,
                   table: ({ children }) => (
                     <div className="overflow-x-auto my-8">
-                      <table className="w-full border-collapse bg-space-800/50 rounded-lg overflow-hidden [&_thead:has(th:empty)]:hidden">
+                      <table className="w-full border-collapse border border-glass-border bg-black/40 [&_thead:has(th:empty)]:hidden">
                         {children}
                       </table>
                     </div>
@@ -157,7 +157,7 @@ export function ProjectDetailClient({ project, content }: ProjectDetailClientPro
                     <tr className="border-b border-glass-border last:border-0">{children}</tr>
                   ),
                   th: ({ children }) => (
-                    <th className="px-6 py-4 text-left text-white font-semibold border-r border-glass-border last:border-0">
+                    <th className="border-r border-glass-border px-6 py-4 text-left font-mono text-xs font-normal uppercase tracking-[0.18em] text-hud-light last:border-0">
                       {children}
                     </th>
                   ),
@@ -167,7 +167,7 @@ export function ProjectDetailClient({ project, content }: ProjectDetailClientPro
                     </td>
                   ),
                   code: ({ children }) => (
-                    <code className="text-accent-cyan bg-space-600 px-1.5 py-0.5 rounded text-sm">
+                    <code className="bg-space-600 px-1.5 py-0.5 font-mono text-sm text-hud">
                       {children}
                     </code>
                   ),
@@ -185,7 +185,7 @@ export function ProjectDetailClient({ project, content }: ProjectDetailClientPro
       <Section>
         <Container>
           <div className="glass-card p-8 text-center">
-            <h2 className="text-2xl font-bold text-white mb-4">
+            <h2 className="hud-title mb-4 text-lg md:text-2xl">
               Building something similar?
             </h2>
             <p className="text-gray-400 mb-6">

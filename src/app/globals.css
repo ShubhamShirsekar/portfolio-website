@@ -4,8 +4,10 @@
 
 @layer base {
   :root {
-    --background: 10 10 15;
+    --background: 5 6 7;
     --foreground: 255 255 255;
+    /* HUD signal colour as an RGB triplet, for rgba() */
+    --hud: 111 214 200;
   }
 
   html {
@@ -14,90 +16,197 @@
 
   body {
     @apply bg-space-900 text-gray-100 antialiased;
-    background-image: 
-      radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.03) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, rgba(6, 182, 212, 0.02) 0%, transparent 50%);
+    /* Sparse starfield: a few tiled dot layers, no images */
+    background-image:
+      radial-gradient(1px 1px at 20px 30px, rgba(255, 255, 255, 0.35), transparent 60%),
+      radial-gradient(1px 1px at 140px 90px, rgba(255, 255, 255, 0.25), transparent 60%),
+      radial-gradient(1px 1px at 260px 210px, rgba(255, 255, 255, 0.3), transparent 60%),
+      radial-gradient(1.5px 1.5px at 330px 40px, rgba(255, 255, 255, 0.2), transparent 60%);
+    background-size: 380px 260px;
     background-attachment: fixed;
   }
 
   ::selection {
-    @apply bg-accent-blue/30 text-white;
+    background: rgb(var(--hud) / 0.3);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 1px solid rgb(var(--hud));
+    outline-offset: 3px;
   }
 }
 
 @layer components {
-  /* Glassmorphism card */
+  /*
+   * HUD panel: hairline border, dark translucent fill and four corner brackets.
+   * The brackets are drawn by 8 background gradients on ::before and grow on hover.
+   */
+  .hud-frame,
   .glass-card {
-    @apply bg-glass-white backdrop-blur-md border border-glass-border rounded-xl;
-    @apply transition-all duration-300 ease-out;
+    @apply relative border border-glass-border bg-glass-white backdrop-blur-[6px];
+    @apply transition-colors duration-300 ease-out;
+    --bracket: 10px;
+    --bracket-color: rgb(var(--hud) / 0.55);
   }
 
-  .glass-card:hover {
-    @apply bg-glass-white-hover border-glass-border-hover;
-  }
-
-  /* Glow effect on hover */
-  .glow-hover {
-    @apply relative overflow-hidden;
-  }
-
-  .glow-hover::before {
+  .hud-frame::before,
+  .glass-card::before {
     content: '';
-    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
-    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-      rgba(59, 130, 246, 0.1) 0%, 
-      transparent 50%);
+    position: absolute;
+    inset: -1px;
+    pointer-events: none;
+    background:
+      linear-gradient(var(--bracket-color), var(--bracket-color)) top left / var(--bracket) 1px no-repeat,
+      linear-gradient(var(--bracket-color), var(--bracket-color)) top left / 1px var(--bracket) no-repeat,
+      linear-gradient(var(--bracket-color), var(--bracket-color)) top right / var(--bracket) 1px no-repeat,
+      linear-gradient(var(--bracket-color), var(--bracket-color)) top right / 1px var(--bracket) no-repeat,
+      linear-gradient(var(--bracket-color), var(--bracket-color)) bottom left / var(--bracket) 1px no-repeat,
+      linear-gradient(var(--bracket-color), var(--bracket-color)) bottom left / 1px var(--bracket) no-repeat,
+      linear-gradient(var(--bracket-color), var(--bracket-color)) bottom right / var(--bracket) 1px no-repeat,
+      linear-gradient(var(--bracket-color), var(--bracket-color)) bottom right / 1px var(--bracket) no-repeat;
+    transition: background-size 0.3s ease-out;
   }
 
-  .glow-hover:hover::before {
-    @apply opacity-100;
+  .hud-frame-interactive:hover,
+  .hud-frame-interactive:focus-visible {
+    @apply border-glass-border-hover bg-glass-white-hover;
+    --bracket: 18px;
+    --bracket-color: rgb(var(--hud));
   }
 
-  /* Text gradient */
+  /* Small spaced-out monospace label: "01 — CHOOSE ONE OF THE AVAILABLE DATES" */
+  .hud-label {
+    @apply font-mono text-[0.68rem] uppercase tracking-[0.28em] text-gray-400;
+  }
+
+  /* Wide display headline */
+  .hud-title {
+    @apply font-display uppercase tracking-[0.12em] text-white;
+  }
+
+  /* Pulsing node on progress rails */
+  .hud-node {
+    @apply relative inline-block h-2.5 w-2.5 rounded-full bg-hud;
+    box-shadow: 0 0 0 4px rgb(var(--hud) / 0.12), 0 0 14px rgb(var(--hud) / 0.8);
+  }
+
   .text-gradient {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+    background-image: linear-gradient(135deg, #ffffff 0%, #a7efe5 60%, #6fd6c8 100%);
   }
 
-  /* Section container */
   .section-container {
-    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply mx-auto max-w-6xl px-5 sm:px-8 lg:px-12;
   }
-
-  /* Star particle */
-  /* Star particle removed - previously used for page background effect */
 }
 
 @layer utilities {
-  /* Hide scrollbar */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-  
+
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
 
-  /* Stagger animation delays */
-  .stagger-1 { animation-delay: 0.1s; }
-  .stagger-2 { animation-delay: 0.2s; }
-  .stagger-3 { animation-delay: 0.3s; }
-  .stagger-4 { animation-delay: 0.4s; }
-  .stagger-5 { animation-delay: 0.5s; }
+  /* CRT-style scanlines; also hides softness in lower-resolution images */
+  .scanlines {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.28) 0px,
+      rgba(0, 0, 0, 0.28) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+
+  .grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+
+  .text-vertical {
+    writing-mode: vertical-rl;
+  }
+}
+
+/* ============================================
+   GLITCH TRANSITION (hero slider)
+   Slices of the image jump sideways with red/cyan channel copies.
+   ============================================ */
+@keyframes glitch-slice {
+  0% { clip-path: inset(10% 0 82% 0); transform: translate(-3%, 0); }
+  12% { clip-path: inset(62% 0 22% 0); transform: translate(4%, 0); }
+  24% { clip-path: inset(34% 0 52% 0); transform: translate(-6%, 0); }
+  36% { clip-path: inset(80% 0 6% 0); transform: translate(2%, 0); }
+  48% { clip-path: inset(4% 0 70% 0); transform: translate(5%, 0); }
+  60% { clip-path: inset(46% 0 40% 0); transform: translate(-4%, 0); }
+  72% { clip-path: inset(22% 0 64% 0); transform: translate(3%, 0); }
+  84% { clip-path: inset(70% 0 14% 0); transform: translate(-2%, 0); }
+  100% { clip-path: inset(50% 0 50% 0); transform: translate(0, 0); }
+}
+
+@keyframes glitch-jitter {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-6px, 2px); }
+  40% { transform: translate(5px, -2px); }
+  60% { transform: translate(-3px, 0); }
+  80% { transform: translate(4px, 1px); }
+}
+
+@keyframes glitch-bars {
+  0% { opacity: 0; }
+  10%, 90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.glitch-slice {
+  animation: glitch-slice 0.7s steps(1, end) both;
+}
+
+.glitch-red {
+  mix-blend-mode: screen;
+  filter: url(#hud-red) saturate(2);
+  animation: glitch-jitter 0.7s steps(2, end) both;
+}
+
+.glitch-cyan {
+  mix-blend-mode: screen;
+  filter: url(#hud-cyan) saturate(2);
+  animation: glitch-jitter 0.7s steps(2, end) reverse both;
+}
+
+.glitch-bars {
+  animation: glitch-bars 0.7s linear both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glitch-slice,
+  .glitch-red,
+  .glitch-cyan,
+  .glitch-bars {
+    animation: none;
+    display: none;
+  }
 }
 
 /* MDX prose styling */
 .prose-space {
   @apply prose prose-invert prose-lg max-w-none;
-  @apply prose-headings:text-gray-100 prose-headings:font-semibold;
-  @apply prose-p:text-gray-300 prose-p:leading-relaxed;
-  @apply prose-a:text-accent-blue prose-a:no-underline hover:prose-a:underline;
-  @apply prose-strong:text-gray-100 prose-strong:font-semibold;
-  @apply prose-code:text-accent-cyan prose-code:bg-space-600 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded;
-  @apply prose-pre:bg-space-700 prose-pre:border prose-pre:border-glass-border;
-  @apply prose-blockquote:border-accent-violet prose-blockquote:text-gray-300;
+  @apply prose-headings:font-semibold prose-headings:text-gray-100;
+  @apply prose-p:leading-relaxed prose-p:text-gray-300;
+  @apply prose-a:text-hud prose-a:no-underline hover:prose-a:underline;
+  @apply prose-strong:font-semibold prose-strong:text-gray-100;
+  @apply prose-code:rounded-none prose-code:bg-space-600 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-hud;
+  @apply prose-pre:border prose-pre:border-glass-border prose-pre:bg-space-700;
+  @apply prose-blockquote:border-hud prose-blockquote:text-gray-300;
   @apply prose-li:text-gray-300;
   @apply prose-hr:border-glass-border;
+}
+
+/* Hero slider progress segment (its animationend advances the slide) */
+@keyframes hud-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }

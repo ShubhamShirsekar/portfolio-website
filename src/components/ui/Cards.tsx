@@ -1,13 +1,45 @@
 'use client';
 
 import { motion, useReducedMotion } from 'framer-motion';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Badge } from './Badge';
-import { cn } from '@/lib/utils';
-import type { Project, Metric, ValueProposition, Experience } from '@/types';
+import type { BrandLogo, Project, Metric, ValueProposition, Experience } from '@/types';
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+/** "2026-05" -> "May 2026" */
+function formatMonth(date: string) {
+  const [year, month] = date.split('-').map(Number);
+  return month ? `${MONTHS[month - 1]} ${year}` : String(year);
+}
 
 // ============================================
-// PROJECT CARD
+// BRAND MARK
+// ============================================
+
+const LOGO_HEIGHT = 16;
+
+/** Logo recoloured to the HUD tint via CSS mask (uses the logo file's alpha as its shape). */
+export function BrandMark({ logo }: { logo: BrandLogo }) {
+  const mask = `url(${logo.src}) center / contain no-repeat`;
+  return (
+    <span
+      role="img"
+      aria-label={logo.name}
+      className="block bg-gray-200"
+      style={{
+        width: LOGO_HEIGHT * (logo.scale ?? 1) * logo.aspect,
+        height: LOGO_HEIGHT * (logo.scale ?? 1),
+        mask,
+        WebkitMask: mask,
+      }}
+    />
+  );
+}
+
+// ============================================
+// PROJECT TILE
 // ============================================
 
 interface ProjectCardProps {
@@ -20,17 +52,45 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.5, delay: (index % 3) * 0.08 }}
+      className="h-full"
     >
-      <Link href={`/projects/${project.slug}`}>
-        <article
-          className={cn(
-            'glass-card p-6 h-full flex flex-col',
-            'hover:shadow-glow-blue/20 hover:-translate-y-1 transition-all duration-300'
-          )}
-        >
-          <div className="flex flex-wrap gap-2 mb-4">
+      <Link
+        href={`/projects/${project.slug}`}
+        className="hud-frame hud-frame-interactive group flex h-full flex-col"
+        aria-label={`${project.title}: more details`}
+      >
+        {/* Header strip: index · date */}
+        <div className="flex items-center justify-between border-b border-glass-border px-5 py-3">
+          <span className="hud-label text-hud">{String(index + 1).padStart(2, '0')}</span>
+          <span className="hud-label">{formatMonth(project.date)}</span>
+        </div>
+
+        {project.image && (
+          <div className="relative aspect-[16/9] overflow-hidden border-b border-glass-border">
+            <Image
+              src={project.image}
+              alt={project.imageAlt ?? ''}
+              fill
+              unoptimized
+              sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+              className="object-cover opacity-80 transition duration-500 group-hover:scale-[1.03] group-hover:opacity-100"
+            />
+            <div className="scanlines absolute inset-0 opacity-30" aria-hidden="true" />
+            {project.logos && project.logos.length > 0 && (
+              <div className="absolute bottom-3 right-3 flex items-center gap-3 border border-white/10 bg-black/60 px-3 py-2 backdrop-blur-sm">
+                {project.logos.map((logo) => (
+                  <BrandMark key={logo.name} logo={logo} />
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        <div className="flex flex-1 flex-col p-5">
+          <div className="mb-4 flex flex-wrap gap-2">
+            {project.featured && <Badge variant="violet">Featured</Badge>}
             {project.tags.map((tag) => (
               <Badge key={tag} variant="blue">
                 {tag}
@@ -38,51 +98,30 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
             ))}
           </div>
 
-          <h3 className="text-xl font-semibold text-white mb-2">
-            {project.title}
-          </h3>
+          <h3 className="mb-3 text-lg font-semibold leading-snug text-white">{project.title}</h3>
 
-          <p className="text-gray-400 text-sm mb-4 line-clamp-3">
-            {project.summary}
-          </p>
+          <p className="mb-5 line-clamp-4 text-sm leading-relaxed text-gray-400">{project.summary}</p>
 
-          <div className="mt-auto flex flex-wrap gap-2 mb-4">
-            {project.tools.slice(0, 3).map((tool) => (
-              <span key={tool} className="text-xs text-gray-500">
-                {tool}
-              </span>
+          <ul className="mt-auto mb-5 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[0.68rem] text-gray-500" aria-label="Tools">
+            {project.tools.map((tool) => (
+              <li key={tool}>{tool}</li>
             ))}
-            {project.tools.length > 3 && (
-              <span className="text-xs text-gray-500">
-                +{project.tools.length - 3} more
-              </span>
-            )}
-          </div>
+          </ul>
 
-          <div className="flex items-center text-accent-blue text-sm font-medium group">
+          <span className="hud-label inline-flex items-center gap-2 !text-hud transition-colors group-hover:!text-hud-light">
             More details
-            <svg
-              className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
+            <svg className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-          </div>
-        </article>
+          </span>
+        </div>
       </Link>
     </motion.div>
   );
 }
 
 // ============================================
-// METRIC CARD
+// METRIC TILE  (big number, small caps above, detail below)
 // ============================================
 
 interface MetricCardProps {
@@ -93,18 +132,15 @@ interface MetricCardProps {
 export function MetricCard({ metric, index = 0 }: MetricCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
-      className="text-center p-6"
+      transition={{ duration: 0.4, delay: index * 0.08 }}
+      className="hud-frame hud-frame-interactive flex h-full flex-col items-center px-4 py-7 text-center"
     >
-      <div className="text-4xl md:text-5xl font-bold text-gradient mb-2">
-        {metric.value}
-      </div>
-      <div className="text-gray-400 text-sm">
-        {metric.label}
-      </div>
+      <span className="hud-label mb-4">{String(index + 1).padStart(2, '0')}</span>
+      <span className="mb-4 whitespace-nowrap font-display text-2xl text-white md:text-[1.7rem]">{metric.value}</span>
+      <span className="max-w-[16rem] font-mono text-[0.7rem] leading-relaxed text-gray-400">{metric.label}</span>
     </motion.div>
   );
 }
@@ -113,72 +149,20 @@ export function MetricCard({ metric, index = 0 }: MetricCardProps) {
 // VALUE PROPOSITION CARD
 // ============================================
 
-interface ValueCardProps {
-  value: ValueProposition;
-  index?: number;
-}
-
-function ValueIcon({ icon }: { icon?: string }) {
-  switch (icon) {
-    case 'agent':
-      return (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v2m-4 3h8a3 3 0 013 3v5a3 3 0 01-3 3H8a3 3 0 01-3-3v-5a3 3 0 013-3zm1.5 5h.01m4.99 0h.01M9.5 16.5h5M3 13v2m18-2v2" />
-        </svg>
-      );
-    case 'plug':
-      return (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-        </svg>
-      );
-    case 'people':
-      return (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-        </svg>
-      );
-    case 'chart':
-      return (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-        </svg>
-      );
-    case 'code':
-      return (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-        </svg>
-      );
-    case 'briefcase':
-      return (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-        </svg>
-      );
-    default:
-      return null;
-  }
-}
-
-export function ValueCard({ value, index = 0 }: ValueCardProps) {
+export function ValueCard({ value, index = 0 }: { value: ValueProposition; index?: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.15 }}
-      className="glass-card p-6 text-center hover:shadow-glow-violet/20 transition-all duration-300"
+      transition={{ duration: 0.5, delay: index * 0.12 }}
+      className="hud-frame p-6"
     >
-      <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-accent-violet/10 text-accent-violet mb-4">
-        <ValueIcon icon={value.icon} />
-      </div>
-      <h3 className="text-xl font-semibold text-white mb-3">
-        {value.title}
-      </h3>
+      <span className="hud-label text-hud">{String(index + 1).padStart(2, '0')}</span>
+      <h3 className="mb-3 mt-3 text-lg font-semibold text-white">{value.title}</h3>
       <ul className="space-y-1.5">
         {value.points.map((point) => (
-          <li key={point} className="text-gray-400 text-sm">
+          <li key={point} className="text-sm text-gray-400">
             {point}
           </li>
         ))}
@@ -194,11 +178,11 @@ export function ValueCard({ value, index = 0 }: ValueCardProps) {
 interface ExperienceCardProps {
   experience: Experience;
   index?: number;
-  /** Render the card's own timeline dot (off when a parent timeline draws dots). */
+  /** Kept for API compatibility; the timeline draws its own nodes. */
   showDot?: boolean;
 }
 
-export function ExperienceCard({ experience, index = 0, showDot = true }: ExperienceCardProps) {
+export function ExperienceCard({ experience, index = 0 }: ExperienceCardProps) {
   const shouldReduce = useReducedMotion();
   return (
     <motion.div
@@ -206,29 +190,22 @@ export function ExperienceCard({ experience, index = 0, showDot = true }: Experi
       whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
       viewport={{ once: true, margin: '0px 0px -15% 0px' }}
       transition={{ duration: 0.7, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
-      className="glass-card p-6 relative"
+      className="hud-frame relative p-6 md:p-7"
     >
-      {/* Timeline dot */}
-      {showDot && (
-        <div className="absolute left-0 top-8 w-3 h-3 rounded-full bg-accent-blue -translate-x-1/2 hidden md:block" />
-      )}
-      
-      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-4">
+      <div className="mb-5 flex flex-col gap-2 border-b border-glass-border pb-5 md:flex-row md:items-start md:justify-between">
         <div>
-          <h3 className="text-xl font-semibold text-white">
-            {experience.role}
-          </h3>
+          <h3 className="text-lg font-semibold text-white md:text-xl">{experience.role}</h3>
           {experience.companyUrl ? (
             <a
               href={experience.companyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-1 text-accent-blue hover:text-accent-blue-light transition-colors"
+              className="group mt-1 inline-flex items-center gap-1 font-mono text-sm uppercase tracking-[0.15em] text-hud transition-colors hover:text-hud-light"
               aria-label={`${experience.company} website (opens in a new tab)`}
             >
               {experience.company}
               <svg
-                className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition"
+                className="h-3.5 w-3.5 opacity-60 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -238,19 +215,19 @@ export function ExperienceCard({ experience, index = 0, showDot = true }: Experi
               </svg>
             </a>
           ) : (
-            <p className="text-accent-blue">{experience.company}</p>
+            <p className="mt-1 font-mono text-sm uppercase tracking-[0.15em] text-hud">{experience.company}</p>
           )}
         </div>
-        <div className="text-sm text-gray-400 md:text-right">
+        <div className="hud-label md:text-right">
           <p>{experience.duration}</p>
-          {experience.location && <p>{experience.location}</p>}
+          {experience.location && <p className="mt-1">{experience.location}</p>}
         </div>
       </div>
-      
-      <ul className="space-y-2">
+
+      <ul className="space-y-2.5">
         {experience.achievements.map((achievement, i) => (
-          <li key={i} className="flex items-start gap-3 text-gray-300 text-sm leading-relaxed">
-            <span className="mt-[calc(0.8125em-3px)] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-cyan" aria-hidden="true" />
+          <li key={i} className="flex items-start gap-3 text-sm leading-relaxed text-gray-300">
+            <span className="mt-[0.6em] h-px w-3 shrink-0 bg-hud" aria-hidden="true" />
             <span>{achievement}</span>
           </li>
         ))}
@@ -263,21 +240,16 @@ export function ExperienceCard({ experience, index = 0, showDot = true }: Experi
 // SKILL CARD
 // ============================================
 
-interface SkillCardProps {
-  skill: string;
-  index?: number;
-}
-
-export function SkillCard({ skill, index = 0 }: SkillCardProps) {
+export function SkillCard({ skill, index = 0 }: { skill: string; index?: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.3, delay: index * 0.05 }}
-      className="glass-card px-4 py-2 text-center hover:border-accent-blue/30 transition-colors"
+      className="hud-frame px-4 py-2 text-center"
     >
-      <span className="text-gray-200 text-sm">{skill}</span>
+      <span className="text-sm text-gray-200">{skill}</span>
     </motion.div>
   );
 }

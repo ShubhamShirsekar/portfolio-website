@@ -35,25 +35,25 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <Link href="/" className="text-xl font-semibold text-white">
+            <Link href="/" className="font-display text-sm uppercase tracking-[0.45em] text-white">
               {siteConfig.name.split(' ')[0]}
-              <span className="text-accent-blue">.</span>
             </Link>
-            <p className="text-gray-400 text-sm">
+            <p className="hud-label">
               {siteConfig.footerTagline}
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h2 className="text-white font-medium">Quick Links</h2>
+            <h2 className="hud-label text-hud">Quick Links</h2>
             <nav className="flex flex-col gap-2">
-              {navLinks.map((link) => (
+              {navLinks.map((link, i) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-gray-400 hover:text-white transition-colors text-sm"
+                  className="font-mono text-xs uppercase tracking-[0.22em] text-gray-400 transition-colors hover:text-white"
                 >
+                  <span className="mr-3 text-gray-600">{String(i + 1).padStart(2, '0')}</span>
                   {link.label}
                 </Link>
               ))}
@@ -62,7 +62,7 @@ export function Footer() {
 
           {/* Connect */}
           <div className="space-y-4">
-            <h2 className="text-white font-medium">Connect</h2>
+            <h2 className="hud-label text-hud">Connect</h2>
             <div className="flex gap-4">
               {socialLinks.map((social) => (
                 <a
@@ -70,7 +70,7 @@ export function Footer() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-accent-blue transition-colors"
+                  className="text-gray-400 hover:text-hud transition-colors"
                   aria-label={social.name}
                 >
                   <SocialIcon icon={social.icon} />
@@ -79,8 +79,7 @@ export function Footer() {
             </div>
             <Link
               href="/contact"
-              className="inline-block mt-4 px-6 py-2 rounded-lg bg-accent-blue text-white font-medium
-                       hover:bg-accent-blue/90 transition-colors"
+              className="mt-4 inline-block border border-hud/50 bg-hud/15 px-6 py-3 font-mono text-[0.7rem] uppercase tracking-[0.25em] text-hud-light transition-colors hover:border-hud hover:bg-hud/25"
             >
               Get in Touch
             </Link>
@@ -89,10 +88,10 @@ export function Footer() {
 
         {/* Bottom */}
         <div className="mt-12 pt-8 border-t border-glass-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-500 text-sm">
+          <p className="font-mono text-[0.68rem] tracking-[0.12em] text-gray-500">
             © {currentYear} {siteConfig.name}. All rights reserved.
           </p>
-          <p className="text-gray-500 text-sm">
+          <p className="font-mono text-[0.68rem] tracking-[0.12em] text-gray-500">
             Built with Next.js, Tailwind CSS & ☕
           </p>
         </div>

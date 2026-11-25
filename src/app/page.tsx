@@ -1,138 +1,25 @@
-'use client';
+import Image from 'next/image';
+import { Button, Section, Container, SectionHeading, ProjectCard, MetricCard } from '@/components/ui';
+import { HeroSlider } from '@/components/home/HeroSlider';
+import { impactMetrics, featuredProjects } from '@/lib/content';
 
-import { motion } from 'framer-motion';
-import { Button, Section, Container, SectionHeading, ProjectCard, MetricCard, ValueCard, TypewriterRotator } from '@/components/ui';
-import TechText from '@/components/reactbits/TechText';
-import { heroContent, valuePropositions, impactMetrics, featuredProjects, siteConfig } from '@/lib/content';
-
-// Hero Section
-function HeroSection() {
+function Arrow() {
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-      <Container className="text-center py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-        >
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.1, duration: 0.6 }}
-            className="font-silkscreen text-hero-mobile md:text-hero text-white mb-3"
-          >
-            Shubham Shirsekar
-          </motion.div>
-          
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-accent-cyan text-sm md:text-base font-medium tracking-wider uppercase mb-6"
-          >
-            {siteConfig.availability}
-          </motion.p>
-
-          <h1 className="sr-only">{heroContent.headline}</h1>
-          {/* Interactive title (React Bits Tech Text), tinted with the brand gradient */}
-          <div className="relative mx-auto mb-6 h-20 md:h-28 w-full max-w-4xl" aria-hidden="true">
-            <TechText
-              text={heroContent.headline}
-              fontWeight={700}
-              fontSize={64}
-              letterSpacing={-0.02}
-              color="#ffffff"
-              accentColor="#ffffff"
-              gradient={['#3b82f6', '#8b5cf6', '#06b6d4']}
-            />
-          </div>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto"
-          >
-            <TypewriterRotator texts={heroContent.taglines} />
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Button href={heroContent.primaryCTA.href} size="lg">
-              {heroContent.primaryCTA.label}
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </Button>
-            <Button href={heroContent.secondaryCTA.href} variant="secondary" size="lg" external>
-              {heroContent.secondaryCTA.label}
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
-            </Button>
-          </motion.div>
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.6 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
-            className="w-6 h-10 border-2 border-gray-600 rounded-full flex justify-center"
-          >
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
-              className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2"
-            />
-          </motion.div>
-        </motion.div>
-      </Container>
-    </section>
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+    </svg>
   );
 }
 
-// Value Propositions Section
-function ValueSection() {
+// Track record: big-number tiles
+function MetricsSection() {
   return (
-    <Section id="value">
+    <Section>
       <Container>
-        <SectionHeading
-          title="What I Do"
-          subtitle="Taking AI agents from client discovery to production, and wiring them into the tools teams already use."
-        />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {valuePropositions.map((value, index) => (
-            <ValueCard key={value.title} value={value} index={index} />
+        <SectionHeading index="01" title="Track Record" />
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+          {impactMetrics.map((metric, index) => (
+            <MetricCard key={metric.label} metric={metric} index={index} />
           ))}
         </div>
       </Container>
@@ -140,56 +27,24 @@ function ValueSection() {
   );
 }
 
-// Impact Metrics Section
-function MetricsSection() {
-  return (
-    <Section className="bg-space-800/30">
-      <Container>
-        <div className="glass-card p-8 md:p-12">
-          <h3 className="text-center text-gray-400 text-sm uppercase tracking-wider mb-8">
-            Track Record
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {impactMetrics.map((metric, index) => (
-              <MetricCard key={metric.label} metric={metric} index={index} />
-            ))}
-          </div>
-        </div>
-      </Container>
-    </Section>
-  );
-}
-
-// Featured Projects Section
 function ProjectsSection() {
   return (
-    <Section id="featured-projects">
+    <Section id="featured-projects" className="pt-0 md:pt-4">
       <Container>
         <SectionHeading
+          index="02"
           title="Featured Projects"
           subtitle="Production agents, applied AI and the hackathons along the way."
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {featuredProjects.map((project, index) => (
             <ProjectCard key={project.slug} project={project} index={index} />
           ))}
         </div>
-        <div className="text-center mt-12">
+        <div className="mt-12 text-center">
           <Button href="/projects" variant="secondary" size="lg">
             View All Projects
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
+            <Arrow />
           </Button>
         </div>
       </Container>
@@ -197,67 +52,39 @@ function ProjectsSection() {
   );
 }
 
-// CTA Section
+// Closing call to action over the moon
 function CTASection() {
   return (
-    <Section>
-      <Container>
-        <div className="glass-card p-8 md:p-12 text-center relative overflow-hidden">
-          {/* Glow effects */}
-          <div className="absolute top-0 left-1/4 w-64 h-64 bg-glow-blue opacity-20 blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-glow-violet opacity-20 blur-3xl" />
-          
-          <div className="relative z-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Caught your attention? Let&apos;s chat.
-            </h2>
-            <p className="text-gray-400 max-w-xl mx-auto mb-8">
-              I&apos;m looking for forward deployed engineering roles where I sit with clients, understand how their work really happens, and ship AI agents and integrations that run in production.
-            </p>
-            <Button href="/contact" size="lg">
-              Get in Touch
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
-            </Button>
-          </div>
-        </div>
+    <section className="relative overflow-hidden">
+      <div className="absolute inset-0" aria-hidden="true">
+        <Image src="/moon.webp" alt="" fill sizes="100vw" className="object-cover object-[50%_30%] opacity-70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-space-900 via-space-900/30 to-space-900" />
+        <div className="scanlines absolute inset-0 opacity-30" />
+      </div>
+      <Container className="relative py-32 text-center md:py-44">
+        <p className="hud-label mb-6 text-hud">{'03 // Next step'}</p>
+        <h2 className="hud-title mx-auto max-w-3xl text-2xl leading-snug md:text-4xl">
+          Caught your attention? Let&apos;s chat.
+        </h2>
+        <p className="mx-auto mb-10 mt-6 max-w-xl font-mono text-sm leading-relaxed text-gray-300">
+          I&apos;m looking for forward deployed engineering roles where I sit with clients, understand how their work really happens, and ship AI agents and integrations that run in production.
+        </p>
+        <Button href="/contact" size="lg">
+          Get in Touch
+          <Arrow />
+        </Button>
       </Container>
-    </Section>
+    </section>
   );
 }
 
 export default function HomePage() {
   return (
-    <div className="relative">
-      {/* GIF Background - Full Page */}
-      <div className="fixed inset-0 z-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/home-bg.jpg"
-          alt=""
-          className="w-full h-full object-cover opacity-30"
-        />
-        <div className="absolute inset-0 bg-space-900/40" />
-      </div>
-      
-      <div className="relative z-10">
-        <HeroSection />
-        <ValueSection />
-        <MetricsSection />
-        <ProjectsSection />
-        <CTASection />
-      </div>
-    </div>
+    <>
+      <HeroSlider />
+      <MetricsSection />
+      <ProjectsSection />
+      <CTASection />
+    </>
   );
 }

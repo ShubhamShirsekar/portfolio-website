@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { Inter, Silkscreen } from 'next/font/google';
-import { Navbar, Footer } from '@/components/layout';
+import { Inter, Michroma, JetBrains_Mono } from 'next/font/google';
+import { Navbar, Footer, HudChrome } from '@/components/layout';
 import './globals.css';
 
 const inter = Inter({ 
@@ -8,10 +8,17 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-const silkscreen = Silkscreen({ 
-  weight: ['400', '700'],
+// Wide, square-cut display face for headlines
+const display = Michroma({
+  weight: '400',
   subsets: ['latin'],
-  variable: '--font-silkscreen',
+  variable: '--font-display',
+});
+
+// Labels, counters and other HUD text
+const mono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
 });
 
 const siteTitle = 'Shubham Shirsekar | Forward Deployed Engineer';
@@ -76,7 +83,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} ${silkscreen.variable} font-sans`}>
+      <body className={`${inter.variable} ${display.variable} ${mono.variable} font-sans`}>
+        <HudChrome />
         <Navbar />
         <main className="relative z-10 min-h-screen pt-16 md:pt-20">
           {children}

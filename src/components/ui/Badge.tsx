@@ -7,17 +7,17 @@ interface BadgeProps {
 }
 
 const variants = {
-  default: 'bg-glass-white text-gray-300 border-glass-border',
-  blue: 'bg-accent-blue/10 text-accent-blue border-accent-blue/30',
-  violet: 'bg-accent-violet/10 text-accent-violet border-accent-violet/30',
-  cyan: 'bg-accent-cyan/10 text-accent-cyan border-accent-cyan/30',
+  default: 'bg-white/5 text-gray-300 border-white/15',
+  blue: 'bg-hud/10 text-hud-light border-hud/30',
+  violet: 'bg-accent-violet/10 text-accent-violet-light border-accent-violet/30',
+  cyan: 'bg-white/[0.03] text-gray-300 border-white/15',
 };
 
 export function Badge({ children, variant = 'default', className }: BadgeProps) {
   return (
     <span
       className={cn(
-        'inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border',
+        'inline-flex items-center px-2.5 py-1 font-mono text-[0.65rem] uppercase tracking-[0.18em] border',
         variants[variant],
         className
       )}
