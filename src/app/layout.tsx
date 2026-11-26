@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Michroma, JetBrains_Mono } from 'next/font/google';
 import { Navbar, Footer, HudChrome } from '@/components/layout';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 const inter = Inter({ 
@@ -90,6 +91,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );

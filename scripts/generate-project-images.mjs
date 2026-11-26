@@ -179,6 +179,38 @@ art['btc-dca-vs-dip'] = (() => {
   return frame(parts.join('\n'));
 })();
 
+// 9. REE thesis: four supplier regions ship to one importer; one route is cut by a shock, stock buffers the rest
+art['ree-robust-sourcing'] = (() => {
+  const parts = [], hub = [880, 375];
+  const suppliers = [[230, 170, C.violet, 1.0], [180, 330, C.blue, 0.55], [230, 490, C.cyan, 0.4], [330, 620, C.blueL, 0.3]];
+  suppliers.forEach(([x, y, col, w], i) => {
+    const cut = i === 0;
+    const d = `M${x + 40} ${y} C ${x + 300} ${y}, ${hub[0] - 300} ${hub[1]}, ${hub[0] - 70} ${hub[1]}`;
+    parts.push(`<path d="${d}" stroke="${col}" stroke-opacity="${cut ? 0.25 : 0.7}" stroke-width="${(2 + w * 8).toFixed(1)}" fill="none" ${cut ? 'stroke-dasharray="10 14"' : 'filter="url(#glow)"'}/>`);
+    // Hexagon: an element cell
+    const hex = Array.from({ length: 6 }, (_, k) => {
+      const a = Math.PI / 6 + (k * Math.PI) / 3;
+      return `${(x + 40 * Math.cos(a)).toFixed(1)},${(y + 40 * Math.sin(a)).toFixed(1)}`;
+    }).join(' ');
+    parts.push(`<polygon points="${hex}" fill="#0b0e10" stroke="${col}" stroke-width="2.5"/>`);
+    parts.push(`<circle cx="${x}" cy="${y}" r="${(6 + w * 8).toFixed(1)}" fill="${col}" opacity="0.85"/>`);
+  });
+  // Shock marker on the cut route
+  parts.push(`<g transform="translate(470 220)" stroke="${C.violetL}" stroke-width="5" stroke-linecap="round" filter="url(#glow)"><line x1="-18" y1="-18" x2="18" y2="18"/><line x1="18" y1="-18" x2="-18" y2="18"/></g>`);
+  // Importer with stock gauge
+  parts.push(`<circle cx="${hub[0]}" cy="${hub[1]}" r="120" fill="none" stroke="url(#acc)" stroke-opacity="0.25"/>`);
+  parts.push(`<rect x="${hub[0] - 70}" y="${hub[1] - 80}" width="140" height="160" rx="18" fill="#0b0e10" stroke="url(#acc)" stroke-width="3" filter="url(#glow)"/>`);
+  [0.9, 0.7, 0.45].forEach((f, k) => {
+    const bx = hub[0] - 46 + k * 34, h = 110 * f;
+    parts.push(`<rect x="${bx}" y="${hub[1] + 55 - h}" width="22" height="${h.toFixed(1)}" rx="3" fill="${[C.cyan, C.blue, C.violet][k]}" opacity="0.8"/>`);
+  });
+  // Cost-resilience frontier: U-shaped curve with the chosen point
+  const pts = Array.from({ length: 41 }, (_, k) => { const t = k / 40; return [760 + t * 300, 580 + 100 * Math.pow((t - 0.5) * 2, 2)]; });
+  parts.push(`<path d="${pts.map((p, k) => `${k ? 'L' : 'M'}${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(' ')}" stroke="${C.cyan}" stroke-opacity="0.6" stroke-width="2.5" fill="none"/>`);
+  parts.push(`<circle cx="910" cy="580" r="8" fill="${C.cyanL}" filter="url(#glow)"/>`);
+  return frame(parts.join('\n'));
+})();
+
 for (const [slug, svg] of Object.entries(art)) fs.writeFileSync(path.join(OUT, `${slug}.svg`), svg);
 
 console.log(Object.keys(art).join('\n'));

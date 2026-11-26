@@ -207,15 +207,18 @@ export function HeroSlider() {
             exit="hidden"
           >
             {index === 0 && (
-              <motion.p
-                className="hud-label mb-5 flex items-center gap-3 text-gray-300"
+              <motion.div
+                className="mb-5"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1, transition: { delay: 0.3 } }}
                 exit={{ opacity: 0, transition: { duration: 0.15 } }}
               >
-                <span className="hud-node !h-1.5 !w-1.5" style={{ backgroundColor: slide.accent }} />
-                {siteConfig.availability}
-              </motion.p>
+                <p className="hud-label flex items-center gap-3 text-gray-300">
+                  <span className="hud-node !h-1.5 !w-1.5" style={{ backgroundColor: slide.accent }} />
+                  {siteConfig.availability}
+                </p>
+                <p className="hud-label mt-1.5 pl-[1.125rem] !text-[0.6rem] text-gray-500">{siteConfig.workAuthorization}</p>
+              </motion.div>
             )}
 
             <p className="hud-title text-[clamp(1.5rem,7vw,4.5rem)] leading-[1.15] md:text-[clamp(1.5rem,3.8vw,4.5rem)]">

@@ -205,6 +205,14 @@
   @apply prose-hr:border-glass-border;
 }
 
+/* The typography plugin strips padding from the outer table cells; tables here are boxed, so keep it */
+.prose-space table :is(th, td):first-child {
+  padding-inline-start: 1.5rem;
+}
+.prose-space table :is(th, td):last-child {
+  padding-inline-end: 1.5rem;
+}
+
 /* Hero slider progress segment (its animationend advances the slide) */
 @keyframes hud-progress {
   from { transform: scaleX(0); }

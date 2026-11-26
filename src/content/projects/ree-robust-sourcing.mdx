@@ -1,0 +1,72 @@
+---
+title: "Robust Sourcing for Rare Earth Elements"
+slug: "ree-robust-sourcing"
+summary: "MSc thesis: a robust optimization model, re-planned every quarter and fed by news-based shock signals, that sets rare earth contracts, orders and stock for an importer exposed to Chinese supply. In a 16-scenario stress test it cuts worst-case cost by 28.5% against the status quo."
+tags: ["MSc Thesis", "Optimization", "NLP"]
+tools: ["Python", "PuLP", "CBC", "SQLite", "LLMs", "UN Comtrade"]
+github: "https://github.com/ShubhamShirsekar/ree-robust-sourcing"
+date: "2026-11"
+featured: false
+---
+
+## Overview
+
+My MSc thesis at **KEDGE Business School** (M.Sc. Data Analytics for Business, 2026): *AI and Data-Driven Risk Management in Supply Chains: A Robust Sourcing Strategy for Rare Earth Elements*.
+
+It builds a decision model for an importer in Japan that buys three rare earths: **NdPr**, **dysprosium** and **terbium**. These go into the permanent magnets used in data-centre hardware, and their supply runs mostly through China. The model decides how much to contract, order and hold in stock each quarter so that the cost stays bearable even in the worst plausible year.
+
+*The thesis is still in progress, so the numbers below are current results and may change before submission.*
+
+---
+
+## The Problem
+
+Rare earth supply is concentrated: in the UN Comtrade data I used, China accounts for **78% of the value** of the importer's rare earth imports. One export restriction, tariff or capacity cut can push prices up and cut volumes faster than an annual procurement plan can react.
+
+A plan that minimises *expected* cost is cheap in a calm year and exposed in a bad one. The question is how much protection is worth paying for, and how to keep adjusting it as news comes in.
+
+---
+
+## How It Works
+
+| Layer | What it does |
+|---|---|
+| **Data** | UN Comtrade imports (2010–2025), USGS oxide prices (2010–2024) and EU 2023 criticality scores set the model inputs. A Star Schema database holds the same data for analysis. |
+| **NLP** | News headlines are classified by shock type, severity and whether China is affected. A keyword baseline is compared with two open-weight LLMs (Nemotron via the NVIDIA API and a locally run model). |
+| **Robust optimization** | A linear program (PuLP + CBC) sets annual contracts, quarterly orders and stock. It minimises the **worst-case cost** across combinations of up to **Γ** simultaneous shock types, and is re-solved every quarter. |
+| **Re-planning** | When the news signal crosses a threshold, the quarter's remaining flexible orders are re-planned at once instead of waiting for the next cycle. |
+
+Tighter limits on reliance on any one supplier region apply to the most critical elements, based on their EU criticality tier.
+
+---
+
+## Results So Far
+
+A stress test over **16 shock scenarios** compares the robust model with three baselines: an expected-value model, a simple dual-sourcing rule, and the status quo.
+
+| Policy | Worst-case cost | vs. status quo |
+|---|---|---|
+| **Robust, Γ = 2** | **43.6 M USD** | **−28.5%** |
+| Expected-value model | 50.6 M USD | −17.1% |
+| Dual sourcing | 54.4 M USD | −10.7% |
+| Status quo | 61.0 M USD | — |
+
+- **Protection has a price, and it's small.** In a year with no shocks, the robust plan costs **8.6% more** than the status quo.
+- **Moderate is best.** Worst-case cost falls from Γ = 0 to Γ = 2, then rises again: planning against every shock at once buys contracts the bad years don't need.
+- **Reacting to news helps.** Triggering an emergency re-plan cuts the robust plan's worst case by a further **4.3%** on high-severity paths. The gain shrinks for plans that are already very protective, where re-planning can over-react.
+
+Every run is checked independently: costs are recomputed for all 256 simulated quarters, constraints and stock balances are verified, and two cases are worked by hand.
+
+---
+
+## Key Learnings
+
+- **Optimising for the worst case changes the conversation.** The useful output isn't one plan but the trade-off curve between calm-year cost and bad-year cost, which a buyer can then choose a point on.
+- **Model checks matter as much as the model.** Two early results that looked surprising turned out to be modelling artefacts (end-of-horizon stock had no value, and a re-plan delay was applied too widely). Both were fixed before any result was reported.
+- **Free, open-weight LLMs are good enough to try first.** The NLP layer runs on open models, with a keyword baseline to show whether the LLM is actually earning its place.
+
+---
+
+## Links
+
+- Code and current results: [GitHub](https://github.com/ShubhamShirsekar/ree-robust-sourcing)

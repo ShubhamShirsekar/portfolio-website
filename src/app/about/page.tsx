@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { Section, Container, SectionHeading, ExperienceTimeline, FunFacts } from '@/components/ui';
+import { Button, Section, Container, SectionHeading, ExperienceTimeline, FunFacts } from '@/components/ui';
 import { DoubleTapHeart } from '@/components/ui/DoubleTapHeart';
 import {
   aboutContent,
@@ -11,6 +11,7 @@ import {
   certifications,
   languages,
   funFacts,
+  thesis,
 } from '@/lib/content';
 
 export const metadata: Metadata = {
@@ -70,6 +71,7 @@ export default function AboutPage() {
                   <span className="hud-node !h-1.5 !w-1.5" aria-hidden="true" />
                   {siteConfig.availability}
                 </p>
+                <p className="hud-label mt-2 !text-[0.6rem] text-gray-500 md:pl-[1.125rem]">{siteConfig.workAuthorization}</p>
               </div>
             </div>
           </Container>
@@ -201,10 +203,41 @@ export default function AboutPage() {
           </Container>
         </Section>
 
+        {/* Thesis */}
+        <Section id="thesis">
+          <Container>
+            <SectionHeading index="06" title="Master's Thesis" subtitle={thesis.programme} />
+            <div className="hud-frame grid grid-cols-1 gap-8 p-7 lg:grid-cols-3 lg:gap-10">
+              <div className="lg:col-span-2">
+                <p className="hud-label !text-[0.6rem] text-hud">{thesis.status}</p>
+                <h3 className="mt-3 text-xl font-semibold leading-snug text-white md:text-2xl">{thesis.title}</h3>
+                <p className="mt-1 text-sm italic text-gray-400">{thesis.fullTitle}</p>
+                <p className="mt-5 leading-relaxed text-gray-300">{thesis.summary}</p>
+                <div className="mt-7 flex flex-wrap gap-3">
+                  <Button href={`/projects/${thesis.projectSlug}`} variant="secondary" size="md">
+                    Read the write-up
+                  </Button>
+                  <Button href={thesis.github} variant="ghost" size="md" external>
+                    Code on GitHub
+                  </Button>
+                </div>
+              </div>
+              <dl className="grid grid-cols-1 gap-px self-start border border-glass-border bg-glass-border sm:grid-cols-3 lg:grid-cols-1">
+                {thesis.highlights.map((h) => (
+                  <div key={h.label} className="bg-space-900/80 px-5 py-4">
+                    <dt className="hud-label !text-[0.6rem]">{h.label}</dt>
+                    <dd className="mt-1 font-display text-2xl text-hud">{h.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </Container>
+        </Section>
+
         {/* Skills & Languages */}
         <Section id="skills">
           <Container>
-            <SectionHeading index="06" title="Skills & Languages" subtitle="What I build with, and how I work with clients." />
+            <SectionHeading index="07" title="Skills & Languages" subtitle="What I build with, and how I work with clients." />
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {skillGroups.map((group) => (
                 <div key={group.title} className="hud-frame p-6">
@@ -241,7 +274,7 @@ export default function AboutPage() {
         {/* Fun facts */}
         <Section id="beyond-work">
           <Container>
-            <SectionHeading index="07" title="Beyond Work" subtitle="A few things that keep me curious off the clock." />
+            <SectionHeading index="08" title="Beyond Work" subtitle="A few things that keep me curious off the clock." />
             <FunFacts facts={funFacts} />
           </Container>
         </Section>

@@ -254,6 +254,17 @@ const projectList: Project[] = [
     date: '2026-01',
   },
   {
+    title: 'Robust Sourcing for Rare Earth Elements',
+    slug: 'ree-robust-sourcing',
+    summary:
+      'MSc thesis: a robust optimization model, re-planned every quarter and fed by news-based shock signals, that sets rare earth contracts, orders and stock for an importer exposed to Chinese supply. In a 16-scenario stress test it cuts worst-case cost by 28.5% against the status quo.',
+    tags: ['MSc Thesis', 'Optimization', 'NLP'],
+    tools: ['Python', 'PuLP', 'CBC', 'SQLite', 'LLMs', 'UN Comtrade'],
+    github: 'https://github.com/ShubhamShirsekar/ree-robust-sourcing',
+    featured: false,
+    date: '2026-11',
+  },
+  {
     title: 'Spotify Playlist Reconstruction',
     slug: 'spotify-reconstruction',
     summary:
@@ -309,6 +320,7 @@ const projectImageAlts: Record<string, string> = {
   'spotify-recommendation': 'Illustration of tracks on vinyl-style rings with recommended tracks highlighted',
   'iea-analysis': 'Illustration of energy trend lines with a lightning bolt',
   'btc-dca-vs-dip': 'Illustration of a price chart with regular buys and buy-the-dip markers',
+  'ree-robust-sourcing': 'Illustration of four supplier regions shipping to one importer, with one route cut by a shock',
 };
 
 // Brand logos shown in the corner of each project image (files in public/logos/brands/).
@@ -432,6 +444,23 @@ export const education: Education[] = [
     logoClassName: 'h-11 w-11 sm:h-14 sm:w-14 object-contain invert opacity-90',
   },
 ];
+
+// Master's thesis: a panel on the About page, written up in full under /projects
+export const thesis = {
+  title: 'Robust Sourcing for Rare Earth Elements',
+  fullTitle: 'AI and Data-Driven Risk Management in Supply Chains: A Robust Sourcing Strategy for Rare Earth Elements',
+  programme: 'M.Sc. Data Analytics for Business · KEDGE Business School',
+  status: 'In progress · 2026',
+  summary:
+    'China dominates rare earth mining and processing, so one export restriction can stall the magnets inside AI hardware. I built a decision model for an importer of NdPr, dysprosium and terbium: a robust linear program, re-solved every quarter, that sets contracts, orders and stock so the worst case stays affordable. News headlines are classified into supply shocks that feed its risk inputs and trigger emergency re-plans.',
+  highlights: [
+    { value: '−28.5%', label: 'Worst-case cost vs. status quo' },
+    { value: '16', label: 'Stress-test scenarios' },
+    { value: '+8.6%', label: 'Cost of that protection in a calm year' },
+  ],
+  projectSlug: 'ree-robust-sourcing',
+  github: 'https://github.com/ShubhamShirsekar/ree-robust-sourcing',
+};
 
 // ============================================
 // CONTACT PAGE CONTENT
